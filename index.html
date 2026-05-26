@@ -3,157 +3,1058 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINATO | From the Ocean's Heart to Your Plate</title>
-    <link rel="stylesheet" href="src/style.css">
-    <!-- Import NCL Gasdrifo Font Alternative (Inter) & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>ShopVerse - Premium E-Commerce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #131921;
+            --secondary: #232f3e;
+            --tertiary: #37475a;
+            --accent: #febd69;
+            --accent-hover: #f3a847;
+            --text-main: #0f1111;
+            --text-light: #565959;
+            --bg-light: #eaeded;
+            --white: #ffffff;
+            --danger: #cc0000;
+            --success: #067d62;
+            --link: #007185;
+            --border: #d5d9d9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', 'Inter', sans-serif; background-color: var(--bg-light); color: var(--text-main); line-height: 1.5; }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        button { cursor: pointer; border: none; font-family: inherit; }
+        input, select, textarea { font-family: inherit; }
+        
+        .container { max-width: 1500px; margin: 0 auto; padding: 0 20px; }
+        .hidden { display: none !important; }
+
+        /* HEADER */
+        header { background: var(--primary); color: var(--white); position: sticky; top: 0; z-index: 1000; }
+        .top-bar { display: flex; align-items: center; padding: 10px 20px; gap: 12px; height: 60px; max-width: 1500px; margin: 0 auto; }
+        .logo { font-size: 26px; font-weight: 800; color: var(--white); margin-right: 8px; white-space: nowrap; letter-spacing: -0.5px; }
+        .logo span { color: var(--accent); }
+        
+        .del-address { display: flex; align-items: center; padding: 8px; border: 1px solid transparent; border-radius: 3px; cursor: pointer; min-width: 70px; }
+        .del-address:hover { border-color: var(--white); }
+        .del-address i { margin-right: 5px; font-size: 16px; color: var(--white); }
+        .del-address span:first-child { font-size: 11px; color: #ccc; display: block; }
+        .del-address span:last-child { font-size: 13px; font-weight: 700; color: var(--white); display: block; }
+
+        .search-container { flex: 1; display: flex; height: 40px; border-radius: 4px; overflow: hidden; max-width: 800px; }
+        .search-select { background: #f3f3f3; border: none; padding: 0 8px; color: #555; font-size: 12px; border-right: 1px solid #ccc; cursor: pointer; min-width: 50px; }
+        .search-input { flex: 1; padding: 0 10px; font-size: 15px; border: none; outline: none; background: #fff; color: #111; }
+        .search-btn { background: var(--accent); width: 45px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #111; transition: 0.15s; }
+        .search-btn:hover { background: var(--accent-hover); }
+
+        .nav-tools { display: flex; gap: 18px; align-items: center; white-space: nowrap; margin-left: auto; }
+        .lang-flag { padding: 8px; border: 1px solid transparent; border-radius: 3px; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 4px; cursor: pointer; }
+        .lang-flag:hover { border-color: var(--white); }
+        .lang-flag img { width: 20px; height: 14px; object-fit: cover; border-radius: 2px; }
+        
+        .nav-item { display: flex; flex-direction: column; padding: 8px; border: 1px solid transparent; border-radius: 3px; cursor: pointer; }
+        .nav-item:hover { border-color: var(--white); }
+        .nav-item span:first-child { font-size: 11px; color: #ccc; }
+        .nav-item span:last-child { font-size: 14px; font-weight: 700; }
+        
+        .cart-icon { position: relative; display: flex; align-items: flex-end; font-size: 14px; font-weight: 700; color: var(--white); }
+        .cart-icon i { font-size: 28px; margin-right: 5px; }
+        .cart-badge { position: absolute; top: -2px; left: 16px; background: var(--accent); color: var(--primary); font-weight: 700; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 13px; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+
+        .sub-nav { background: var(--secondary); color: var(--white); padding: 5px 20px; display: flex; align-items: center; gap: 18px; font-size: 14px; overflow-x: auto; max-width: 1500px; margin: 0 auto; border-top: 1px solid #3a4b60; }
+        .sub-nav::-webkit-scrollbar { display: none; }
+        .sub-nav a { padding: 5px 6px; border: 1px solid transparent; border-radius: 2px; white-space: nowrap; font-size: 13px; }
+        .sub-nav a:hover { border-color: var(--white); }
+        .sub-nav .menu-btn { font-weight: 700; display: flex; align-items: center; gap: 5px; }
+
+        /* HERO */
+        .hero { position: relative; margin-bottom: -150px; background: #2c3e50; overflow: hidden; }
+        .hero-banner { width: 100%; height: 380px; object-fit: cover; opacity: 0.7; }
+        .hero-text { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white; text-shadow: 0 3px 6px rgba(0,0,0,0.6); width: 90%; max-width: 700px; }
+        .hero-text h1 { font-size: 44px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .hero-text p { font-size: 20px; margin-bottom: 25px; opacity: 0.95; }
+        .hero-btn { padding: 12px 28px; background: var(--accent); color: #111; font-weight: 700; border-radius: 6px; font-size: 16px; transition: 0.2s; border: none; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .hero-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .hero-gradient { position: absolute; bottom: 0; left: 0; width: 100%; height: 180px; background: linear-gradient(to bottom, transparent, var(--bg-light)); }
+
+        /* MAIN */
+        main { padding-top: 20px; min-height: 70vh; }
+        
+        /* CARDS */
+        .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+        .cat-card { background: var(--white); padding: 20px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .cat-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 15px; }
+        .cat-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px; }
+        .cat-img-grid img { width: 100%; height: 115px; object-fit: cover; border-radius: 4px; cursor: pointer; background: #f5f5f5; }
+        .cat-img-grid img:hover { opacity: 0.85; }
+        .cat-link { color: var(--link); font-size: 13px; cursor: pointer; }
+        .cat-link:hover { color: var(--danger); text-decoration: underline; }
+
+        .section-header { display: flex; justify-content: space-between; align-items: center; padding: 25px 20px 10px; max-width: 1500px; margin: 0 auto; }
+        .section-title { font-size: 22px; font-weight: 700; }
+        .see-all { color: var(--link); font-size: 13px; cursor: pointer; }
+        .see-all:hover { text-decoration: underline; color: var(--danger); }
+
+        .prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; padding: 0 20px 30px; max-width: 1500px; margin: 0 auto; }
+        .prod-card { background: var(--white); border-radius: 4px; padding: 18px; transition: transform 0.2s, box-shadow 0.2s; position: relative; display: flex; flex-direction: column; cursor: default; }
+        .prod-card:hover { box-shadow: 0 6px 12px rgba(0,0,0,0.15); transform: translateY(-2px); }
+        
+        .prod-badge { position: absolute; top: 10px; left: 10px; background: var(--danger); color: white; font-size: 11px; font-weight: 700; padding: 3px 7px; border-radius: 3px; text-transform: uppercase; z-index: 10; }
+        .prod-badge.new { background: var(--link); }
+        .prod-badge.limited { background: #b12704; }
+        
+        .prod-img-wrap { height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; overflow: hidden; background: #fafafa; border-radius: 4px; cursor: pointer; position: relative; }
+        .prod-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s; }
+        .prod-card:hover .prod-img-wrap img { transform: scale(1.06); }
+        
+        .prod-title { font-size: 14px; line-height: 1.4; height: 40px; overflow: hidden; margin-bottom: 6px; color: var(--text-main); cursor: pointer; }
+        .prod-title:hover { color: var(--danger); text-decoration: underline; }
+        
+        .prod-rating { display: flex; align-items: center; gap: 5px; margin-bottom: 5px; }
+        .stars { color: #ffa41c; font-size: 14px; letter-spacing: -1px; }
+        .rating-count { color: var(--link); font-size: 12px; cursor: pointer; }
+        .rating-count:hover { text-decoration: underline; color: var(--danger); }
+        
+        .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+        .prod-price { font-size: 21px; font-weight: 500; color: #0f1111; }
+        .prod-price .sym { font-size: 13px; vertical-align: top; position: relative; top: 3px; }
+        .prod-price .dec { font-size: 13px; vertical-align: top; position: relative; top: 3px; }
+        .prod-old-price { font-size: 12px; color: var(--text-light); text-decoration: line-through; }
+        .prod-discount { font-size: 12px; color: var(--danger); font-weight: 500; }
+        
+        .prime-tag { color: #00a8e1; font-weight: 700; font-style: italic; font-size: 12px; margin: 5px 0; display: flex; align-items: center; gap: 4px; }
+        .prime-tag .check { background: #00a8e1; color: white; font-size: 10px; border-radius: 50%; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; font-style: normal; }
+        
+        .delivery { font-size: 12px; color: var(--text-light); margin-bottom: 10px; }
+        .delivery b { color: var(--text-main); font-weight: 600; }
+        
+        .add-btn { width: 100%; padding: 8px 12px; background: var(--accent); border-radius: 20px; font-size: 13px; font-weight: 500; transition: background 0.2s; margin-top: auto; border: 1px solid #f2c200; }
+        .add-btn:hover { background: var(--accent-hover); }
+
+        /* PRODUCT DETAIL */
+        .detail-page { background: var(--white); max-width: 1500px; margin: 20px auto; padding: 20px; border-radius: 8px; display: flex; gap: 40px; flex-wrap: wrap; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .detail-gallery { flex: 1.2; min-width: 280px; display: flex; gap: 15px; }
+        .detail-thumbs { display: flex; flex-direction: column; gap: 10px; }
+        .detail-thumbs img { width: 45px; height: 45px; object-fit: cover; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; opacity: 0.6; transition: 0.2s; }
+        .detail-thumbs img:hover { opacity: 0.9; }
+        .detail-thumbs img.active { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(254, 189, 105, 0.4); opacity: 1; }
+        .detail-main { flex: 1; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 8px; height: 400px; background: #fafafa; }
+        .detail-main img { max-width: 85%; max-height: 85%; object-fit: contain; }
+        
+        .detail-info { flex: 1.8; min-width: 300px; }
+        .detail-title { font-size: 24px; font-weight: 400; line-height: 1.3; margin-bottom: 8px; }
+        .detail-brand { color: var(--link); font-size: 14px; margin-bottom: 10px; cursor: pointer; }
+        .detail-brand:hover { text-decoration: underline; color: var(--danger); }
+        
+        .detail-stats { border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 15px; }
+        .detail-ratings { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; flex-wrap: wrap; }
+        .detail-ratings span { font-size: 14px; }
+        
+        .detail-price-box { background: #f7f7f7; padding: 18px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border); }
+        .detail-discount { display: inline-block; background: var(--danger); color: white; font-size: 12px; font-weight: 700; padding: 2px 6px; border-radius: 3px; margin-bottom: 5px; }
+        .detail-price { font-size: 26px; color: #0f1111; font-weight: 400; }
+        .detail-list { font-size: 13px; color: var(--text-light); text-decoration: line-through; margin-left: 8px; }
+        .detail-vat { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+        
+        .features-list { margin-bottom: 20px; padding-left: 20px; }
+        .features-list li { margin-bottom: 6px; font-size: 14px; line-height: 1.4; }
+        .features-list li::marker { color: var(--text-light); }
+        
+        .detail-meta-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .detail-meta-table td { padding: 6px 10px; border-bottom: 1px solid #f0f0f0; font-size: 13px; }
+        .detail-meta-table td:first-child { font-weight: 600; color: var(--text-light); width: 140px; }
+
+        .buy-box { flex: 0.8; min-width: 250px; border: 1px solid var(--border); border-radius: 8px; padding: 20px; height: fit-content; background: #fafafa; }
+        .buy-price { font-size: 22px; font-weight: 400; margin-bottom: 5px; }
+        .delivery-date { font-size: 14px; margin-bottom: 12px; }
+        .delivery-date b { font-weight: 700; }
+        .delivery-date span { color: var(--text-light); font-weight: 400; }
+        .in-stock { color: var(--success); font-size: 16px; font-weight: 500; margin-bottom: 15px; display: flex; align-items: center; gap: 6px; }
+        .seller { font-size: 13px; color: var(--text-light); margin-bottom: 15px; }
+        .seller b { color: var(--text-main); }
+        .seller span { color: var(--link); cursor: pointer; }
+        .seller span:hover { text-decoration: underline; }
+        
+        .qty-control { display: flex; align-items: center; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: #e3e6e6; width: fit-content; margin-bottom: 15px; height: 32px; }
+        .qty-control button { width: 32px; background: #e3e6e6; border: none; font-size: 16px; color: #333; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .qty-control button:hover { background: #d5d9d9; }
+        .qty-control input { width: 35px; text-align: center; border: none; border-left: 1px solid var(--border); border-right: 1px solid var(--border); background: #f0f2f2; height: 100%; font-size: 14px; outline: none; }
+        
+        .action-btn { width: 100%; padding: 10px; border-radius: 20px; font-size: 14px; margin-bottom: 10px; transition: 0.15s; }
+        .btn-add-cart { background: #ffd814; border: 1px solid #fcd200; color: #0f1111; }
+        .btn-add-cart:hover { background: #f7ca00; border-color: #f2c200; }
+        .btn-buy-now { background: #ffa41c; border: 1px solid #ff8f00; color: #0f1111; }
+        .btn-buy-now:hover { background: #fa8900; border-color: #e87f00; }
+        
+        .secure-trans { font-size: 12px; color: var(--text-light); display: flex; align-items: center; gap: 5px; margin-bottom: 15px; }
+        .buy-links { display: flex; flex-direction: column; gap: 5px; font-size: 12px; }
+        .buy-links a { color: var(--link); }
+        .buy-links a:hover { text-decoration: underline; }
+
+        /* CART */
+        .cart-page { background: var(--white); max-width: 1500px; margin: 20px auto; padding: 24px; border-radius: 8px; display: flex; gap: 30px; flex-wrap: wrap; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .cart-items-section { flex: 2.5; min-width: 300px; padding-right: 20px; border-right: 1px solid var(--border); }
+        .cart-header { font-size: 26px; font-weight: 400; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: baseline; }
+        .cart-header span:last-child { font-size: 14px; color: var(--text-light); }
+        
+        .cart-item { display: flex; gap: 18px; padding-bottom: 18px; margin-bottom: 18px; border-bottom: 1px solid var(--border); }
+        .cart-item:last-child { border-bottom: none; }
+        .cart-item-img { width: 160px; height: 160px; flex-shrink: 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: #fafafa; cursor: pointer; }
+        .cart-item-img img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
+        .cart-item-info { flex: 1; min-width: 0; }
+        .cart-item-title { font-size: 15px; font-weight: 600; margin-bottom: 5px; line-height: 1.3; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .cart-item-title:hover { color: var(--danger); }
+        .cart-item-stock { color: var(--success); font-size: 12px; margin-bottom: 4px; font-weight: 500; }
+        .cart-item-meta { font-size: 12px; color: var(--text-light); margin-bottom: 6px; line-height: 1.4; }
+        .cart-item-meta span { color: var(--link); cursor: pointer; }
+        .cart-item-meta span:hover { text-decoration: underline; }
+        
+        .cart-actions { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; margin-bottom: 10px; }
+        .cart-actions .divider { width: 1px; background: var(--border); align-self: stretch; }
+        .cart-actions span { color: var(--link); cursor: pointer; white-space: nowrap; }
+        .cart-actions span:hover { text-decoration: underline; color: var(--danger); }
+        
+        .cart-item-price { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+        .qty-control-small { display: inline-flex; align-items: center; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: #f0f2f2; }
+        .qty-control-small button { width: 28px; height: 26px; background: #e3e6e6; border: none; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #333; }
+        .qty-control-small button:hover { background: #d5d9d9; }
+        .qty-control-small span { width: 30px; text-align: center; font-size: 12px; background: #fff; height: 100%; display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+
+        .cart-summary { flex: 1; min-width: 260px; padding: 18px; background: #f3f3f3; border-radius: 8px; height: fit-content; border: 1px solid var(--border); }
+        .subtotal-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; font-size: 16px; }
+        .subtotal-row b { font-size: 18px; font-weight: 700; }
+        .gift-check { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; margin-bottom: 16px; line-height: 1.3; color: var(--text-main); }
+        .proceed-btn { width: 100%; padding: 10px; background: #ffd814; border: 1px solid #fcd200; border-radius: 6px; font-size: 13px; font-weight: 500; margin-bottom: 8px; transition: 0.15s; }
+        .proceed-btn:hover { background: #f7ca00; }
+        
+        .empty-cart { text-align: center; padding: 80px 20px; width: 100%; background: var(--white); border-radius: 8px; margin: 20px auto; max-width: 1500px; }
+        .empty-cart i { font-size: 70px; color: #d5d9d9; margin-bottom: 20px; }
+        .empty-cart h2 { font-size: 24px; font-weight: 400; margin-bottom: 15px; }
+
+        /* CHECKOUT */
+        .checkout-page { max-width: 750px; margin: 30px auto; background: var(--white); padding: 35px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+        .checkout-title { font-size: 26px; font-weight: 400; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+        
+        .step-header { display: flex; align-items: center; gap: 10px; margin: 20px 0 12px; font-size: 16px; font-weight: 600; }
+        .step-num { width: 24px; height: 24px; background: var(--secondary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+        .step-header.completed .step-num { background: var(--success); }
+        
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-weight: 500; margin-bottom: 6px; font-size: 13px; color: var(--text-main); }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 4px; font-size: 14px; background: #fafafa; }
+        .form-group input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(254, 189, 105, 0.3); outline: none; background: #fff; }
+        
+        .payment-opt { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; padding: 12px; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; transition: 0.15s; background: #fff; }
+        .payment-opt:hover { background: #f7f7f7; }
+        .payment-opt.active { border-color: var(--accent); background: #fffdf0; box-shadow: 0 0 0 1px var(--accent); }
+        .payment-opt i { font-size: 20px; color: var(--secondary); }
+        
+        .order-summary { background: #f7f7f7; padding: 15px; border-radius: 4px; margin-top: 20px; border: 1px solid var(--border); }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; }
+        .summary-row.total { font-size: 16px; font-weight: 700; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 8px; }
+        
+        .pay-btn { width: 100%; padding: 14px; background: var(--accent); font-size: 16px; font-weight: 700; border-radius: 6px; margin-top: 20px; transition: 0.2s; border: none; cursor: pointer; }
+        .pay-btn:hover { background: var(--accent-hover); }
+        
+        /* TOAST & MODAL */
+        .toast { position: fixed; bottom: 25px; right: 25px; background: #111; color: white; padding: 14px 22px; border-radius: 6px; display: flex; align-items: center; gap: 12px; z-index: 3000; transform: translateY(120px); opacity: 0; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-size: 14px; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast i { color: var(--success); font-size: 18px; }
+        .toast .close-toast { margin-left: 15px; cursor: pointer; opacity: 0.6; }
+        .toast .close-toast:hover { opacity: 1; }
+        
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 2000; backdrop-filter: blur(2px); }
+        .modal-content { background: var(--white); padding: 45px; border-radius: 12px; text-align: center; max-width: 420px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-content i.success { font-size: 65px; color: var(--success); margin-bottom: 20px; }
+        .modal-content h2 { font-size: 22px; margin-bottom: 10px; }
+        .modal-content p { color: var(--text-light); margin-bottom: 25px; font-size: 15px; line-height: 1.5; }
+        .modal-btn { padding: 12px 25px; background: var(--secondary); color: white; border-radius: 6px; font-weight: 600; transition: 0.2s; }
+        .modal-btn:hover { background: var(--tertiary); }
+
+        /* FOOTER */
+        .back-to-top { background: var(--tertiary); color: var(--white); text-align: center; padding: 16px; cursor: pointer; font-size: 13px; transition: 0.2s; }
+        .back-to-top:hover { background: #4a5c70; }
+        footer { background: var(--secondary); color: var(--white); padding: 45px 20px 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
+        .footer-col h4 { font-size: 15px; margin-bottom: 14px; font-weight: 700; }
+        .footer-col a { display: block; font-size: 13px; color: #ddd; margin-bottom: 7px; }
+        .footer-col a:hover { text-decoration: underline; color: var(--accent); }
+        .footer-bottom { text-align: center; padding-top: 35px; border-top: 1px solid #3a4b60; margin-top: 45px; font-size: 12px; color: #999; max-width: 1000px; margin-left: auto; margin-right: auto; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1000px) {
+            .detail-page { flex-direction: column; }
+            .buy-box { width: 100%; order: 3; }
+        }
+        @media (max-width: 768px) {
+            .top-bar { flex-wrap: wrap; height: auto; padding: 10px; gap: 8px; }
+            .search-container { order: 3; width: 100%; margin-top: 8px; max-width: 100%; }
+            .nav-tools { margin-left: auto; }
+            .del-address { display: none; }
+            .cart-page { flex-direction: column; }
+            .cart-items-section { border-right: none; padding-right: 0; }
+            .form-row { grid-template-columns: 1fr; }
+            .cat-grid { grid-template-columns: 1fr; }
+            .hero-text h1 { font-size: 28px; }
+            .hero-text p { font-size: 16px; }
+        }
+
+        /* Loading Spinner */
+        .spinner { width: 20px; height: 20px; border: 2px solid #f3f3f3; border-top: 2px solid var(--secondary); border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block; vertical-align: middle; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
 </head>
 <body>
 
-    <!-- 3D Background Container -->
-    <div id="canvas-container"></div>
+    <!-- HEADER -->
+    <header>
+        <div class="top-bar">
+            <a href="#" class="logo" onclick="app.router('home'); return false;">Shop<span>Verse</span></a>
+            
+            <div class="del-address" onclick="alert('Select delivery location feature coming soon!')">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <span>Deliver to</span>
+                    <span id="user-loc">New York 10001</span>
+                </div>
+            </div>
 
-    <!-- Main Application Wrapper -->
-    <div id="app">
+            <div class="search-container">
+                <select class="search-select" id="cat-select">
+                    <option value="all">All Departments</option>
+                </select>
+                <input type="text" class="search-input" id="search-box" placeholder="Search ShopVerse">
+                <button class="search-btn" onclick="app.search()"><i class="fas fa-search"></i></button>
+            </div>
 
-        <!-- ================= NAVIGATION ================= -->
-        <nav class="glass-nav">
-            <div class="logo">
-                <img src="assets/logowithwordmark.png" alt="Minato Logo">
+            <div class="nav-tools">
+                <div class="lang-flag">
+                    <img src="https://flagcdn.com/w20/us.png" alt="EN"> EN ▾
+                </div>
+                <div class="nav-item" onclick="app.router('home')">
+                    <span>Hello, Sign in</span>
+                    <span>Account & Lists</span>
+                </div>
+                <div class="nav-item">
+                    <span>Returns</span>
+                    <span>& Orders</span>
+                </div>
+                <a href="#" class="cart-icon" onclick="app.router('cart'); return false;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Cart</span>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </a>
             </div>
-            <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#menu">Menu</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <div class="nav-actions">
-                <button id="open-cart-btn" class="cart-icon-btn">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span id="cart-count" class="cart-badge">0</span>
-                </button>
-            </div>
+        </div>
+        <nav class="sub-nav">
+            <a href="#" class="menu-btn" onclick="app.router('home'); return false;"><i class="fas fa-bars"></i> All</a>
+            <a href="#" onclick="app.filterCat('Electronics'); return false;">Electronics</a>
+            <a href="#" onclick="app.filterCat('Computers'); return false;">Computers</a>
+            <a href="#" onclick="app.filterCat('Smart Home'); return false;">Smart Home</a>
+            <a href="#" onclick="app.filterCat('Arts & Crafts'); return false;">Arts & Crafts</a>
+            <a href="#" onclick="app.filterCat('Automotive'); return false;">Automotive</a>
+            <a href="#" onclick="app.filterCat('Baby'); return false;">Baby</a>
+            <a href="#" onclick="app.filterCat('Beauty'); return false;">Beauty & Personal Care</a>
+            <a href="#" onclick="app.filterCat('Fashion'); return false;">Fashion</a>
+            <a href="#" onclick="app.filterCat('Grocery'); return false;">Grocery</a>
+            <a href="#" onclick="app.filterCat('Health'); return false;">Health & Household</a>
+            <a href="#" onclick="app.filterCat('Home & Kitchen'); return false;">Home & Kitchen</a>
+            <a href="#" onclick="app.filterCat('Industrial'); return false;">Industrial</a>
+            <a href="#" onclick="app.filterCat('Luggage'); return false;">Luggage</a>
+            <a href="#" onclick="app.filterCat('Movies'); return false;">Movies & TV</a>
+            <a href="#" onclick="app.filterCat('Pet Supplies'); return false;">Pet Supplies</a>
+            <a href="#" onclick="app.filterCat('Sports'); return false;">Sports & Outdoors</a>
+            <a href="#" onclick="app.filterCat('Tools'); return false;">Tools & Home</a>
+            <a href="#" onclick="app.filterCat('Toys & Games'); return false;">Toys & Games</a>
+            <a href="#" onclick="app.filterCat('Video Games'); return false;">Video Games</a>
         </nav>
+    </header>
 
-        <!-- ================= HERO SECTION ================= -->
-        <section id="home" class="hero-section">
-            <!-- 3D Model loads specifically here on desktop -->
-            <div id="hero-3d-model"></div>
-            
-            <div class="hero-content glass-card-strong">
-                <h1>MINATO <span>みなと</span></h1>
-                <p class="slogan">From the Ocean's Heart to <span class="highlight-red">Your Plate.</span></p>
-                <a href="#menu" class="btn-primary">View Menu</a>
+    <main id="app-root"></main>
+
+    <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Back to top</div>
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Get to Know Us</h4>
+                <a href="#">Careers</a><a href="#">Blog</a><a href="#">About ShopVerse</a><a href="#">Investor Relations</a><a href="#">ShopVerse Devices</a>
             </div>
-        </section>
-
-        <!-- ================= MENU SECTION ================= -->
-        <section id="menu" class="menu-section">
-            <h2 class="section-title">Our <span class="highlight-red">Menu</span></h2>
-            
-            <div class="menu-layout">
-                <!-- Sidebar Filters -->
-                <div class="menu-sidebar glass-card">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="Signature">Signature</button>
-                    <button class="filter-btn" data-filter="Nigiri">Nigiri</button>
-                    <button class="filter-btn" data-filter="Sashimi">Sashimi</button>
-                    <button class="filter-btn" data-filter="Rolls">Rolls</button>
-                    <button class="filter-btn" data-filter="Dessert">Dessert</button>
-                </div>
-
-                <!-- Product Grid -->
-                <div id="menu-grid" class="menu-grid">
-                    <!-- Items will be injected by JavaScript -->
-                </div>
+            <div class="footer-col">
+                <h4>Make Money with Us</h4>
+                <a href="#">Sell products on ShopVerse</a><a href="#">Sell on ShopVerse Business</a><a href="#">Sell apps on ShopVerse</a><a href="#">Become an Affiliate</a><a href="#">Advertise Your Products</a>
             </div>
-        </section>
-
-        <!-- ================= ABOUT SECTION ================= -->
-        <section id="about" class="about-section glass-card-strong">
-            <div class="about-content">
-                <h2>The Meaning of <span class="highlight-red">Minato</span></h2>
-                <p><strong>Minato (港)</strong> translates to "Harbor" in Japanese. It symbolizes the starting point of a journey, a gathering of cultures, and a safe haven for the freshest seafood.</p>
-                <div class="purpose-points">
-                    <div class="point"><i class="fas fa-check-circle"></i> Authentic</div>
-                    <div class="point"><i class="fas fa-check-circle"></i> Memorable</div>
-                    <div class="point"><i class="fas fa-check-circle"></i> Premium Delivery</div>
-                </div>
+            <div class="footer-col">
+                <h4>ShopVerse Payment Products</h4>
+                <a href="#">ShopVerse Business Card</a><a href="#">Shop with Points</a><a href="#">Reload Your Balance</a><a href="#">ShopVerse Currency Converter</a>
             </div>
-        </section>
+            <div class="footer-col">
+                <h4>Let Us Help You</h4>
+                <a href="#">Your Account</a><a href="#">Your Orders</a><a href="#">Shipping Rates & Policies</a><a href="#">Returns & Replacements</a><a href="#">Manage Your Content and Devices</a><a href="#">ShopVerse Assistant</a><a href="#">Help</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="logo" style="font-size: 20px; margin-bottom: 10px;">Shop<span>Verse</span></div>
+            © 2026 ShopVerse, Inc. or its affiliates. All Rights Reserved. <br>
+            Conditions of Use | Privacy Notice | Interest-Based Ads
+        </div>
+    </footer>
 
-        <!-- ================= CONTACT SECTION ================= -->
-        <section id="contact" class="contact-section glass-card">
-            <h2>Contact <span class="highlight-red">Us</span></h2>
-            <p>Have a question? Reach out to our harbor.</p>
-            <form id="contact-form">
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn-primary">Send Message</button>
-            </form>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2024 Minato Sushi. All rights reserved.</p>
-        </footer>
-
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-text">Item added to Cart</span>
+        <span class="close-toast" onclick="this.parentElement.classList.remove('show')"><i class="fas fa-times"></i></span>
     </div>
 
-    <!-- ================= CART SIDEBAR (Amazon Style) ================= -->
-    <div id="cart-overlay" class="cart-overlay"></div>
-    <div id="cart-sidebar" class="cart-sidebar glass-card">
-        <div class="cart-header">
-            <h3>Your Panier</h3>
-            <button id="close-cart-btn"><i class="fas fa-times"></i></button>
-        </div>
-        
-        <div id="cart-items" class="cart-items">
-            <!-- Cart items injected here -->
-            <p id="empty-cart-msg">Your panier is empty.</p>
-        </div>
+    <script>
+        const CATEGORIES = [
+            'Electronics', 'Computers', 'Smart Home', 'Arts & Crafts', 'Automotive',
+            'Baby', 'Beauty', 'Fashion', 'Grocery', 'Health',
+            'Home & Kitchen', 'Industrial', 'Luggage', 'Movies', 'Pet Supplies',
+            'Sports', 'Tools', 'Toys & Games', 'Video Games'
+        ];
 
-        <div class="cart-footer">
-            <h3>Total: <span id="cart-total">$0.00</span></h3>
-            <button id="open-checkout-btn" class="btn-primary" disabled>Proceed to Delivery</button>
-        </div>
-    </div>
+        const FAKE_PRODUCTS = [
+            { id: 1, title: "Sony WH-1000XM5 Wireless Noise Cancelling Headphones", cat: "Electronics", price: 348.00, old: 399.99, rate: 4.8, reviews: 12450, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Sony+XM5", badge: "Best Seller" },
+            { id: 2, title: "Apple AirPods Pro (2nd Generation) with MagSafe Case", cat: "Electronics", price: 199.99, old: 249.00, rate: 4.7, reviews: 45200, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=AirPods+Pro", badge: "Top Rated" },
+            { id: 3, title: "Samsung 65-Inch Class OLED 4K Smart TV (2025 Model)", cat: "Electronics", price: 1297.99, old: 1899.99, rate: 4.6, reviews: 890, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Samsung+65+OLED", badge: "Deal" },
+            { id: 4, title: "Logitech MX Master 3S Wireless Performance Mouse", cat: "Electronics", price: 89.99, old: 109.99, rate: 4.9, reviews: 23100, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=MX+Master+3S", badge: "" },
+            { id: 5, title: "Anker 737 Power Bank 24000mAh 140W Output", cat: "Electronics", price: 109.99, old: 149.99, rate: 4.5, reviews: 3400, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Anker+PowerBank", badge: "" },
+            { id: 6, title: "Apple MacBook Air 15-inch M3 Chip 8GB RAM 256GB SSD", cat: "Computers", price: 1149.00, old: 1299.00, rate: 4.8, reviews: 5600, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=MacBook+Air", badge: "New" },
+            { id: 7, title: "Dell XPS 16 Laptop Intel Core Ultra 7 32GB RAM 1TB SSD", cat: "Computers", price: 1599.99, old: 1899.00, rate: 4.6, reviews: 1200, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Dell+XPS+16", badge: "" },
+            { id: 8, title: "Samsung T7 Shield 2TB Portable SSD USB 3.2 Gen 2", cat: "Computers", price: 139.99, old: 219.99, rate: 4.8, reviews: 8900, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Samsung+T7", badge: "Limited" },
+            { id: 9, title: "LG 27-Inch UltraGear QHD Gaming Monitor 165Hz 1ms", cat: "Computers", price: 249.99, old: 349.99, rate: 4.7, reviews: 4500, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=LG+27+Monitor", badge: "Deal" },
+            { id: 10, title: "Keychron Q1 Pro Mechanical Keyboard Wireless RGB", cat: "Computers", price: 169.00, old: 199.00, rate: 4.7, reviews: 2100, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Keychron+Q1", badge: "" },
+            { id: 11, title: "Ring Video Doorbell Pro 2 with 3D Motion Detection", cat: "Smart Home", price: 199.99, old: 269.99, rate: 4.4, reviews: 15000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Ring+Doorbell", badge: "" },
+            { id: 12, title: "Ecobee Smart Thermostat Premium with Voice Control", cat: "Smart Home", price: 219.99, old: 279.99, rate: 4.5, reviews: 6700, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Ecobee+Thermostat", badge: "" },
+            { id: 13, title: "Philips Hue White and Color Ambiance Starter Kit", cat: "Smart Home", price: 129.99, old: 189.99, rate: 4.6, reviews: 18000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Philips+Hue", badge: "" },
+            { id: 14, title: "Cricut Maker 3 Cutting Machine for DIY Crafts", cat: "Arts & Crafts", price: 349.99, old: 399.99, rate: 4.7, reviews: 4300, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Cricut+Maker+3", badge: "" },
+            { id: 15, title: "Crayola Ultimate Art Supplies Kit 140 Pieces", cat: "Arts & Crafts", price: 24.99, old: 39.99, rate: 4.8, reviews: 22000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Crayola+140", badge: "Best Seller" },
+            { id: 16, title: "Wagner Spraytech Control Spray Max HVLP Paint Sprayer", cat: "Arts & Crafts", price: 89.00, old: 119.00, rate: 4.3, reviews: 5600, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Wagner+Sprayer", badge: "" },
+            { id: 17, title: "Chemical Guys HOL169 16-Piece Car Care Kit", cat: "Automotive", price: 69.99, old: 99.99, rate: 4.7, reviews: 14500, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Car+Care+Kit", badge: "" },
+            { id: 18, title: "Bosch Icon 26A Wiper Blade Set (Pair)", cat: "Automotive", price: 42.99, old: 54.99, rate: 4.8, reviews: 32000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Bosch+Wipers", badge: "" },
+            { id: 19, title: "Garmin DriveSmart 66 GPS Navigator with 6.95 Display", cat: "Automotive", price: 179.99, old: 249.99, rate: 4.5, reviews: 2800, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Garmin+GPS", badge: "" },
+            { id: 20, title: "Honest Company Diaper Club Box Size 4 (200 Count)", cat: "Baby", price: 79.99, old: 95.00, rate: 4.6, reviews: 8900, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Honest+Diapers", badge: "Subscribe" },
+            { id: 21, title: "Graco 4Ever DLX 4-in-1 Car Seat Convertible", cat: "Baby", price: 249.99, old: 329.99, rate: 4.8, reviews: 11000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Graco+Car+Seat", badge: "Top Rated" },
+            { id: 22, title: "Philips Avent Anti-Colic Baby Bottles 9oz (4 Pack)", cat: "Baby", price: 22.99, old: 29.99, rate: 4.7, reviews: 25000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Avent+Bottles", badge: "" },
+            { id: 23, title: "CeraVe Moisturizing Cream 19oz Face & Body", cat: "Beauty", price: 17.78, old: 24.99, rate: 4.8, reviews: 120000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=CeraVe+Cream", badge: "Best Seller" },
+            { id: 24, title: "Dyson Airwrap Complete Long Hair Styler", cat: "Beauty", price: 499.99, old: 599.99, rate: 4.5, reviews: 7800, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Dyson+Airwrap", badge: "" },
+            { id: 25, title: "The Ordinary Niacinamide 10% + Zinc 1% Serum 30ml", cat: "Beauty", price: 5.90, old: 8.50, rate: 4.6, reviews: 89000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=The+Ordinary", badge: "" },
+            { id: 26, title: "Levi's Men's 501 Original Fit Jeans", cat: "Fashion", price: 49.50, old: 69.50, rate: 4.5, reviews: 45000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Levis+501", badge: "" },
+            { id: 27, title: "Nike Air Max 90 Men's Running Shoes", cat: "Fashion", price: 119.97, old: 140.00, rate: 4.6, reviews: 15000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Nike+Air+Max", badge: "" },
+            { id: 28, title: "Columbia Men's Watertight II Rain Jacket", cat: "Fashion", price: 44.99, old: 70.00, rate: 4.5, reviews: 32000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Columbia+Jacket", badge: "" },
+            { id: 29, title: "Fjallraven Kanken Classic Backpack", cat: "Fashion", price: 80.00, old: 90.00, rate: 4.7, reviews: 18000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Kanken+Backpack", badge: "" },
+            { id: 30, title: "Starbucks Medium Roast Ground Coffee 20oz Bag", cat: "Grocery", price: 9.48, old: 12.99, rate: 4.7, reviews: 56000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Starbucks+Coffee", badge: "Subscribe" },
+            { id: 31, title: "Kirkland Signature Organic Extra Virgin Olive Oil 2L", cat: "Grocery", price: 18.99, old: 24.99, rate: 4.8, reviews: 12000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Olive+Oil+2L", badge: "" },
+            { id: 32, title: "Nature Valley Crunchy Granola Bars Variety Pack 36ct", cat: "Grocery", price: 12.98, old: 16.99, rate: 4.6, reviews: 28000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Granola+Bars", badge: "" },
+            { id: 33, title: "Advil Pain Reliever 200mg Coated Tablets 300ct", cat: "Health", price: 19.98, old: 25.99, rate: 4.8, reviews: 41000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Advil+300", badge: "" },
+            { id: 34, title: "Oral-B Pro 1000 Power Rechargeable Electric Toothbrush", cat: "Health", price: 39.94, old: 59.99, rate: 4.6, reviews: 67000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Oral-B+Pro", badge: "" },
+            { id: 35, title: "Centrum Adult Multivitamin 365 Tablets", cat: "Health", price: 19.48, old: 26.99, rate: 4.7, reviews: 34000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Centrum+365", badge: "" },
+            { id: 36, title: "Instant Pot Duo 7-in-1 Electric Pressure Cooker 6 Qt", cat: "Home & Kitchen", price: 79.00, old: 99.95, rate: 4.7, reviews: 150000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Instant+Pot", badge: "Best Seller" },
+            { id: 37, title: "Ninja Professional Plus Blender with Auto-iQ", cat: "Home & Kitchen", price: 89.99, old: 119.99, rate: 4.8, reviews: 42000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Ninja+Blender", badge: "" },
+            { id: 38, title: "Keurig K-Express Coffee Maker Single Serve K-Cup", cat: "Home & Kitchen", price: 59.00, old: 89.99, rate: 4.5, reviews: 23000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Keurig+Express", badge: "Deal" },
+            { id: 39, title: "Casper Original Hybrid Mattress Queen 12 Inch", cat: "Home & Kitchen", price: 895.00, old: 1295.00, rate: 4.4, reviews: 6500, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Casper+Mattress", badge: "" },
+            { id: 40, title: "Uline Heavy Duty Packing Tape 6 Rolls", cat: "Industrial", price: 14.50, old: 22.00, rate: 4.7, reviews: 8900, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Packing+Tape", badge: "" },
+            { id: 41, title: "Rubbermaid Commercial Brute Trash Can 32 Gallon", cat: "Industrial", price: 42.99, old: 55.00, rate: 4.8, reviews: 15000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Rubbermaid+32gal", badge: "" },
+            { id: 42, title: "Samsonite Omni PC Hardside Expandable Luggage 28-Inch", cat: "Luggage", price: 139.99, old: 210.00, rate: 4.6, reviews: 9800, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Samsonite+28", badge: "" },
+            { id: 43, title: "Delsey Paris Com-Fort 2.0 Hardside Spinner 24-Inch", cat: "Luggage", price: 119.99, old: 180.00, rate: 4.5, reviews: 3400, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Delsey+24", badge: "" },
+            { id: 44, title: "The Batman 4K Ultra HD + Blu-ray + Digital Code", cat: "Movies", price: 24.99, old: 39.98, rate: 4.8, reviews: 7600, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Batman+4K", badge: "" },
+            { id: 45, title: "Top Gun: Maverick Steelbook 4K UHD Edition", cat: "Movies", price: 29.99, old: 44.99, rate: 4.9, reviews: 12000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Top+Gun+4K", badge: "New" },
+            { id: 46, title: "Hill's Science Diet Adult Dry Dog Food 30lb Bag", cat: "Pet Supplies", price: 58.99, old: 74.99, rate: 4.8, reviews: 56000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Hills+Dog+Food", badge: "Subscribe" },
+            { id: 47, title: "PetSafe Automatic Ball Launcher Dog Toy", cat: "Pet Supplies", price: 99.95, old: 149.95, rate: 4.3, reviews: 4200, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Ball+Launcher", badge: "" },
+            { id: 48, title: "Yeti Tundra 45 Cooler High Performance Ice Retention", cat: "Sports", price: 299.99, old: 350.00, rate: 4.9, reviews: 8900, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Yeti+Tundra+45", badge: "" },
+            { id: 49, title: "Callaway Supersoft Golf Balls 12 Pack (2024 Model)", cat: "Sports", price: 22.99, old: 29.99, rate: 4.7, reviews: 21000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Callaway+Golf", badge: "" },
+            { id: 50, title: "Wilson NCAA Composite Leather Official Game Basketball", cat: "Sports", price: 29.99, old: 39.99, rate: 4.6, reviews: 15000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Wilson+Ball", badge: "" },
+            { id: 51, title: "DEWALT 20V MAX Cordless Drill Combo Kit 10-Tool", cat: "Tools", price: 399.00, old: 549.00, rate: 4.8, reviews: 5600, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=DeWalt+10+Tool", badge: "Deal" },
+            { id: 52, title: "Milwaukee M18 FUEL 1/2 Inch Impact Wrench Kit", cat: "Tools", price: 279.00, old: 349.00, rate: 4.9, reviews: 7800, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Milwaukee+M18", badge: "" },
+            { id: 53, title: "LEGO Star Wars Millennium Falcon Ultimate Collector", cat: "Toys & Games", price: 799.99, old: 849.99, rate: 4.9, reviews: 12000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=LEGO+Falcon", badge: "" },
+            { id: 54, title: "Nintendo Switch OLED Model White Console Bundle", cat: "Video Games", price: 339.99, old: 399.99, rate: 4.8, reviews: 23000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Switch+OLED", badge: "Top Rated" },
+            { id: 55, title: "PlayStation 5 DualSense Edge Wireless Controller", cat: "Video Games", price: 179.99, old: 199.99, rate: 4.6, reviews: 4500, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=PS5+Controller", badge: "New" },
+            { id: 56, title: "Xbox Series X 1TB Console Black Bundle", cat: "Video Games", price: 449.99, old: 499.99, rate: 4.8, reviews: 34000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Xbox+Series+X", badge: "" },
+            { id: 57, title: "GoPro HERO12 Black Waterproof Action Camera 5.3K", cat: "Electronics", price: 299.99, old: 399.99, rate: 4.7, reviews: 8900, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=GoPro+12", badge: "" },
+            { id: 58, title: "Bose QuietComfort Ultra Earbuds Wireless Bluetooth", cat: "Electronics", price: 279.00, old: 329.00, rate: 4.5, reviews: 3400, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Bose+QC+Ultra", badge: "" },
+            { id: 59, title: "iPad Pro 13-Inch M4 Chip Wi-Fi 256GB Space Black", cat: "Computers", price: 1199.00, old: 1299.00, rate: 4.9, reviews: 4500, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=iPad+Pro+M4", badge: "New" },
+            { id: 60, title: "iRobot Roomba j7+ Self-Emptying Robot Vacuum", cat: "Smart Home", price: 399.99, old: 599.99, rate: 4.6, reviews: 15000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Roomba+j7", badge: "Deal" },
+            { id: 61, title: "Weber Spirit E-315 3-Burner Propane Gas Grill", cat: "Home & Kitchen", price: 469.00, old: 569.00, rate: 4.7, reviews: 6700, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Weber+Grill", badge: "" },
+            { id: 62, title: "Dyson V15 Detect Cordless Vacuum Laser Slim Fluffy", cat: "Home & Kitchen", price: 649.99, old: 749.99, rate: 4.8, reviews: 9800, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Dyson+V15", badge: "" },
+            { id: 63, title: "Brother HL-L2350DW Compact Monochrome Laser Printer", cat: "Computers", price: 119.99, old: 149.99, rate: 4.5, reviews: 22000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Brother+Printer", badge: "" },
+            { id: 64, title: "Fitbit Charge 6 Fitness Tracker with Heart Rate", cat: "Electronics", price: 139.95, old: 159.95, rate: 4.4, reviews: 7800, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Fitbit+Charge+6", badge: "" },
+            { id: 65, title: "Kindle Paperwhite Signature Edition 32GB (2024)", cat: "Electronics", price: 169.99, old: 189.99, rate: 4.7, reviews: 45000, img: "https://via.placeholder.com/300x300/e8e8e8/111?text=Kindle+Paperwhite", badge: "Best Seller" }
+        ];
 
-    <!-- ================= CHECKOUT MODAL ================= -->
-    <div id="checkout-modal" class="modal-overlay">
-        <div class="modal-content glass-card-strong">
-            <button id="close-checkout-btn" class="modal-close"><i class="fas fa-times"></i></button>
-            <h2>Delivery Details</h2>
-            <p class="payment-notice"><i class="fas fa-money-bill-wave"></i> Payment strictly at delivery (Cash/Card)</p>
-            
-            <form id="checkout-form">
-                <div class="form-group">
-                    <label>Full Name *</label>
-                    <input type="text" id="cust-name" required>
-                </div>
-                <div class="form-group">
-                    <label>Phone Number *</label>
-                    <input type="tel" id="cust-phone" required>
-                </div>
-                <div class="form-group">
-                    <label>Delivery Address *</label>
-                    <textarea id="cust-address" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Order Note (e.g., Ring twice, extra soy sauce)</label>
-                    <textarea id="cust-note" rows="2"></textarea>
-                </div>
+        // APP STATE
+        const state = {
+            cart: JSON.parse(localStorage.getItem('sv_cart') || '[]'),
+            view: 'home',
+            params: null
+        };
+
+        const app = {
+            init: () => {
+                app.populateSearch();
+                app.router('home');
+                app.updateCartUI();
+                document.getElementById('search-box').addEventListener('keyup', e => e.key === 'Enter' && app.search());
+            },
+
+            populateSearch: () => {
+                const s = document.getElementById('cat-select');
+                CATEGORIES.forEach(c => {
+                    const o = document.createElement('option');
+                    o.value = c; o.textContent = c;
+                    s.appendChild(o);
+                });
+            },
+
+            router: (view, params = null) => {
+                state.view = view;
+                state.params = params;
+                window.scrollTo(0, 0);
+                const root = document.getElementById('app-root');
+                root.innerHTML = '';
+
+                switch(view) {
+                    case 'home': app.renderHome(root); break;
+                    case 'cat': app.renderCat(root, params); break;
+                    case 'prod': app.renderProd(root, params); break;
+                    case 'cart': app.renderCart(root); break;
+                    case 'checkout': app.renderCheckout(root); break;
+                }
+            },
+
+            renderHome: (root) => {
+                root.innerHTML = `
+                    <div class="hero">
+                        <img src="https://via.placeholder.com/1500x380/131921/232f3e?text=ShopVerse+Summer+Sale+-+Up+to+60%25+Off" class="hero-banner">
+                        <div class="hero-text">
+                            <h1>Upgrade Your Everything</h1>
+                            <p>Explore millions of products with fast, free delivery on eligible orders.</p>
+                            <button class="hero-btn" onclick="app.filterCat('Electronics')">Shop Top Deals</button>
+                        </div>
+                        <div class="hero-gradient"></div>
+                    </div>
+                    <div class="container">
+                        <div class="cat-grid">
+                            ${CATEGORIES.slice(0,4).map(c => `
+                                <div class="cat-card">
+                                    <h3>${c}</h3>
+                                    <div class="cat-img-grid">
+                                        ${app.getProdsByCat(c).slice(0,4).map(p => `<img src="${p.img}" onclick="app.router('prod', ${p.id})">`).join('')}
+                                    </div>
+                                    <a class="cat-link" onclick="app.filterCat('${c}')">See more</a>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="cat-grid" style="margin-top:20px;">
+                            ${CATEGORIES.slice(4,8).map(c => `
+                                <div class="cat-card">
+                                    <h3>${c}</h3>
+                                    <div class="cat-img-grid">
+                                        ${app.getProdsByCat(c).slice(0,4).map(p => `<img src="${p.img}" onclick="app.router('prod', ${p.id})">`).join('')}
+                                    </div>
+                                    <a class="cat-link" onclick="app.filterCat('${c}')">See more</a>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="section-header">
+                            <span class="section-title">Deals Under $100</span>
+                            <a class="see-all" onclick="app.filterCat('all')">See all deals</a>
+                        </div>
+                        <div class="prod-grid">
+                            ${app.renderProds(FAKE_PRODUCTS.filter(p => p.price < 100).slice(0,8))}
+                        </div>
+
+                        <div class="section-header">
+                            <span class="section-title">Top Rated in Electronics</span>
+                            <a class="see-all" onclick="app.filterCat('Electronics')">See all</a>
+                        </div>
+                        <div class="prod-grid">
+                            ${app.renderProds(FAKE_PRODUCTS.filter(p => p.cat === 'Electronics'))}
+                        </div>
+
+                        <div class="section-header">
+                            <span class="section-title">Home & Kitchen Essentials</span>
+                            <a class="see-all" onclick="app.filterCat('Home & Kitchen')">See all</a>
+                        </div>
+                        <div class="prod-grid">
+                            ${app.renderProds(FAKE_PRODUCTS.filter(p => p.cat === 'Home & Kitchen'))}
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderCat: (root, cat) => {
+                const prods = cat === 'all' ? FAKE_PRODUCTS : FAKE_PRODUCTS.filter(p => p.cat === cat);
+                root.innerHTML = `
+                    <div class="container" style="padding: 15px 20px;">
+                        <div style="font-size: 13px; color: var(--text-light); margin-bottom: 10px;">
+                            <a onclick="app.router('home')">Home</a> &gt; ${cat === 'all' ? 'All Products' : `<a onclick="app.router('home')">${cat}</a>`}
+                        </div>
+                        <h1 class="section-title" style="margin-bottom: 15px;">${cat === 'all' ? 'All Products' : `Results for "${cat}"`}</h1>
+                        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                            <div class="prod-grid" style="padding: 0; margin: 0;">
+                                ${prods.length ? app.renderProds(prods) : '<p style="padding: 40px; font-size: 16px;">No products found.</p>'}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderProd: (root, id) => {
+                const p = FAKE_PRODUCTS.find(i => i.id === id);
+                if (!p) return;
+                const discount = Math.round(((p.old - p.price) / p.old) * 100);
                 
-                <button type="submit" id="checkout-btn" class="btn-primary btn-large">
-                    Confirm Order
-                </button>
-            </form>
-        </div>
-    </div>
+                root.innerHTML = `
+                    <div class="container">
+                        <div style="padding: 12px 0; font-size: 13px; color: var(--link); display: flex; gap: 5px; align-items: center;">
+                            <a onclick="app.router('home')">Home</a> <span>&gt;</span>
+                            <a onclick="app.filterCat('${p.cat}')">${p.cat}</a> <span>&gt;</span>
+                            <span style="color: var(--text-light); cursor: default;">${p.title.substring(0,40)}...</span>
+                        </div>
+                        <div class="detail-page">
+                            <div class="detail-gallery">
+                                <div class="detail-thumbs">
+                                    <img src="${p.img}" class="active" onclick="document.querySelector('.detail-main img').src=this.src; document.querySelectorAll('.detail-thumbs img').forEach(t=>t.classList.remove('active')); this.classList.add('active');">
+                                    <img src="https://via.placeholder.com/300x300/eee/999?text=Angle+1" onclick="document.querySelector('.detail-main img').src=this.src; document.querySelectorAll('.detail-thumbs img').forEach(t=>t.classList.remove('active')); this.classList.add('active');">
+                                    <img src="https://via.placeholder.com/300x300/eee/999?text=Angle+2" onclick="document.querySelector('.detail-main img').src=this.src; document.querySelectorAll('.detail-thumbs img').forEach(t=>t.classList.remove('active')); this.classList.add('active');">
+                                    <img src="https://via.placeholder.com/300x300/eee/999?text=Detail" onclick="document.querySelector('.detail-main img').src=this.src; document.querySelectorAll('.detail-thumbs img').forEach(t=>t.classList.remove('active')); this.classList.add('active');">
+                                </div>
+                                <div class="detail-main">
+                                    <img src="${p.img}" alt="${p.title}">
+                                </div>
+                            </div>
+                            <div class="detail-info">
+                                <h1 class="detail-title">${p.title}</h1>
+                                <div class="detail-brand" onclick="app.filterCat('${p.cat}')">Visit the ${p.cat} Store</div>
+                                <div class="detail-stats">
+                                    <div class="detail-ratings">
+                                        <span style="font-size: 15px; font-weight: 500;">${p.rate}</span>
+                                        <span class="stars">${app.getStars(p.rate)}</span>
+                                        <span class="rating-count">${p.reviews.toLocaleString()} ratings</span>
+                                        <span style="color: var(--text-light);">|</span>
+                                        <span style="color: var(--link); font-size: 13px; cursor: pointer;">Search this page</span>
+                                    </div>
+                                    ${p.badge ? `<span style="background: var(--danger); color: white; font-size: 12px; font-weight: 700; padding: 3px 7px; border-radius: 3px; margin-top: 5px; display: inline-block;">${p.badge}</span>` : ''}
+                                </div>
+                                <div class="detail-price-box">
+                                    <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+                                        <span style="font-size: 13px; color: var(--danger); font-weight: 700;">-${discount}%</span>
+                                        <span class="detail-price">$${p.price.toFixed(2)}</span>
+                                        <span class="detail-list">List Price: $${p.old.toFixed(2)}</span>
+                                    </div>
+                                    <div class="detail-vat">List Price was: $${p.old.toFixed(2)}. You save: $${(p.old - p.price).toFixed(2)} (${discount}%)</div>
+                                    <div style="font-size: 12px; color: var(--text-light); margin-top: 8px;">
+                                        <b style="color: var(--text-main);">FREE Returns</b> on eligible orders. <span style="color: var(--link); cursor: pointer;">Learn more</span>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: 15px;">
+                                    <div style="font-size: 14px; color: var(--text-light); margin-bottom: 4px;">Brand</div>
+                                    <div style="font-size: 14px; font-weight: 500;">${p.cat} Official</div>
+                                </div>
+                                <table class="detail-meta-table">
+                                    <tr><td>Color</td><td>Black / White / Space Grey</td></tr>
+                                    <tr><td>Connectivity</td><td>Wireless, Bluetooth 5.3</td></tr>
+                                    <tr><td>Special Feature</td><td>Noise Cancellation, Waterproof</td></tr>
+                                    <tr><td>Item Weight</td><td>0.85 lbs</td></tr>
+                                    <tr><td>Model Year</td><td>2026</td></tr>
+                                </table>
+                                <div style="font-size: 14px; line-height: 1.6; margin-bottom: 20px; color: var(--text-main);">
+                                    <p>Experience premium quality with the ${p.title}. Engineered for performance, designed for style. Whether you're upgrading your daily essentials or treating yourself to the latest tech, this product delivers excellence in every detail.</p>
+                                </div>
+                                <ul class="features-list">
+                                    <li>Advanced technology for superior performance</li>
+                                    <li>Ergonomic design for all-day comfort</li>
+                                    <li>2-year manufacturer warranty included</li>
+                                    <li>Eco-friendly packaging and sustainable materials</li>
+                                    <li>Compatible with all major devices and platforms</li>
+                                </ul>
+                                <div style="font-size: 13px; color: var(--text-light);">
+                                    <span style="color: var(--link); cursor: pointer;">Report an issue with this product or seller</span>
+                                </div>
+                            </div>
+                            <div class="buy-box">
+                                <div class="buy-price">$${p.price.toFixed(2)}</div>
+                                <div class="delivery-date"><b style="color: var(--success);">FREE delivery</b> <span>Tuesday, May 26</span>. <span style="color: var(--link); cursor: pointer;">Details</span></div>
+                                <div class="in-stock"><i class="fas fa-map-marker-alt"></i> Delivers to <span id="loc-detail" style="color: var(--text-main);">New York 10001</span></div>
+                                <div class="in-stock" style="margin-bottom: 12px;"><i class="fas fa-check-circle"></i> In Stock</div>
+                                <div class="seller">Ships from <b>ShopVerse</b> &nbsp; Sold by <b style="color: var(--link); cursor: pointer;">ShopVerse.com</b></div>
+                                <div style="margin-bottom: 15px;">
+                                    <label style="font-size: 12px; margin-bottom: 5px; display: block;">Quantity:</label>
+                                    <div class="qty-control">
+                                        <button onclick="let q=document.getElementById('detail-qty'); if(q.value>1)q.value--">-</button>
+                                        <input type="number" value="1" min="1" max="10" id="detail-qty">
+                                        <button onclick="let q=document.getElementById('detail-qty'); if(q.value<10)q.value++">+</button>
+                                    </div>
+                                </div>
+                                <button class="action-btn btn-add-cart" onclick="app.addCart(${p.id})">Add to Cart</button>
+                                <button class="action-btn btn-buy-now" onclick="app.addCart(${p.id}, 1); app.router('checkout')">Buy Now</button>
+                                <div style="margin-top: 12px; font-size: 12px;">
+                                    <div class="secure-trans"><i class="fas fa-lock"></i> Secure transaction</div>
+                                    <div class="buy-links">
+                                        <a href="#">Add to List</a>
+                                        <a href="#">Share</a>
+                                        <a href="#">Buy used: $${(p.price * 0.75).toFixed(2)}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-header" style="padding: 20px 0 10px;">
+                            <span class="section-title">Customers who viewed this item also viewed</span>
+                        </div>
+                        <div class="prod-grid">
+                            ${app.renderProds(FAKE_PRODUCTS.filter(x => x.cat === p.cat && x.id !== p.id).slice(0, 4))}
+                        </div>
+                    </div>
+                `;
+            },
 
-    <!-- Main Script Entry Point -->
-    <script type="module" src="src/main.js"></script>
+            renderCart: (root) => {
+                if (state.cart.length === 0) {
+                    root.innerHTML = `
+                        <div class="empty-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h2>Your ShopVerse Cart is empty</h2>
+                            <p style="margin-bottom: 20px; color: var(--text-light);">Check your Saved for Later items or continue shopping.</p>
+                            <button class="hero-btn" onclick="app.router('home')">Continue Shopping</button>
+                        </div>
+                    `;
+                    return;
+                }
 
+                let subtotal = 0;
+                let totalItems = 0;
+                
+                const itemsHtml = state.cart.map(item => {
+                    const p = FAKE_PRODUCTS.find(i => i.id === item.id);
+                    const lineTotal = p.price * item.qty;
+                    subtotal += lineTotal;
+                    totalItems += item.qty;
+                    return `
+                        <div class="cart-item">
+                            <div class="cart-item-img" onclick="app.router('prod', ${p.id})">
+                                <img src="${p.img}" alt="${p.title}">
+                            </div>
+                            <div class="cart-item-info">
+                                <div class="cart-item-title" onclick="app.router('prod', ${p.id})">${p.title}</div>
+                                <div class="cart-item-stock">In Stock</div>
+                                <div class="cart-item-meta">Style: Standard | <span>Gift options not available.</span></div>
+                                <div class="cart-actions">
+                                    <span onclick="app.updateQty(${p.id}, ${item.qty + 1})">Qty: ${item.qty}</span>
+                                    <div class="divider"></div>
+                                    <span onclick="app.updateQty(${p.id}, ${item.qty - 1})">${item.qty > 1 ? 'Decrease' : 'Delete'}</span>
+                                    <div class="divider"></div>
+                                    <span onclick="app.removeCart(${p.id})">Delete</span>
+                                    <div class="divider"></div>
+                                    <span>Save for later</span>
+                                    <div class="divider"></div>
+                                    <span>Compare with similar items</span>
+                                    <div class="divider"></div>
+                                    <span>Share</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right; min-width: 100px;">
+                                <div class="cart-item-price">$${lineTotal.toFixed(2)}</div>
+                                <div class="qty-control-small">
+                                    <button onclick="app.updateQty(${p.id}, ${item.qty - 1})"><i class="fas fa-minus" style="font-size: 10px;"></i></button>
+                                    <span>${item.qty}</span>
+                                    <button onclick="app.updateQty(${p.id}, ${item.qty + 1})"><i class="fas fa-plus" style="font-size: 10px;"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                root.innerHTML = `
+                    <div class="cart-page">
+                        <div class="cart-items-section">
+                            <div class="cart-header">
+                                <span>Shopping Cart</span>
+                                <span>Price</span>
+                            </div>
+                            ${itemsHtml}
+                            <div style="text-align: right; font-size: 18px; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border);">
+                                Subtotal (${totalItems} items): <b style="font-size: 20px;">$${subtotal.toFixed(2)}</b>
+                            </div>
+                        </div>
+                        <div class="cart-summary">
+                            <div class="subtotal-row">
+                                <span>Subtotal (${totalItems} items)</span>
+                                <b>$${subtotal.toFixed(2)}</b>
+                            </div>
+                            <div class="gift-check">
+                                <input type="checkbox" id="gift-check">
+                                <label for="gift-check">This order contains a gift</label>
+                            </div>
+                            <button class="proceed-btn" onclick="app.router('checkout')">Proceed to checkout</button>
+                            <button class="proceed-btn" style="background: #fff; border: 1px solid var(--border); margin-top: 5px;" onclick="app.removeCartAll()">Clear Cart</button>
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderCheckout: (root) => {
+                if (state.cart.length === 0) { app.router('cart'); return; }
+                
+                let subtotal = 0;
+                state.cart.forEach(item => {
+                    const p = FAKE_PRODUCTS.find(i => i.id === item.id);
+                    subtotal += p.price * item.qty;
+                });
+                const shipping = 12.99;
+                const tax = subtotal * 0.08;
+                const total = subtotal + shipping + tax;
+
+                root.innerHTML = `
+                    <div class="checkout-page">
+                        <h2 class="checkout-title">Checkout</h2>
+                        
+                        <div class="step-header">
+                            <span class="step-num">1</span>
+                            <span>Shipping Address</span>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" value="John" placeholder="First Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" value="Doe" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Address Line 1</label>
+                            <input type="text" value="123 Main Street" placeholder="Street Address">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" value="New York" placeholder="City">
+                            </div>
+                            <div class="form-group">
+                                <label>State</label>
+                                <input type="text" value="NY" placeholder="State">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>ZIP Code</label>
+                            <input type="text" value="10001" placeholder="10001">
+                        </div>
+
+                        <div class="step-header">
+                            <span class="step-num">2</span>
+                            <span>Payment Method</span>
+                        </div>
+                        <div class="payment-opt active" onclick="document.querySelectorAll('.payment-opt').forEach(o=>o.classList.remove('active')); this.classList.add('active');">
+                            <i class="fas fa-credit-card"></i>
+                            <div>
+                                <div style="font-weight: 600; font-size: 14px;">Credit or Debit Card</div>
+                                <div style="font-size: 12px; color: var(--text-light);">Add a card to pay securely</div>
+                            </div>
+                        </div>
+                        <div class="payment-opt" onclick="document.querySelectorAll('.payment-opt').forEach(o=>o.classList.remove('active')); this.classList.add('active');">
+                            <i class="fab fa-paypal"></i>
+                            <div>
+                                <div style="font-weight: 600; font-size: 14px;">PayPal</div>
+                            </div>
+                        </div>
+                        <div class="payment-opt" onclick="document.querySelectorAll('.payment-opt').forEach(o=>o.classList.remove('active')); this.classList.add('active');">
+                            <i class="fab fa-apple-pay"></i>
+                            <div>
+                                <div style="font-weight: 600; font-size: 14px;">Apple Pay</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label>Card Number</label>
+                            <input type="text" placeholder="0000 0000 0000 0000">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Expiration Date</label>
+                                <input type="text" placeholder="MM / YY">
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input type="text" placeholder="123">
+                            </div>
+                        </div>
+
+                        <div class="order-summary">
+                            <h3 style="font-size: 16px; margin-bottom: 12px; font-weight: 600;">Order Summary</h3>
+                            <div class="summary-row">
+                                <span>Items:</span>
+                                <span>$${subtotal.toFixed(2)}</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Shipping & Handling:</span>
+                                <span>$${shipping.toFixed(2)}</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Estimated Tax:</span>
+                                <span>$${tax.toFixed(2)}</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Order Total:</span>
+                                <span>$${total.toFixed(2)}</span>
+                            </div>
+                        </div>
+
+                        <button class="pay-btn" id="pay-btn" onclick="app.pay()">
+                            Place your order - $${total.toFixed(2)}
+                        </button>
+                        <p style="font-size: 12px; color: var(--text-light); margin-top: 12px; text-align: center;">
+                            By placing your order, you agree to ShopVerse's <a href="#" style="color: var(--link);">Privacy Notice</a> and <a href="#" style="color: var(--link);">Conditions of Use</a>.
+                        </p>
+                    </div>
+                `;
+            },
+
+            pay: () => {
+                const btn = document.getElementById('pay-btn');
+                btn.disabled = true;
+                btn.innerHTML = '<span class="spinner"></span> Processing Payment...';
+                btn.style.background = '#ccc';
+                btn.style.cursor = 'not-allowed';
+
+                setTimeout(() => {
+                    state.cart = [];
+                    localStorage.setItem('sv_cart', '[]');
+                    app.updateCartUI();
+                    
+                    document.body.insertAdjacentHTML('beforeend', `
+                        <div class="modal-overlay">
+                            <div class="modal-content">
+                                <i class="fas fa-check-circle success"></i>
+                                <h2>Order Placed Successfully!</h2>
+                                <p>Thank you for your purchase. Your order has been confirmed and will be shipped soon.</p>
+                                <p style="font-weight: 600; color: var(--text-main);">Order #SV-${Math.floor(Math.random()*900000)+100000}</p>
+                                <button class="modal-btn" onclick="document.querySelector('.modal-overlay').remove(); app.router('home');">Continue Shopping</button>
+                            </div>
+                        </div>
+                    `);
+                }, 2000);
+            },
+
+            // UTILS
+            getProdsByCat: (cat) => FAKE_PRODUCTS.filter(p => p.cat === cat),
+            
+            getStars: (r) => {
+                let s = '';
+                for(let i=1; i<=5; i++) {
+                    if(i <= Math.floor(r)) s += '<i class="fas fa-star"></i>';
+                    else if(i === Math.ceil(r) && !Number.isInteger(r)) s += '<i class="fas fa-star-half-alt"></i>';
+                    else s += '<i class="far fa-star"></i>';
+                }
+                return s;
+            },
+
+            renderProds: (items) => items.map(p => {
+                const disc = Math.round(((p.old - p.price) / p.old) * 100);
+                return `
+                    <div class="prod-card">
+                        ${p.badge ? `<div class="prod-badge ${p.badge === 'New' ? 'new' : ''}">${p.badge}</div>` : ''}
+                        <div class="prod-img-wrap" onclick="app.router('prod', ${p.id})">
+                            <img src="${p.img}" alt="${p.title}">
+                        </div>
+                        <div class="prod-title" onclick="app.router('prod', ${p.id})">${p.title}</div>
+                        <div class="prod-rating">
+                            <span class="stars">${app.getStars(p.rate)}</span>
+                            <span class="rating-count">${p.reviews.toLocaleString()}</span>
+                        </div>
+                        <div class="price-row">
+                            <div class="prod-price">
+                                <span class="sym">$</span>${Math.floor(p.price)}<span class="dec">${(p.price % 1).toFixed(2).substring(2)}</span>
+                            </div>
+                            <span class="prod-old-price">$${p.old.toFixed(2)}</span>
+                        </div>
+                        <span class="prod-discount">Save ${disc}%</span>
+                        <div class="prime-tag"><span class="check">✓</span> shopverse</div>
+                        <div class="delivery">FREE Delivery by <b>Tue, May 26</b></div>
+                        <button class="add-btn" onclick="event.stopPropagation(); app.addCart(${p.id})">Add to Cart</button>
+                    </div>
+                `;
+            }).join(''),
+
+            filterCat: (cat) => {
+                document.getElementById('search-box').value = '';
+                app.router('cat', cat);
+            },
+
+            search: () => {
+                const q = document.getElementById('search-box').value.toLowerCase().trim();
+                const c = document.getElementById('cat-select').value;
+                
+                let res = FAKE_PRODUCTS;
+                if (c !== 'all') res = res.filter(p => p.cat === c);
+                if (q) res = res.filter(p => p.title.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q));
+
+                const root = document.getElementById('app-root');
+                root.innerHTML = `
+                    <div class="container" style="padding: 20px;">
+                        <h1 class="section-title" style="margin-bottom: 20px;">${q ? `Results for "${q}"` : 'All Products'}</h1>
+                        <div class="prod-grid" style="padding: 0;">
+                            ${res.length ? app.renderProds(res) : '<p style="padding: 40px; font-size: 16px;">No products found.</p>'}
+                        </div>
+                    </div>
+                `;
+            },
+
+            addCart: (id, qty = 1) => {
+                qty = parseInt(qty) || 1;
+                const ex = state.cart.find(i => i.id === id);
+                if(ex) ex.qty += qty;
+                else state.cart.push({id, qty});
+                app.save();
+                app.toast('Added to Cart');
+            },
+
+            removeCart: (id) => {
+                state.cart = state.cart.filter(i => i.id !== id);
+                app.save();
+                app.router('cart');
+            },
+
+            removeCartAll: () => {
+                state.cart = [];
+                app.save();
+                app.router('cart');
+            },
+
+            updateQty: (id, newQty) => {
+                if(newQty < 1) return app.removeCart(id);
+                const it = state.cart.find(i => i.id === id);
+                if(it) it.qty = newQty;
+                app.save();
+                if(state.view === 'cart') app.router('cart');
+            },
+
+            save: () => {
+                localStorage.setItem('sv_cart', JSON.stringify(state.cart));
+                app.updateCartUI();
+            },
+
+            updateCartUI: () => {
+                const c = state.cart.reduce((s, i) => s + i.qty, 0);
+                document.getElementById('cart-count').textContent = c;
+            },
+
+            toast: (msg) => {
+                const t = document.getElementById('toast');
+                document.getElementById('toast-text').textContent = msg;
+                t.classList.add('show');
+                setTimeout(() => t.classList.remove('show'), 2500);
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', app.init);
+    </script>
 </body>
 </html>
+
