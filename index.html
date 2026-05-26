@@ -1,804 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Minato Sushi | Authentic Japanese Experience</title>
-  <meta name="description" content="Minato Sushi: Traditional and creative sushi, available for delivery, takeout, or dine-in. Order now with our easy Amazon-style interface."/>
-  <style>
-    :root{
-      --primary:#e63946;
-      --primary-dark:#c1121f;
-      --secondary:#1d3557;
-      --background:#f8f9fa;
-      --surface:#ffffff;
-      --text:#212529;
-      --text-light:#6c757d;
-      --border:#dee2e6;
-      --shadow:0 4px 12px rgba(0,0,0,0.08);
-      --shadow-lg:0 8px 24px rgba(0,0,0,0.12);
-      --radius:12px;
-      --radius-lg:16px;
-      --transition:all 0.2s ease;
-      --font:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:var(--font);
-      background:var(--background);
-      color:var(--text);
-      line-height:1.6;
-      -webkit-font-smoothing:antialiased;
-    }
-    img{max-width:100%;display:block}
-    button{font:inherit;cursor:pointer;border:none;background:none}
-    a{text-decoration:none;color:inherit}
-    .container{max-width:1200px;margin:0 auto;padding:0 20px}
-    .section{padding:80px 0}
-    .section-title{
-      font-size:2.25rem;
-      font-weight:700;
-      margin-bottom:16px;
-      color:var(--secondary);
-    }
-    .section-subtitle{
-      font-size:1.125rem;
-      color:var(--text-light);
-      margin-bottom:40px;
-      max-width:600px;
-    }
-    /* Header */
-    header{
-      position:sticky;top:0;z-index:1000;
-      background:var(--surface);
-      box-shadow:var(--shadow);
-      padding:12px 0;
-    }
-    .header-inner{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:20px;
-    }
-    .logo{
-      font-size:1.5rem;font-weight:800;color:var(--primary);
-      display:flex;align-items:center;gap:8px;
-    }
-    .logo-icon{
-      width:32px;height:32px;background:var(--primary);
-      border-radius:8px;display:grid;place-items:center;
-      color:white;font-weight:900;
-    }
-    nav{display:flex;gap:24px}
-    .nav-link{
-      font-weight:500;color:var(--text);
-      padding:8px 4px;border-bottom:2px solid transparent;
-      transition:var(--transition);
-    }
-    .nav-link:hover,.nav-link.active{
-      color:var(--primary);border-color:var(--primary);
-    }
-    .header-actions{display:flex;align-items:center;gap:16px}
-    .cart-btn{
-      position:relative;padding:10px;
-      border-radius:50%;background:var(--background);
-      transition:var(--transition);
-    }
-    .cart-btn:hover{background:var(--border)}
-    .cart-count{
-      position:absolute;top:-4px;right:-4px;
-      background:var(--primary);color:white;
-      font-size:0.75rem;font-weight:700;
-      width:20px;height:20px;border-radius:50%;
-      display:grid;place-items:center;
-    }
-    .mobile-toggle{display:none;font-size:1.5rem}
-    /* Hero */
-    .hero{
-      background:linear-gradient(135deg,var(--secondary) 0%,#457b9d 100%);
-      color:white;padding:100px 0 80px;
-      position:relative;overflow:hidden;
-    }
-    .hero::before{
-      content:'';position:absolute;inset:0;
-      background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
-      opacity:0.3;
-    }
-    .hero-content{max-width:600px;position:relative;z-index:2}
-    .hero-title{
-      font-size:3rem;font-weight:800;line-height:1.1;
-      margin-bottom:20px;
-    }
-    .hero-text{
-      font-size:1.25rem;opacity:0.9;margin-bottom:32px;
-    }
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      gap:8px;padding:14px 28px;
-      background:var(--primary);color:white;
-      font-weight:600;border-radius:var(--radius);
-      transition:var(--transition);
-    }
-    .btn:hover{background:var(--primary-dark);transform:translateY(-2px)}
-    .btn-outline{
-      background:transparent;border:2px solid white;
-    }
-    .btn-outline:hover{background:rgba(255,255,255,0.1)}
-    /* Story Section */
-    .story-grid{
-      display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
-    }
-    .story-img{
-      border-radius:var(--radius-lg);overflow:hidden;
-      box-shadow:var(--shadow-lg);height:400px;
-      background:linear-gradient(45deg,#a8dadc,#457b9d);
-      display:grid;place-items:center;color:white;font-weight:600;
-    }
-    .story-content h2{color:var(--secondary);margin-bottom:20px}
-    .story-content p{margin-bottom:16px;color:var(--text-light)}
-    /* Menu Section - Amazon Style */
-    .menu-filters{
-      display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px;
-    }
-    .filter-btn{
-      padding:10px 20px;border-radius:30px;
-      background:var(--surface);border:1px solid var(--border);
-      font-weight:500;transition:var(--transition);
-    }
-    .filter-btn.active,.filter-btn:hover{
-      background:var(--primary);color:white;border-color:var(--primary);
-    }
-    .products-grid{
-      display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-      gap:24px;
-    }
-    .product-card{
-      background:var(--surface);border-radius:var(--radius);
-      box-shadow:var(--shadow);overflow:hidden;
-      display:flex;flex-direction:column;
-      transition:var(--transition);
-    }
-    .product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-    .product-img{
-      height:200px;background:linear-gradient(135deg,#f1faee,#a8dadc);
-      display:grid;place-items:center;color:var(--secondary);
-      font-weight:600;
-    }
-    .product-body{padding:20px;flex:1;display:flex;flex-direction:column}
-    .product-title{font-weight:700;font-size:1.125rem;margin-bottom:8px}
-    .product-desc{color:var(--text-light);font-size:0.95rem;margin-bottom:16px;flex:1}
-    .product-price{font-size:1.25rem;font-weight:700;color:var(--primary);margin-bottom:16px}
-    .quantity-control{
-      display:flex;align-items:center;gap:12px;margin-bottom:16px;
-    }
-    .qty-btn{
-      width:32px;height:32px;border-radius:8px;
-      background:var(--background);font-weight:600;
-      display:grid;place-items:center;transition:var(--transition);
-    }
-    .qty-btn:hover{background:var(--border)}
-    .qty-value{font-weight:600;min-width:24px;text-align:center}
-    .add-to-plate{
-      width:100%;padding:12px;background:var(--secondary);
-      color:white;font-weight:600;border-radius:var(--radius);
-      transition:var(--transition);display:flex;align-items:center;justify-content:center;gap:8px;
-    }
-    .add-to-plate:hover{background:#14213d}
-    .add-to-plate:active{transform:scale(0.98)}
-    /* Cart Panel */
-    .cart-panel{
-      position:fixed;top:0;right:-400px;width:400px;max-width:100%;
-      height:100vh;background:var(--surface);
-      box-shadow:-4px 0 24px rgba(0,0,0,0.1);
-      z-index:2000;transition:var(--transition);
-      display:flex;flex-direction:column;
-    }
-    .cart-panel.open{right:0}
-    .cart-header{
-      padding:20px;border-bottom:1px solid var(--border);
-      display:flex;align-items:center;justify-content:space-between;
-    }
-    .cart-close{font-size:1.5rem;color:var(--text-light)}
-    .cart-items{flex:1;overflow-y:auto;padding:20px}
-    .cart-item{
-      display:grid;grid-template-columns:60px 1fr auto;gap:16px;
-      padding:16px 0;border-bottom:1px solid var(--border);
-    }
-    .cart-item-img{
-      width:60px;height:60px;border-radius:8px;
-      background:var(--background);display:grid;place-items:center;
-      font-size:0.8rem;color:var(--secondary);
-    }
-    .cart-item-details h4{font-weight:600;margin-bottom:4px}
-    .cart-item-price{color:var(--primary);font-weight:600}
-    .cart-item-qty{
-      display:flex;align-items:center;gap:8px;margin-top:8px;
-    }
-    .cart-footer{
-      padding:20px;border-top:1px solid var(--border);
-      background:var(--background);
-    }
-    .cart-total{
-      display:flex;justify-content:space-between;font-size:1.25rem;
-      font-weight:700;margin-bottom:16px;
-    }
-    .checkout-btn{
-      width:100%;padding:16px;background:var(--primary);
-      color:white;font-weight:700;border-radius:var(--radius);
-      font-size:1.1rem;transition:var(--transition);
-    }
-    .checkout-btn:hover{background:var(--primary-dark)}
-    .cart-overlay{
-      position:fixed;inset:0;background:rgba(0,0,0,0.4);
-      z-index:1999;opacity:0;pointer-events:none;transition:var(--transition);
-    }
-    .cart-overlay.open{opacity:1;pointer-events:auto}
-    /* Checkout Modal */
-    .modal{
-      position:fixed;inset:0;z-index:3000;
-      display:grid;place-items:center;
-      background:rgba(0,0,0,0.5);opacity:0;pointer-events:none;
-      transition:var(--transition);padding:20px;
-    }
-    .modal.open{opacity:1;pointer-events:auto}
-    .modal-content{
-      background:var(--surface);border-radius:var(--radius-lg);
-      width:100%;max-width:500px;box-shadow:var(--shadow-lg);
-      overflow:hidden;transform:translateY(20px);transition:var(--transition);
-    }
-    .modal.open .modal-content{transform:translateY(0)}
-    .modal-header{
-      padding:24px;border-bottom:1px solid var(--border);
-      display:flex;justify-content:space-between;align-items:center;
-    }
-    .modal-body{padding:24px}
-    .form-group{margin-bottom:20px}
-    .form-label{display:block;font-weight:500;margin-bottom:8px}
-    .form-input{
-      width:100%;padding:12px 16px;border:1px solid var(--border);
-      border-radius:8px;font:inherit;transition:var(--transition);
-    }
-    .form-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(230,57,70,0.1)}
-    .modal-footer{
-      padding:20px 24px;border-top:1px solid var(--border);
-      display:flex;gap:12px;justify-content:flex-end;
-    }
-    .btn-secondary{
-      padding:12px 24px;background:var(--background);
-      border-radius:var(--radius);font-weight:600;transition:var(--transition);
-    }
-    .btn-secondary:hover{background:var(--border)}
-    /* About Section */
-    .about-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:32px;
-    }
-    .about-card{
-      background:var(--surface);padding:32px;border-radius:var(--radius);
-      box-shadow:var(--shadow);text-align:center;
-    }
-    .about-icon{
-      width:64px;height:64px;margin:0 auto 20px;
-      background:var(--primary);border-radius:50%;
-      display:grid;place-items:center;color:white;font-size:1.5rem;
-    }
-    .about-card h3{margin-bottom:12px;color:var(--secondary)}
-    /* Footer */
-    footer{
-      background:var(--secondary);color:white;padding:60px 0 30px;
-    }
-    .footer-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:32px;margin-bottom:40px;
-    }
-    .footer-col h4{margin-bottom:20px;font-size:1.125rem}
-    .footer-col a{
-      display:block;color:rgba(255,255,255,0.8);
-      padding:6px 0;transition:var(--transition);
-    }
-    .footer-col a:hover{color:white}
-    .footer-bottom{
-      text-align:center;padding-top:20px;
-      border-top:1px solid rgba(255,255,255,0.1);
-      color:rgba(255,255,255,0.7);font-size:0.9rem;
-    }
-    /* Responsive */
-    @media(max-width:900px){
-      nav{display:none}
-      .mobile-toggle{display:block}
-      .story-grid{grid-template-columns:1fr}
-      .hero-title{font-size:2.5rem}
-      .cart-panel{width:100%;max-width:400px}
-    }
-    @media(max-width:600px){
-      .section{padding:60px 0}
-      .hero{padding:80px 0 60px}
-      .hero-title{font-size:2rem}
-      .section-title{font-size:1.75rem}
-      .products-grid{grid-template-columns:1fr}
-    }
-    /* Utilities */
-    .hidden{display:none!important}
-    .text-center{text-align:center}
-    .mt-8{margin-top:32px}
-    .flex{display:flex}
-    .items-center{align-items:center}
-    .justify-center{justify-content:center}
-    .gap-2{gap:8px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minato Sushi | Authentic Japanese Cuisine</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="container header-inner">
-      <a href="#" class="logo">
-        <span class="logo-icon">M</span>
-        Minato
-      </a>
-      <nav>
-        <a href="#home" class="nav-link active">Home</a>
-        <a href="#story" class="nav-link">Our Story</a>
-        <a href="#menu" class="nav-link">Menu</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </nav>
-      <div class="header-actions">
-        <button class="cart-btn" id="cartToggle" aria-label="Open cart">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-          </svg>
-          <span class="cart-count" id="cartCount">0</span>
-        </button>
-        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">☰</button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section id="home" class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1 class="hero-title">Authentic Japanese Sushi, Crafted with Passion</h1>
-        <p class="hero-text">Experience the art of traditional and creative sushi at Minato. Fresh ingredients, masterful preparation, delivered to your door or enjoyed in our serene space.</p>
-        <div class="flex gap-2">
-          <a href="#menu" class="btn">Order Now</a>
-          <a href="#story" class="btn btn-outline">Our Story</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Story Section -->
-  <section id="story" class="section">
-    <div class="container">
-      <div class="story-grid">
-        <div class="story-img">Minato Kitchen</div>
-        <div class="story-content">
-          <h2 class="section-title">The Story of Minato</h2>
-          <p>Minato was born from a simple belief: great sushi should be accessible, authentic, and memorable. Our founder, Chef Kenji Tanaka, trained for over 15 years in Tokyo before bringing his craft to your neighborhood.</p>
-          <p>Every piece of sushi we serve honors traditional techniques while embracing local, seasonal ingredients. We source our fish daily, prepare our rice with precision, and craft each roll with intention.</p>
-          <p>Minato means "harbor" in Japanese — a place of arrival, connection, and nourishment. We invite you to make our table yours.</p>
-          <a href="#menu" class="btn mt-8">Explore Our Menu</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Menu Section -->
-  <section id="menu" class="section" style="background:#fff">
-    <div class="container">
-      <h2 class="section-title text-center">Our Menu</h2>
-      <p class="section-subtitle text-center">Scroll, select quantity, and add to your plate — just like Amazon, but for sushi.</p>
-      
-      <div class="menu-filters">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="nigiri">Nigiri</button>
-        <button class="filter-btn" data-filter="rolls">Specialty Rolls</button>
-        <button class="filter-btn" data-filter="sashimi">Sashimi</button>
-        <button class="filter-btn" data-filter="appetizers">Appetizers</button>
-      </div>
-
-      <div class="products-grid" id="productsGrid">
-        <!-- Products will be injected by JavaScript -->
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="section">
-    <div class="container">
-      <h2 class="section-title text-center">Why Choose Minato</h2>
-      <p class="section-subtitle text-center">We are committed to quality, sustainability, and an unforgettable dining experience.</p>
-      
-      <div class="about-grid">
-        <div class="about-card">
-          <div class="about-icon">🐟</div>
-          <h3>Fresh Daily</h3>
-          <p>Our fish is sourced every morning from trusted suppliers to ensure peak freshness and flavor.</p>
-        </div>
-        <div class="about-card">
-          <div class="about-icon">🍚</div>
-          <h3>Traditional Craft</h3>
-          <p>Every grain of rice is seasoned and shaped using time-honored Japanese techniques.</p>
-        </div>
-        <div class="about-card">
-          <div class="about-icon">🌱</div>
-          <h3>Sustainable</h3>
-          <p>We partner with eco-conscious fisheries and use compostable packaging for all orders.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact / Footer -->
-  <footer id="contact">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h4>Minato Sushi</h4>
-          <p style="color:rgba(255,255,255,0.8);line-height:1.7">
-            Authentic Japanese sushi crafted with passion. Dine in, take out, or delivery.
-          </p>
-        </div>
-        <div class="footer-col">
-          <h4>Visit Us</h4>
-          <a href="#">123 Sakura Street</a>
-          <a href="#">Tunis, Tunisia</a>
-          <a href="#">Open Daily: 11AM - 10PM</a>
-        </div>
-        <div class="footer-col">
-          <h4>Contact</h4>
-          <a href="tel:+21612345678">+216 12 345 678</a>
-          <a href="mailto:hello@minatosushi.tn">hello@minatosushi.tn</a>
-          <a href="#">Instagram</a>
-          <a href="#">Facebook</a>
-        </div>
-        <div class="footer-col">
-          <h4>Quick Links</h4>
-          <a href="#menu">Menu</a>
-          <a href="#story">Our Story</a>
-          <a href="#">Careers</a>
-          <a href="#">Privacy Policy</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        &copy; 2026 Minato Sushi. All rights reserved. Crafted with care in Tunisia.
-      </div>
-    </div>
-  </footer>
-
-  <!-- Cart Panel -->
-  <div class="cart-overlay" id="cartOverlay"></div>
-  <div class="cart-panel" id="cartPanel">
-    <div class="cart-header">
-      <h3>Your Plate</h3>
-      <button class="cart-close" id="cartClose">&times;</button>
-    </div>
-    <div class="cart-items" id="cartItems">
-      <!-- Cart items injected here -->
-      <p class="text-center" style="color:var(--text-light);padding:40px 20px">Your plate is empty. Start adding sushi!</p>
-    </div>
-    <div class="cart-footer">
-      <div class="cart-total">
-        <span>Total:</span>
-        <span id="cartTotal">$0.00</span>
-      </div>
-      <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
-    </div>
-  </div>
-
-  <!-- Checkout Modal -->
-  <div class="modal" id="checkoutModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Checkout</h3>
-        <button class="cart-close" id="modalClose">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="checkoutForm">
-          <div class="form-group">
-            <label class="form-label" for="name">Full Name</label>
-            <input type="text" id="name" class="form-input" required placeholder="Your name"/>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="phone">Phone Number</label>
-            <input type="tel" id="phone" class="form-input" required placeholder="+216 XX XXX XXX"/>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="address">Delivery Address</label>
-            <input type="text" id="address" class="form-input" required placeholder="Street, City, Postal Code"/>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="notes">Special Instructions (optional)</label>
-            <textarea id="notes" class="form-input" rows="3" placeholder="Allergies, delivery notes, etc."></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button class="btn-secondary" id="cancelCheckout">Cancel</button>
-        <button class="btn" id="confirmOrder">Confirm Order</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Product Data
-    const products = [
-      {id:1,name:"Salmon Nigiri",category:"nigiri",price:6.50,desc:"Fresh Atlantic salmon over seasoned rice",img:"🍣"},
-      {id:2,name:"Tuna Nigiri",category:"nigiri",price:7.00,desc:"Premium bluefin tuna, hand-pressed",img:"🐟"},
-      {id:3,name:"Dragon Roll",category:"rolls",price:14.50,desc:"Eel, cucumber, avocado, eel sauce",img:"🐉"},
-      {id:4,name:"Rainbow Roll",category:"rolls",price:15.00,desc:"Crab, avocado, topped with assorted fish",img:"🌈"},
-      {id:5,name:"Salmon Sashimi",category:"sashimi",price:12.00,desc:"5 slices of fresh salmon, no rice",img:"🍽️"},
-      {id:6,name:"Tuna Sashimi",category:"sashimi",price:13.50,desc:"6 slices of premium tuna",img:"🔪"},
-      {id:7,name:"Edamame",category:"appetizers",price:4.50,desc:"Steamed soybeans with sea salt",img:"🫘"},
-      {id:8,name:"Miso Soup",category:"appetizers",price:3.50,desc:"Traditional soybean paste soup",img:"🍲"},
-      {id:9,name:"Spicy Tuna Roll",category:"rolls",price:11.00,desc:"Tuna, cucumber, spicy mayo, sesame",img:"🌶️"},
-      {id:10,name:"Vegetable Tempura",category:"appetizers",price:8.00,desc:"Lightly battered seasonal vegetables",img:"🥦"},
-      {id:11,name:"Unagi Nigiri",category:"nigiri",price:8.50,desc:"Grilled freshwater eel with sweet sauce",img:"🍱"},
-      {id:12,name:"Chirashi Bowl",category:"sashimi",price:18.00,desc:"Assorted sashimi over sushi rice",img:"🍚"}
-    ];
-
-    // State
-    let cart = [];
-    let currentFilter = 'all';
-
-    // DOM Elements
-    const productsGrid = document.getElementById('productsGrid');
-    const cartPanel = document.getElementById('cartPanel');
-    const cartOverlay = document.getElementById('cartOverlay');
-    const cartItems = document.getElementById('cartItems');
-    const cartCount = document.getElementById('cartCount');
-    const cartTotal = document.getElementById('cartTotal');
-    const checkoutModal = document.getElementById('checkoutModal');
-    const checkoutForm = document.getElementById('checkoutForm');
-
-    // Render Products
-    function renderProducts(filter = 'all') {
-      productsGrid.innerHTML = '';
-      const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
-      
-      filtered.forEach(product => {
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `
-          <div class="product-img">${product.img}</div>
-          <div class="product-body">
-            <h3 class="product-title">${product.name}</h3>
-            <p class="product-desc">${product.desc}</p>
-            <div class="product-price">$${product.price.toFixed(2)}</div>
-            <div class="quantity-control">
-              <button class="qty-btn decrease" data-id="${product.id}">−</button>
-              <span class="qty-value" id="qty-${product.id}">1</span>
-              <button class="qty-btn increase" data-id="${product.id}">+</button>
-            </div>
-            <button class="add-to-plate" data-id="${product.id}">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14"/>
-              </svg>
-              Add to Your Plate
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logowithwordmark.png" alt="Minato Sushi">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="menu.html" class="btn-primary">Order Now</a>
+            <button class="mobile-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
-          </div>
-        `;
-        productsGrid.appendChild(card);
-      });
-      attachProductListeners();
-    }
+        </div>
+    </nav>
 
-    // Attach event listeners to product cards
-    function attachProductListeners() {
-      document.querySelectorAll('.decrease').forEach(btn => {
-        btn.onclick = (e) => updateQuantity(e.target.dataset.id, -1);
-      });
-      document.querySelectorAll('.increase').forEach(btn => {
-        btn.onclick = (e) => updateQuantity(e.target.dataset.id, 1);
-      });
-      document.querySelectorAll('.add-to-plate').forEach(btn => {
-        btn.onclick = (e) => addToCart(parseInt(e.target.dataset.id));
-      });
-    }
-
-    // Update quantity display
-    function updateQuantity(id, change) {
-      const el = document.getElementById(`qty-${id}`);
-      let val = parseInt(el.textContent) + change;
-      if(val < 1) val = 1;
-      if(val > 10) val = 10;
-      el.textContent = val;
-    }
-
-    // Add to cart
-    function addToCart(productId) {
-      const product = products.find(p => p.id === productId);
-      const qty = parseInt(document.getElementById(`qty-${productId}`).textContent);
-      const existing = cart.find(item => item.id === productId);
-      
-      if(existing) {
-        existing.qty += qty;
-      } else {
-        cart.push({...product, qty});
-      }
-      
-      updateCartUI();
-      openCart();
-      
-      // Visual feedback
-      const btn = event.target.closest('.add-to-plate');
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '✓ Added!';
-      btn.style.background = '#2a9d8f';
-      setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.style.background = '';
-      }, 1200);
-    }
-
-    // Update cart UI
-    function updateCartUI() {
-      // Update count
-      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-      cartCount.textContent = totalCount;
-      cartCount.style.display = totalCount > 0 ? 'grid' : 'none';
-      
-      // Update items list
-      if(cart.length === 0) {
-        cartItems.innerHTML = '<p class="text-center" style="color:var(--text-light);padding:40px 20px">Your plate is empty. Start adding sushi!</p>';
-      } else {
-        cartItems.innerHTML = cart.map(item => `
-          <div class="cart-item">
-            <div class="cart-item-img">${item.img}</div>
-            <div class="cart-item-details">
-              <h4>${item.name}</h4>
-              <div class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</div>
-              <div class="cart-item-qty">
-                <button class="qty-btn" onclick="updateCartItem(${item.id}, -1)">−</button>
-                <span>${item.qty}</span>
-                <button class="qty-btn" onclick="updateCartItem(${item.id}, 1)">+</button>
-              </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="assets/texture.png" alt="Japanese wave pattern" class="wave-pattern">
+        </div>
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Experience Authentic <span class="accent">Japanese</span> Cuisine</h1>
+                <p>Fresh sushi, traditional recipes, and modern creativity. Delivered to your door or dine with us.</p>
+                <div class="hero-buttons">
+                    <a href="menu.html" class="btn-primary btn-large">Order Online</a>
+                    <a href="aboutus.html" class="btn-secondary btn-large">Our Story</a>
+                </div>
             </div>
-            <button class="cart-close" style="font-size:1.25rem" onclick="removeFromCart(${item.id})">&times;</button>
-          </div>
-        `).join('');
-      }
-      
-      // Update total
-      const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-      cartTotal.textContent = `$${total.toFixed(2)}`;
-    }
+            <div class="hero-image">
+                <div class="logo-showcase">
+                    <img src="assets/logo mark.png" alt="Minato Logo">
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Update cart item quantity
-    window.updateCartItem = function(id, change) {
-      const item = cart.find(i => i.id === id);
-      if(!item) return;
-      item.qty += change;
-      if(item.qty <= 0) {
-        removeFromCart(id);
-      } else {
-        updateCartUI();
-      }
-    };
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Minato</h2>
+                <p>We bring the finest Japanese culinary experience to your table</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🐟</div>
+                    <h3>Fresh Daily</h3>
+                    <p>Premium fish delivered fresh every morning from trusted suppliers</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🍳</div>
+                    <h3>Expert Chefs</h3>
+                    <p>Trained sushi masters with years of traditional experience</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Fast Delivery</h3>
+                    <p>Quick and reliable delivery to keep your food fresh and hot</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Premium Quality</h3>
+                    <p>Only the finest ingredients sourced with care</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Remove from cart
-    window.removeFromCart = function(id) {
-      cart = cart.filter(item => item.id !== id);
-      updateCartUI();
-    };
+    <!-- Menu Preview -->
+    <section class="menu-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Items</h2>
+                <p>Customer favorites from our menu</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-item-image">🍣</div>
+                    <h3>Salmon Nigiri</h3>
+                    <p>Fresh Atlantic salmon over seasoned rice</p>
+                    <span class="price">$6.50</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image"></div>
+                    <h3>Dragon Roll</h3>
+                    <p>Eel, cucumber, avocado with eel sauce</p>
+                    <span class="price">$14.50</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">🥢</div>
+                    <h3>Rainbow Roll</h3>
+                    <p>Crab, avocado topped with assorted fish</p>
+                    <span class="price">$15.00</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="menu.html" class="btn-primary">View Full Menu</a>
+            </div>
+        </div>
+    </section>
 
-    // Cart toggle functions
-    function openCart() {
-      cartPanel.classList.add('open');
-      cartOverlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeCart() {
-      cartPanel.classList.remove('open');
-      cartOverlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Visit Us</h2>
+                    <div class="info-item">
+                        <strong>Address</strong>
+                        <p>123 Sakura Street<br>Tunis, Tunisia</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Hours</strong>
+                        <p>Mon-Fri: 11:00 AM - 10:00 PM<br>Sat-Sun: 12:00 PM - 11:00 PM</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>Contact</strong>
+                        <p>Phone: +216 12 345 678<br>Email: hello@minatosushi.tn</p>
+                    </div>
+                </div>
+                <div class="contact-map">
+                    <div class="map-placeholder">
+                        <p>📍 Map Location</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Modal functions
-    function openModal() {
-      checkoutModal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeModal() {
-      checkoutModal.classList.remove('open');
-      document.body.style.overflow = '';
-    }
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/logowithwordmark.png" alt="Minato Sushi">
+                    <p>Authentic Japanese cuisine crafted with passion and tradition.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="aboutus.html">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Instagram">IG</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Minato Sushi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-    // Event Listeners
-    document.getElementById('cartToggle').onclick = openCart;
-    document.getElementById('cartClose').onclick = closeCart;
-    cartOverlay.onclick = closeCart;
-    document.getElementById('checkoutBtn').onclick = () => {
-      if(cart.length === 0) return;
-      closeCart();
-      openModal();
-    };
-    document.getElementById('modalClose').onclick = closeModal;
-    document.getElementById('cancelCheckout').onclick = closeModal;
-    checkoutOverlay = cartOverlay; // reuse overlay for modal close on background click
-    cartOverlay.onclick = (e) => {
-      if(e.target === cartOverlay && cartPanel.classList.contains('open')) closeCart();
-      if(e.target === cartOverlay && checkoutModal.classList.contains('open')) closeModal();
-    };
-
-    // Filter buttons
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.onclick = (e) => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        currentFilter = e.target.dataset.filter;
-        renderProducts(currentFilter);
-      };
-    });
-
-    // Checkout form submission
-    document.getElementById('confirmOrder').onclick = (e) => {
-      e.preventDefault();
-      if(!checkoutForm.checkValidity()) {
-        checkoutForm.reportValidity();
-        return;
-      }
-      // Simulate order submission
-      const btn = e.target;
-      const originalText = btn.textContent;
-      btn.textContent = 'Order Placed! ✓';
-      btn.disabled = true;
-      
-      setTimeout(() => {
-        alert(`Thank you! Your order #MNT-${Math.floor(Math.random()*9000)+1000} has been confirmed.\n\nWe will contact you shortly at ${document.getElementById('phone').value}.`);
-        cart = [];
-        updateCartUI();
-        closeModal();
-        checkoutForm.reset();
-        btn.textContent = originalText;
-        btn.disabled = false;
-      }, 1500);
-    };
-
-    // Mobile menu toggle (simple version)
-    document.getElementById('mobileToggle').onclick = () => {
-      const nav = document.querySelector('nav');
-      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-      if(nav.style.display === 'flex') {
-        nav.style.flexDirection = 'column';
-        nav.style.position = 'absolute';
-        nav.style.top = '70px';
-        nav.style.left = '0';
-        nav.style.right = '0';
-        nav.style.background = 'white';
-        nav.style.padding = '20px';
-        nav.style.boxShadow = 'var(--shadow)';
-      }
-    };
-
-    // Smooth scroll for nav links
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.onclick = (e) => {
-        e.preventDefault();
-        const target = document.querySelector(link.getAttribute('href'));
-        if(target) {
-          target.scrollIntoView({behavior:'smooth', block:'start'});
-          // Close mobile menu if open
-          const nav = document.querySelector('nav');
-          if(window.innerWidth <= 900 && nav.style.display === 'flex') {
-            nav.style.display = 'none';
-          }
-        }
-      };
-    });
-
-    // Initialize
-    renderProducts();
-    updateCartUI();
-
-    // Close modals on Escape key
-    document.onkeydown = (e) => {
-      if(e.key === 'Escape') {
-        closeCart();
-        closeModal();
-      }
-    };
-  </script>
+    <script src="main.js"></script>
 </body>
 </html>
