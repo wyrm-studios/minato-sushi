@@ -39,13 +39,13 @@ export const sendOrderToMinato = async (cartData, customerDetails) => {
                     ${cartData.map(item => `
                         <li style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee;">
                             <span>${item.quantity}x ${item.name}</span>
-                            <strong style="color: #465162;">$${(item.price * item.quantity).toFixed(2)}</strong>
+                            <strong style="color: #465162;">$${(item.price * item.quantity).toFixed(3)}</strong>
                         </li>
                     `).join('')}
                 </ul>
                 
                 <div style="text-align: right; margin-top: 20px; font-size: 20px; color: #FF554D;">
-                    <strong>TOTAL: $${total.toFixed(2)}</strong>
+                    <strong>TOTAL: $${total.toFixed(3)}</strong>
                 </div>
 
                 ${customerDetails.note ? `
@@ -53,6 +53,11 @@ export const sendOrderToMinato = async (cartData, customerDetails) => {
                     <h3 style="color: #000;">📝 Customer Note:</h3>
                     <p style="background: #EAE8FD; padding: 15px; border-radius: 5px; font-style: italic;">${customerDetails.note}</p>
                 ` : ''}
+                
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+                <p style="text-align: center; color: #777; font-size: 12px;">
+                    Order placed at ${new Date().toLocaleString()}
+                </p>
             </div>
         </div>
     `;
@@ -70,7 +75,7 @@ export const sendOrderToMinato = async (cartData, customerDetails) => {
         name: "Minato Restaurant" 
     }];
     
-    sendSmtpEmail.subject = `NEW ORDER: $${total.toFixed(2)} from ${customerDetails.name}`;
+    sendSmtpEmail.subject = `NEW ORDER: $${total.toFixed(3)} from ${customerDetails.name}`;
     sendSmtpEmail.htmlContent = htmlContent;
 
     // 4. Send the email via Brevo
