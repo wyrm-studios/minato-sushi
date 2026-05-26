@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Minato Sushi Restaurant Website",
   "main": "main.js",
-  "type": "module",
   "scripts": {
     "dev": "npx serve .",
     "build": "echo 'No build step required'"
