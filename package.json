@@ -1,23 +1,11 @@
 {
   "name": "minato-sushi",
   "version": "1.0.0",
-  "description": "Minato Sushi Restaurant Website",
-  "main": "main.js",
   "scripts": {
     "dev": "npx serve .",
-    "build": "echo 'No build step required'"
+    "build": "echo 'No build step'"
   },
   "dependencies": {
     "sib-api-v3-sdk": "^8.5.0"
-  },
-  "devDependencies": {
-    "serve": "^14.2.0"
-  },
-  "keywords": [
-    "sushi",
-    "restaurant",
-    "japanese"
-  ],
-  "author": "Minato Sushi",
-  "license": "ISC"
+  }
 }
