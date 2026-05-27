@@ -6,58 +6,127 @@
     <title>Mon Panier | Minato Sushi</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            emailjs.init("t7b92Hr_BeDF12J7j1DJd"); // Replace with your EmailJS Public Key
+            // ✅ VOTRE CLÉ PUBLIQUE EMAILJS (Déjà configurée)
+            emailjs.init("t7b92Hr_BeDF12J7j1DJd");
         })();
     </script>
+
+    <style>
+        :root {
+            --primary: #5B9BD5;
+            --primary-dark: #4A8BC7;
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --bg-elevated: #1a1a1a;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --border: #2a2a2a;
+            --font-main: 'Inter', sans-serif;
+            --font-title: 'Playfair Display', serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-main); background: var(--bg-dark); color: var(--text-main); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        
+        .cart-page-container { min-height: 100vh; padding-top: 100px; background: var(--bg-dark); }
+        .page-title { font-family: var(--font-title); font-size: 2.5rem; color: var(--primary); margin-bottom: 40px; text-align: center; }
+        
+        .cart-grid { display: grid; grid-template-columns: 1fr 380px; gap: 40px; align-items: start; }
+        .cart-items-list { display: flex; flex-direction: column; gap: 16px; }
+        .cart-item-row { background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border); display: flex; gap: 20px; align-items: center; }
+        .cart-item-img { width: 70px; height: 70px; background: var(--bg-elevated); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; }
+        .cart-item-info { flex: 1; }
+        .cart-item-name { font-weight: 600; margin-bottom: 4px; }
+        .cart-item-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; }
+        .cart-item-price { color: var(--primary); font-weight: 700; }
+        
+        .qty-control { display: flex; align-items: center; gap: 10px; background: var(--bg-dark); padding: 6px; border-radius: 8px; }
+        .qty-btn { width: 28px; height: 28px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; color: white; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .qty-btn:hover { background: var(--primary); border-color: var(--primary); }
+        .qty-val { min-width: 24px; text-align: center; font-weight: 600; }
+        .cart-remove { background: none; border: none; color: #ff4444; font-size: 1.2rem; cursor: pointer; padding: 8px; }
+        
+        .cart-summary { position: sticky; top: 120px; background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border); }
+        .cart-summary h3 { font-family: var(--font-title); margin-bottom: 20px; font-size: 1.4rem; }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 12px; color: var(--text-muted); }
+        .summary-total { display: flex; justify-content: space-between; font-size: 1.5rem; font-weight: 700; color: var(--primary); margin: 20px 0; padding-top: 20px; border-top: 1px solid var(--border); }
+        
+        .btn-primary { background: var(--primary); color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%; border: none; transition: 0.3s; font-size: 1rem; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal.active { display: flex; }
+        .modal-content { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; max-width: 550px; width: 100%; max-height: 90vh; overflow-y: auto; }
+        .modal-header { padding: 25px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .modal-header h2 { font-family: var(--font-title); color: var(--primary); margin: 0; }
+        .close-modal { background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
+        .modal-body { padding: 25px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-main); font-size: 0.95rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-main); font-family: inherit; font-size: 15px; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); }
+        .payment-box { background: var(--bg-elevated); padding: 20px; border-radius: 8px; border: 1px solid var(--border); margin-top: 20px; }
+        .payment-box h4 { color: var(--primary); margin-bottom: 8px; }
+        .payment-box p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+        .order-summary-box { margin-top: 25px; padding: 20px; background: var(--bg-elevated); border-radius: 8px; border: 1px solid var(--border); }
+        .order-summary-box h4 { color: var(--primary); margin-bottom: 15px; }
+        .order-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95rem; }
+        .modal-footer { padding: 25px; border-top: 1px solid var(--border); display: flex; gap: 15px; justify-content: flex-end; }
+        .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+        
+        .success-modal { text-align: center; padding: 50px; }
+        .success-icon { width: 80px; height: 80px; background: #4CAF50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 25px; }
+        .empty-cart { text-align: center; padding: 80px 20px; }
+        .empty-cart h2 { font-family: var(--font-title); color: var(--text-muted); margin-bottom: 15px; }
+        .empty-cart p { color: var(--text-muted); margin-bottom: 30px; }
+        
+        @media (max-width: 900px) {
+            .cart-grid { grid-template-columns: 1fr; }
+            .cart-summary { position: static; }
+        }
+    </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="assets/logowithwordmark.png" alt="Minato Sushi">
+    <!-- NAVBAR -->
+    <nav style="position:fixed;top:0;left:0;right:0;height:80px;background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:1000;display:flex;align-items:center;padding:0 40px;">
+        <div style="width:100%;max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;">
+            <a href="index.html">
+                <img src="assets/logowithwordmark.png" alt="Minato Sushi" style="height:45px;filter:brightness(0)invert(1);">
             </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="aboutus.html">À Propos</a></li>
-                <li><a href="panier.html" class="active">Panier</a></li>
+            <ul style="display:flex;list-style:none;gap:30px;margin:0;padding:0;">
+                <li><a href="index.html" style="color:var(--text-muted);font-weight:500;">Accueil</a></li>
+                <li><a href="menu.html" style="color:var(--text-muted);font-weight:500;">Menu</a></li>
+                <li><a href="aboutus.html" style="color:var(--text-muted);font-weight:500;">À Propos</a></li>
+                <li><a href="panier.html" style="color:var(--primary);font-weight:600;">Panier</a></li>
             </ul>
-            <div class="nav-right">
-                <a href="panier.html" class="cart-icon">
-                    🛒 <span class="cart-count" id="navCartCount">0</span>
-                </a>
-            </div>
-            <button class="mobile-toggle" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
         </div>
     </nav>
 
+    <!-- CART PAGE -->
     <div class="cart-page-container">
-        <div class="container" style="padding-top: 120px; padding-bottom: 100px;">
+        <div style="max-width:1200px;margin:0 auto;padding:0 20px;">
             <h1 class="page-title">Mon Panier</h1>
-            
-            <div id="cartContent">
-                <!-- Cart items will be loaded here -->
-            </div>
-
-            <div id="emptyCart" style="display: none; text-align: center; padding: 80px 20px;">
-                <div style="font-size: 6rem; margin-bottom: 20px;">🛒</div>
-                <h2 style="font-family: var(--font-title); margin-bottom: 15px; color: var(--text-muted);">Votre panier est vide</h2>
-                <p style="color: var(--text-muted); margin-bottom: 30px;">Ajoutez des articles depuis le menu pour commander</p>
-                <a href="menu.html" class="btn-primary" style="padding: 16px 40px; font-size: 16px;">Voir le Menu</a>
+            <div id="cartContent"></div>
+            <div id="emptyCart" style="display:none;" class="empty-cart">
+                <div style="font-size:5rem;margin-bottom:20px;"></div>
+                <h2>Votre panier est vide</h2>
+                <p>Ajoutez des articles depuis le menu pour commander</p>
+                <a href="menu.html" class="btn-primary" style="display:inline-block;width:auto;padding:16px 40px;">Voir le Menu</a>
             </div>
         </div>
     </div>
 
-    <!-- Checkout Modal -->
+    <!-- CHECKOUT MODAL -->
     <div class="modal" id="checkoutModal">
-        <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-content">
             <div class="modal-header">
                 <h2>Finaliser la Commande</h2>
                 <button class="close-modal" onclick="closeCheckoutModal()">✕</button>
@@ -65,37 +134,31 @@
             <div class="modal-body">
                 <form id="checkoutForm">
                     <div class="form-group">
-                        <label for="customerName">Nom Complet *</label>
+                        <label>Nom Complet *</label>
                         <input type="text" id="customerName" required placeholder="Votre nom complet">
                     </div>
-                    
                     <div class="form-group">
-                        <label for="customerPhone">Numéro de Téléphone *</label>
+                        <label>Numéro de Téléphone *</label>
                         <input type="tel" id="customerPhone" required placeholder="+216 XX XXX XXX">
                     </div>
-                    
                     <div class="form-group">
-                        <label for="customerAddress">Adresse de Livraison *</label>
+                        <label>Adresse de Livraison *</label>
                         <textarea id="customerAddress" required rows="3" placeholder="Rue, ville, code postal..."></textarea>
                     </div>
-                    
                     <div class="form-group">
-                        <label for="customerNote">Instructions Spéciales (Optionnel)</label>
-                        <textarea id="customerNote" rows="2" placeholder="Allergies, remarques sur la livraison..."></textarea>
+                        <label>Instructions Spéciales (Optionnel)</label>
+                        <textarea id="customerNote" rows="2" placeholder="Allergies, remarques..."></textarea>
                     </div>
 
-                    <div class="payment-info-box">
-                        <h4 style="margin-bottom: 10px; color: var(--primary);">💵 Mode de Paiement</h4>
-                        <p style="font-size: 14px; color: var(--text-muted);">
-                            <strong>Paiement à la livraison</strong><br>
-                            Vous pouvez payer en espèces ou par carte lors de la réception de votre commande.
-                        </p>
+                    <div class="payment-box">
+                        <h4>💵 Mode de Paiement</h4>
+                        <p><strong>Paiement à la livraison</strong><br>Vous pouvez payer en espèces ou par carte lors de la réception de votre commande.</p>
                     </div>
 
-                    <div class="order-summary-box" style="margin-top: 25px; padding: 20px; background: var(--bg-elevated); border-radius: 8px; border: 1px solid var(--border);">
-                        <h4 style="margin-bottom: 15px; color: var(--primary);">Résumé de la Commande</h4>
-                        <div id="orderSummaryItems" style="margin-bottom: 15px;"></div>
-                        <div style="display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 700; color: var(--primary); border-top: 1px solid var(--border); padding-top: 15px;">
+                    <div class="order-summary-box">
+                        <h4>Résumé de la Commande</h4>
+                        <div id="orderSummaryItems"></div>
+                        <div class="summary-total">
                             <span>Total à payer:</span>
                             <span id="orderTotalDisplay">0.000 DT</span>
                         </div>
@@ -104,64 +167,177 @@
             </div>
             <div class="modal-footer">
                 <button class="btn-secondary" onclick="closeCheckoutModal()">Annuler</button>
-                <button class="btn-primary" id="confirmOrderBtn" onclick="submitOrder()">
-                    Confirmer la Commande
-                </button>
+                <button class="btn-primary" id="confirmOrderBtn" onclick="submitOrder()">Confirmer la Commande</button>
             </div>
         </div>
     </div>
 
-    <!-- Success Modal -->
+    <!-- SUCCESS MODAL -->
     <div class="modal" id="successModal">
-        <div class="modal-content success" style="text-align: center; padding: 50px;">
-            <div class="success-icon" style="width: 80px; height: 80px; background: #4CAF50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 25px;">✓</div>
-            <h2 style="margin-bottom: 15px; font-family: var(--font-title);">Commande Envoyée!</h2>
-            <p style="color: var(--text-muted); margin-bottom: 30px; line-height: 1.6;">
+        <div class="modal-content success-modal">
+            <div class="success-icon">✓</div>
+            <h2 style="font-family:var(--font-title);margin-bottom:15px;">Commande Envoyée!</h2>
+            <p style="color:var(--text-muted);margin-bottom:30px;line-height:1.6;">
                 Merci pour votre commande!<br>
                 Nous vous contacterons bientôt au numéro indiqué pour confirmer.
             </p>
-            <button class="btn-primary" onclick="closeSuccessModal()" style="padding: 14px 40px;">Retour à l'Accueil</button>
+            <button class="btn-primary" onclick="window.location.href='index.html'" style="padding:14px 40px;">Retour à l'Accueil</button>
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <img src="assets/logowithwordmark.png" alt="Minato Sushi">
-                    <p>Sushi authentique japonais préparé avec passion et tradition.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="menu.html">Menu</a></li>
-                        <li><a href="aboutus.html">À Propos</a></li>
-                        <li><a href="panier.html">Panier</a></li>
-                    </ul>
-                </div>
-                <div class="footer-social">
-                    <h4>Suivez-nous</h4>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook">FB</a>
-                        <a href="#" aria-label="Instagram">IG</a>
-                        <a href="#" aria-label="TikTok">TT</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Minato Sushi. Tous droits réservés.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="main.js"></script>
+    <!-- JAVASCRIPT -->
     <script>
-        // Initialize cart page when loaded
+        // === CART STATE ===
+        let cart = JSON.parse(localStorage.getItem('minato_cart')) || [];
+        
+        // === INITIALIZE ===
         document.addEventListener('DOMContentLoaded', function() {
             renderCartPage();
             updateCartCount();
         });
+
+        // === RENDER CART PAGE ===
+        function renderCartPage() {
+            const cartContent = document.getElementById('cartContent');
+            const emptyCart = document.getElementById('emptyCart');
+            
+            if (cart.length === 0) {
+                cartContent.style.display = 'none';
+                emptyCart.style.display = 'block';
+                return;
+            }
+            
+            cartContent.style.display = 'block';
+            emptyCart.style.display = 'none';
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            cartContent.innerHTML = `
+                <div class="cart-grid">
+                    <div>
+                        <h2 style="font-family:var(--font-title);margin-bottom:25px;font-size:1.6rem;">Articles (${cart.length})</h2>
+                        <div class="cart-items-list">
+                            ${cart.map(item => `
+                                <div class="cart-item-row">
+                                    <div class="cart-item-img">${item.emoji || '🍱'}</div>
+                                    <div class="cart-item-info">
+                                        <div class="cart-item-name">${item.name}</div>
+                                        <div class="cart-item-desc">${item.desc}</div>
+                                        <div class="cart-item-price">${(item.price * item.quantity).toFixed(3)} DT</div>
+                                    </div>
+                                    <div class="qty-control">
+                                        <button class="qty-btn" onclick="updateCartItemQuantity(${item.id}, -1)">−</button>
+                                        <span class="qty-val">${item.quantity}</span>
+                                        <button class="qty-btn" onclick="updateCartItemQuantity(${item.id}, 1)">+</button>
+                                    </div>
+                                    <button class="cart-remove" onclick="removeFromCart(${item.id})">🗑️</button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="cart-summary">
+                        <h3>Résumé de la Commande</h3>
+                        <div class="summary-row"><span>Sous-total</span><span>${total.toFixed(3)} DT</span></div>
+                        <div class="summary-row"><span>Livraison</span><span style="color:#4CAF50;">Gratuite</span></div>
+                        <div class="summary-total"><span>Total</span><span>${total.toFixed(3)} DT</span></div>
+                        <button onclick="openCheckoutModal()" class="btn-primary">Commander Maintenant</button>
+                        <p style="text-align:center;margin-top:15px;font-size:0.85rem;color:var(--text-muted);">💵 Paiement à la livraison</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // === CART FUNCTIONS ===
+        function updateCartItemQuantity(id, change) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) cart = cart.filter(i => i.id !== id);
+                localStorage.setItem('minato_cart', JSON.stringify(cart));
+                renderCartPage();
+                updateCartCount();
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            localStorage.setItem('minato_cart', JSON.stringify(cart));
+            renderCartPage();
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.querySelectorAll('.cart-count').forEach(el => el.textContent = count);
+        }
+
+        // === MODAL FUNCTIONS ===
+        function openCheckoutModal() {
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('orderSummaryItems').innerHTML = cart.map(item => `
+                <div class="order-item"><span>${item.quantity}x ${item.name}</span><span style="font-weight:600;">${(item.price * item.quantity).toFixed(3)} DT</span></div>
+            `).join('');
+            document.getElementById('orderTotalDisplay').textContent = total.toFixed(3) + ' DT';
+            document.getElementById('checkoutModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // === SUBMIT ORDER (EMAILJS) ===
+        async function submitOrder() {
+            const name = document.getElementById('customerName').value.trim();
+            const phone = document.getElementById('customerPhone').value.trim();
+            const address = document.getElementById('customerAddress').value.trim();
+            const note = document.getElementById('customerNote').value.trim();
+            
+            if (!name || !phone || !address) {
+                alert('Veuillez remplir tous les champs obligatoires');
+                return;
+            }
+            
+            const btn = document.getElementById('confirmOrderBtn');
+            btn.textContent = 'Envoi en cours...';
+            btn.disabled = true;
+            
+            try {
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                const templateParams = {
+                    from_name: name,
+                    phone: phone,
+                    address: address,
+                    note: note || 'Aucune',
+                    order_items: cart.map(i => `${i.quantity}x ${i.name} - ${(i.price * i.quantity).toFixed(3)} DT`).join('\n'),
+                    total: total.toFixed(3),
+                    date: new Date().toLocaleString('fr-FR')
+                };
+
+                // ⚠️ IMPORTANT: Replace these with your actual EmailJS Service ID & Template ID
+                const serviceID = 'YOUR_SERVICE_ID';   // Ex: service_abc123
+                const templateID = 'YOUR_TEMPLATE_ID'; // Ex: template_xyz789
+                
+                await emailjs.send(serviceID, templateID, templateParams);
+                
+                // Success
+                cart = [];
+                localStorage.setItem('minato_cart', JSON.stringify(cart));
+                updateCartCount();
+                closeCheckoutModal();
+                document.getElementById('successModal').classList.add('active');
+                
+            } catch (error) {
+                console.error('EmailJS Error:', error);
+                alert('Erreur de connexion. Veuillez réessayer ou appeler le restaurant.\n\nDétail: ' + error.text);
+            } finally {
+                btn.textContent = 'Confirmer la Commande';
+                btn.disabled = false;
+            }
+        }
     </script>
 </body>
 </html>
