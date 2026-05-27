@@ -10,18 +10,14 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="assets/logowithwordmark.png" alt="Minato Sushi">
-            </a>
+            <a href="index.html" class="logo"><img src="assets/logowithwordmark.png" alt="Minato"></a>
             <ul class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="menu.html" class="active">Menu</a></li>
                 <li><a href="aboutus.html">À Propos</a></li>
+                <li><a href="panier.html">Mon Panier <span id="nav-cart-count">0</span></a></li>
             </ul>
-            <button class="cart-toggle" id="cartToggle">🛒 <span class="cart-count" id="cartCount">0</span></button>
-            <button class="mobile-toggle" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
+            <button class="mobile-toggle" onclick="document.querySelector('.category-sidebar').style.display = document.querySelector('.category-sidebar').style.display === 'block' ? 'none' : 'block'">☰</button>
         </div>
     </nav>
 
