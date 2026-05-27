@@ -1,13 +1,18 @@
+// ==========================================
+// 🍣 MINATO SUSHI - COMPLETE JAVASCRIPT
+// ==========================================
+
+// 1. MENU DATA - Complete with 50+ items
 const menuData = {
     plateaux: [
         { id: 1, name: 'Plateau 1 - P1', price: 37.500, desc: '8 Maki Saumon - 8 Californien - Saumon Avocat', pieces: '16 pièces', emoji: '🍱', popular: true },
         { id: 2, name: 'Plateau 2 - P2', price: 61.000, desc: '8 Maki Saumon - 8 Californien - Saumon Avocat - 8 Crunchy Las Vegas', pieces: '24 pièces', emoji: '🍱', popular: true },
-        { id: 3, name: 'Plateau Crunchy', price: 69.000, desc: '8 Crunchy Maki Spicy Ebi Tempura - 8 Las Vegas - 6 Godzilla', pieces: '22 pièces', emoji: '', popular: true },
-        { id: 4, name: 'Plateau Deluxe', price: 89.000, desc: 'Assortiment premium de nos meilleures spécialités', pieces: '32 pièces', emoji: '🍱', popular: false },
+        { id: 3, name: 'Plateau Crunchy', price: 69.000, desc: '8 Crunchy Maki Spicy Ebi Tempura - 8 Las Vegas - 6 Godzilla', pieces: '22 pièces', emoji: '🍱', popular: true },
+        { id: 4, name: 'Plateau Deluxe', price: 89.000, desc: 'Assortiment premium de nos meilleures spécialités', pieces: '32 pièces', emoji: '', popular: false },
         { id: 5, name: 'Plateau Veggie', price: 42.000, desc: 'Sélection de sushis végétariens frais', pieces: '20 pièces', emoji: '🥬', popular: false },
         { id: 6, name: 'Plateau Spicy', price: 58.000, desc: 'Pour les amateurs de sensations fortes', pieces: '24 pièces', emoji: '🌶️', popular: false },
-        { id: 7, name: 'Plateau Family', price: 120.000, desc: 'Idéal pour 4-6 personnes - variété et quantité', pieces: '50 pièces', emoji: '👨‍👩‍👧‍👦', popular: true },
-        { id: 8, name: 'Plateau Couple', price: 75.000, desc: 'Parfait pour deux - assortiment romantique', pieces: '28 pièces', emoji: '💑', popular: false },
+        { id: 7, name: 'Plateau Family', price: 120.000, desc: 'Idéal pour 4-6 personnes', pieces: '50 pièces', emoji: '👨‍👩‍👧‍👦', popular: true },
+        { id: 8, name: 'Plateau Couple', price: 75.000, desc: 'Parfait pour deux personnes', pieces: '28 pièces', emoji: '💑', popular: false },
         { id: 9, name: 'Plateau Solo', price: 29.000, desc: 'Menu individuel complet', pieces: '12 pièces', emoji: '🍱', popular: true },
         { id: 10, name: 'Plateau Premium', price: 150.000, desc: 'Le summum de nos créations', pieces: '60 pièces', emoji: '👑', popular: true }
     ],
@@ -18,7 +23,7 @@ const menuData = {
         { id: 14, name: 'Maki Avocat', price: 15.000, desc: 'Avocat frais crémeux', pieces: '8 pièces', emoji: '🥑', popular: false },
         { id: 15, name: 'Maki Thon', price: 19.000, desc: 'Thon rouge premium', pieces: '8 pièces', emoji: '🐟', popular: false },
         { id: 16, name: 'Maki California', price: 21.000, desc: 'Crabe - Avocat - Concombre', pieces: '8 pièces', emoji: '🍙', popular: true },
-        { id: 17, name: 'Maki Crevette', price: 17.000, desc: 'Crevette tempura croustillante', pieces: '8 pièces', emoji: '', popular: false },
+        { id: 17, name: 'Maki Crevette', price: 17.000, desc: 'Crevette tempura croustillante', pieces: '8 pièces', emoji: '🦐', popular: false },
         { id: 18, name: 'Maki Concombre', price: 12.000, desc: 'Concombre frais et croquant', pieces: '8 pièces', emoji: '🥒', popular: false },
         { id: 19, name: 'Maki Anguille', price: 24.000, desc: 'Anguille grillée sauce teriyaki', pieces: '8 pièces', emoji: '🐍', popular: true },
         { id: 20, name: 'Maki Philadelphia', price: 22.000, desc: 'Saumon - Fromage cream - Avocat', pieces: '8 pièces', emoji: '🍣', popular: true },
@@ -104,150 +109,140 @@ const categories = [
     { id: 'extras', name: 'Extras', icon: '' }
 ];
 
+// 2. STATE MANAGEMENT
 let cart = JSON.parse(localStorage.getItem('minato_cart')) || [];
 let currentCategory = 'plateaux';
 let quantities = {};
 
-Object.values(menuData).flat().forEach(p => quantities[p.id] = 1);
+Object.values(menuData).flat().forEach(p => {
+    quantities[p.id] = 1;
+});
 
+// 3. DOM ELEMENTS
 const els = {
     categoryList: document.getElementById('categoryList'),
     productsGrid: document.getElementById('productsGrid'),
-    cartItems: document.getElementById('cartItems'),
-    cartTotal: document.getElementById('cartTotal'),
     cartCount: document.getElementById('cartCount'),
-    cartPanel: document.getElementById('cartPanel'),
-    cartToggle: document.getElementById('cartToggle'),
-    closeCart: document.getElementById('closeCart'),
-    checkoutBtn: document.getElementById('checkoutBtn'),
-    checkoutModal: document.getElementById('checkoutModal'),
-    closeModal: document.getElementById('closeModal'),
-    cancelOrder: document.getElementById('cancelOrder'),
-    confirmOrder: document.getElementById('confirmOrder'),
-    successModal: document.getElementById('successModal'),
-    closeSuccess: document.getElementById('closeSuccess'),
+    navCartCount: document.getElementById('navCartCount'),
     categoryTitle: document.getElementById('categoryTitle'),
-    checkoutForm: document.getElementById('checkoutForm'),
     mobileToggle: document.querySelector('.mobile-toggle'),
     navLinks: document.querySelector('.nav-links')
 };
 
+// 4. RENDER FUNCTIONS
 function renderCategories() {
     if (!els.categoryList) return;
-    els.categoryList.innerHTML = categories.map(c => `
-        <li class="category-item ${c.id === currentCategory ? 'active' : ''}" data-category="${c.id}">
-            <span class="category-icon">${c.icon}</span>
-            <span class="category-name">${c.name}</span>
-        </li>
+    
+    els.categoryList.innerHTML = categories.map(cat => `
+        <div class="cat-item ${cat.id === currentCategory ? 'active' : ''}" onclick="switchCategory('${cat.id}')">
+            <span class="cat-icon">${cat.icon}</span>
+            <span>${cat.name}</span>
+        </div>
     `).join('');
-    document.querySelectorAll('.category-item').forEach(el => {
-        el.addEventListener('click', () => {
-            currentCategory = el.dataset.category;
-            renderCategories();
-            renderProducts();
-        });
-    });
+}
+
+function switchCategory(catId) {
+    currentCategory = catId;
+    renderCategories();
+    renderProducts();
 }
 
 function renderProducts() {
     if (!els.productsGrid) return;
+    
     const products = menuData[currentCategory] || [];
-    const cat = categories.find(c => c.id === currentCategory);
-    if (els.categoryTitle) els.categoryTitle.textContent = cat ? cat.name : 'Menu';
+    const category = categories.find(c => c.id === currentCategory);
+    
+    if (els.categoryTitle) {
+        els.categoryTitle.textContent = category ? category.name : 'Menu';
+    }
     
     if (products.length === 0) {
-        els.productsGrid.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:40px;">Aucun article</p>';
+        els.productsGrid.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:40px;">Aucun article dans cette catégorie</p>';
         return;
     }
     
-    els.productsGrid.innerHTML = products.map(p => `
+    els.productsGrid.innerHTML = products.map(product => `
         <div class="product-card">
-            <div class="product-image">
-                <span>${p.emoji}</span>
-                ${p.popular ? '<span class="product-badge">Populaire</span>' : ''}
+            <div class="prod-img">
+                ${product.popular ? '<span class="badge-popular">Populaire</span>' : ''}
+                <span style="font-size: 4rem;">${product.emoji}</span>
             </div>
-            <div class="product-info">
-                <h3 class="product-name">${p.name}</h3>
-                <p class="product-desc">${p.desc}</p>
-                ${p.pieces ? `<p class="product-pieces">${p.pieces}</p>` : ''}
-                <div class="product-price">${p.price.toFixed(3)} DT</div>
-                <div class="quantity-control">
-                    <button class="qty-btn" onclick="updateQuantity(${p.id}, -1)">−</button>
-                    <span class="qty-value" id="qty-${p.id}">${quantities[p.id]}</span>
-                    <button class="qty-btn" onclick="updateQuantity(${p.id}, 1)">+</button>
+            <div class="prod-details">
+                <div class="prod-name">${product.name}</div>
+                <div class="prod-desc">${product.desc}</div>
+                ${product.pieces ? `<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:10px;">${product.pieces}</div>` : ''}
+                <span class="prod-price">${product.price.toFixed(3)} DT</span>
+                <div class="qty-control">
+                    <button class="qty-btn" onclick="updateQuantity(${product.id}, -1)">−</button>
+                    <span class="qty-val" id="qty-${product.id}">${quantities[product.id]}</span>
+                    <button class="qty-btn" onclick="updateQuantity(${product.id}, 1)">+</button>
                 </div>
-                <button class="add-to-cart" onclick="addToCart(${p.id})" id="btn-${p.id}">+ Ajouter</button>
+                <button class="btn-add" onclick="addToCart(${product.id})" id="btn-${product.id}">
+                    + Ajouter au Panier
+                </button>
             </div>
         </div>
     `).join('');
 }
 
-function renderCart() {
-    if (!els.cartItems || !els.cartTotal || !els.cartCount) return;
-    const totalItems = cart.reduce((s, i) => s + i.quantity, 0);
-    const totalPrice = cart.reduce((s, i) => s + i.price * i.quantity, 0);
-    els.cartCount.textContent = totalItems;
-    els.cartTotal.textContent = totalPrice.toFixed(3) + ' DT';
+// 5. CART FUNCTIONS
+function updateQuantity(productId, change) {
+    quantities[productId] = Math.max(1, Math.min(10, quantities[productId] + change));
+    const qtyEl = document.getElementById(`qty-${productId}`);
+    if (qtyEl) qtyEl.textContent = quantities[productId];
+}
+
+function addToCart(productId) {
+    const allProducts = Object.values(menuData).flat();
+    const product = allProducts.find(p => p.id === productId);
+    const quantity = quantities[productId];
     
-    if (cart.length === 0) {
-        els.cartItems.innerHTML = `<div class="cart-empty"><div class="cart-empty-icon">🍣</div><p>Votre panier est vide</p><p class="cart-hint">Ajoutez des articles depuis le menu</p></div>`;
-        if (els.checkoutBtn) els.checkoutBtn.disabled = true;
-    } else {
-        els.cartItems.innerHTML = cart.map(i => `
-            <div class="cart-item">
-                <div class="cart-item-image">${i.emoji}</div>
-                <div class="cart-item-details">
-                    <div class="cart-item-name">${i.name}</div>
-                    <div class="cart-item-price">${(i.price * i.quantity).toFixed(3)} DT</div>
-                    <div class="cart-item-controls">
-                        <button class="qty-btn" onclick="updateCartItemQuantity(${i.id}, -1)">−</button>
-                        <span>${i.quantity}</span>
-                        <button class="qty-btn" onclick="updateCartItemQuantity(${i.id}, 1)">+</button>
-                        <button class="cart-item-remove" onclick="removeFromCart(${i.id})">✕</button>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-        if (els.checkoutBtn) els.checkoutBtn.disabled = false;
-    }
-}
-
-function updateQuantity(id, change) {
-    quantities[id] = Math.max(1, Math.min(10, quantities[id] + change));
-    const el = document.getElementById(`qty-${id}`);
-    if (el) el.textContent = quantities[id];
-}
-
-function addToCart(id) {
-    const all = Object.values(menuData).flat();
-    const product = all.find(p => p.id === id);
     if (!product) return;
-    const qty = quantities[id];
-    const existing = cart.find(i => i.id === id);
-    if (existing) existing.quantity += qty;
-    else cart.push({...product, quantity: qty});
+    
+    const existingItem = cart.find(item => item.id === productId);
+    
+    if (existingItem) {
+        existingItem.quantity += quantity;
+    } else {
+        cart.push({ ...product, quantity });
+    }
+    
     saveCart();
-    renderCart();
-    const btn = document.getElementById(`btn-${id}`);
+    updateCartCount();
+    
+    // Visual feedback
+    const btn = document.getElementById(`btn-${productId}`);
     if (btn) {
-        const orig = btn.textContent;
-        btn.classList.add('added');
+        const originalText = btn.textContent;
+        btn.style.background = 'var(--primary)';
         btn.textContent = '✓ Ajouté';
-        setTimeout(() => { btn.classList.remove('added'); btn.textContent = orig; }, 2000);
+        
+        setTimeout(() => {
+            btn.style.background = '';
+            btn.textContent = originalText;
+        }, 2000);
     }
 }
 
-function removeFromCart(id) {
-    cart = cart.filter(i => i.id !== id);
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
     saveCart();
-    renderCart();
+    renderCartPage();
+    updateCartCount();
 }
 
-function updateCartItemQuantity(id, change) {
-    const item = cart.find(i => i.id === id);
+function updateCartItemQuantity(productId, change) {
+    const item = cart.find(item => item.id === productId);
     if (item) {
         item.quantity += change;
-        item.quantity <= 0 ? removeFromCart(id) : (saveCart(), renderCart());
+        if (item.quantity <= 0) {
+            removeFromCart(productId);
+        } else {
+            saveCart();
+            renderCartPage();
+            updateCartCount();
+        }
     }
 }
 
@@ -255,80 +250,226 @@ function saveCart() {
     localStorage.setItem('minato_cart', JSON.stringify(cart));
 }
 
+function updateCartCount() {
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    if (els.cartCount) els.cartCount.textContent = count;
+    if (els.navCartCount) els.navCartCount.textContent = count;
+}
+
+// 6. CART PAGE RENDER
+function renderCartPage() {
+    const cartContent = document.getElementById('cartContent');
+    const emptyCart = document.getElementById('emptyCart');
+    
+    if (!cartContent) return;
+    
+    if (cart.length === 0) {
+        cartContent.style.display = 'none';
+        emptyCart.style.display = 'block';
+        return;
+    }
+    
+    cartContent.style.display = 'block';
+    emptyCart.style.display = 'none';
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    cartContent.innerHTML = `
+        <div style="display: grid; grid-template-columns: 1fr 350px; gap: 40px; align-items: start;">
+            <div>
+                <h2 style="font-family: var(--font-title); margin-bottom: 25px; font-size: 1.8rem;">Articles (${cart.length})</h2>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    ${cart.map(item => `
+                        <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border); display: flex; gap: 20px; align-items: center;">
+                            <div style="width: 80px; height: 80px; background: var(--bg-elevated); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0;">
+                                ${item.emoji}
+                            </div>
+                            <div style="flex: 1;">
+                                <h3 style="font-size: 1.1rem; margin-bottom: 5px;">${item.name}</h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">${item.desc}</p>
+                                <div style="color: var(--primary); font-weight: 700;">${(item.price * item.quantity).toFixed(3)} DT</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <button onclick="updateCartItemQuantity(${item.id}, -1)" style="width: 32px; height: 32px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 6px; color: white; font-weight: bold; cursor: pointer;">−</button>
+                                <span style="font-weight: 600; min-width: 30px; text-align: center;">${item.quantity}</span>
+                                <button onclick="updateCartItemQuantity(${item.id}, 1)" style="width: 32px; height: 32px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 6px; color: white; font-weight: bold; cursor: pointer;">+</button>
+                            </div>
+                            <button onclick="removeFromCart(${item.id})" style="padding: 8px 12px; color: #ff4444; background: none; border: none; cursor: pointer; font-size: 1.2rem;">🗑️</button>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            
+            <div style="position: sticky; top: 120px;">
+                <div style="background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border);">
+                    <h3 style="font-family: var(--font-title); margin-bottom: 20px; font-size: 1.4rem;">Résumé de la Commande</h3>
+                    
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border);">
+                        <span style="color: var(--text-muted);">Sous-total</span>
+                        <span style="font-weight: 600;">${total.toFixed(3)} DT</span>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border);">
+                        <span style="color: var(--text-muted);">Livraison</span>
+                        <span style="font-weight: 600; color: #4CAF50;">Gratuite</span>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 25px; font-size: 1.5rem; font-weight: 700; color: var(--primary);">
+                        <span>Total</span>
+                        <span>${total.toFixed(3)} DT</span>
+                    </div>
+                    
+                    <button onclick="openCheckoutModal()" class="btn-primary" style="width: 100%; padding: 16px; font-size: 1.1rem; font-weight: 600;">
+                        Commander Maintenant
+                    </button>
+                    
+                    <p style="text-align: center; margin-top: 15px; font-size: 0.85rem; color: var(--text-muted);">
+                        💵 Paiement à la livraison
+                    </p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// 7. CHECKOUT MODAL FUNCTIONS
+function openCheckoutModal() {
+    const modal = document.getElementById('checkoutModal');
+    if (!modal) return;
+    
+    // Update order summary
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const summaryDiv = document.getElementById('orderSummaryItems');
+    const totalDisplay = document.getElementById('orderTotalDisplay');
+    
+    if (summaryDiv) {
+        summaryDiv.innerHTML = cart.map(item => `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95rem;">
+                <span>${item.quantity}x ${item.name}</span>
+                <span style="font-weight: 600;">${(item.price * item.quantity).toFixed(3)} DT</span>
+            </div>
+        `).join('');
+    }
+    
+    if (totalDisplay) {
+        totalDisplay.textContent = total.toFixed(3) + ' DT';
+    }
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCheckoutModal() {
+    const modal = document.getElementById('checkoutModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+function closeSuccessModal() {
+    const modal = document.getElementById('successModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        window.location.href = 'index.html';
+    }
+}
+
+// 8. ORDER SUBMISSION WITH EMAILJS
+async function submitOrder() {
+    const form = document.getElementById('checkoutForm');
+    if (!form) return;
+    
+    const name = document.getElementById('customerName').value.trim();
+    const phone = document.getElementById('customerPhone').value.trim();
+    const address = document.getElementById('customerAddress').value.trim();
+    const note = document.getElementById('customerNote').value.trim();
+    
+    if (!name || !phone || !address) {
+        alert('Veuillez remplir tous les champs obligatoires');
+        return;
+    }
+    
+    if (cart.length === 0) {
+        alert('Votre panier est vide');
+        return;
+    }
+    
+    const confirmBtn = document.getElementById('confirmOrderBtn');
+    const originalText = confirmBtn.textContent;
+    confirmBtn.textContent = 'Envoi en cours...';
+    confirmBtn.disabled = true;
+    
+    try {
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        
+        // Format order items for email
+        const orderItems = cart.map(item => 
+            `${item.quantity}x ${item.name} - ${(item.price * item.quantity).toFixed(3)} DT`
+        ).join('\n');
+        
+        // Email template parameters
+        const templateParams = {
+            to_email: 'minato.sushi00@gmail.com',
+            from_name: name,
+            from_email: 'noreply@minato.com',
+            phone: phone,
+            address: address,
+            note: note || 'Aucune',
+            order_items: orderItems,
+            total: total.toFixed(3),
+            date: new Date().toLocaleString('fr-FR'),
+            message: `Nouvelle commande de ${name}\n\nTéléphone: ${phone}\nAdresse: ${address}\n\nArticles:\n${orderItems}\n\nTotal: ${total.toFixed(3)} DT\n\nNote: ${note || 'Aucune'}`
+        };
+        
+        // Send email using EmailJS
+        // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual EmailJS credentials
+        await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
+        
+        // Clear cart
+        cart = [];
+        saveCart();
+        updateCartCount();
+        
+        // Close modal and show success
+        closeCheckoutModal();
+        document.getElementById('successModal').classList.add('active');
+        
+    } catch (error) {
+        console.error('Error sending order:', error);
+        alert('Erreur de connexion. Veuillez réessayer ou appeler le restaurant directement.');
+    } finally {
+        confirmBtn.textContent = originalText;
+        confirmBtn.disabled = false;
+    }
+}
+
+// 9. MOBILE MENU
 function initMobileMenu() {
     if (!els.mobileToggle || !els.navLinks) return;
+    
     els.mobileToggle.addEventListener('click', () => {
         els.navLinks.classList.toggle('active');
         els.mobileToggle.classList.toggle('active');
     });
 }
 
-function initCartToggle() {
-    if (!els.cartToggle || !els.cartPanel) return;
-    els.cartToggle.addEventListener('click', () => els.cartPanel.classList.add('active'));
-    if (els.closeCart) els.closeCart.addEventListener('click', () => els.cartPanel.classList.remove('active'));
-    document.addEventListener('click', e => {
-        if (els.cartPanel.classList.contains('active') && !els.cartPanel.contains(e.target) && !els.cartToggle.contains(e.target)) {
-            els.cartPanel.classList.remove('active');
-        }
-    });
-}
-
-function initModals() {
-    if (els.checkoutBtn) els.checkoutBtn.addEventListener('click', () => { els.checkoutModal.classList.add('active'); els.cartPanel.classList.remove('active'); });
-    if (els.closeModal) els.closeModal.addEventListener('click', () => els.checkoutModal.classList.remove('active'));
-    if (els.cancelOrder) els.cancelOrder.addEventListener('click', () => els.checkoutModal.classList.remove('active'));
-    if (els.closeSuccess) els.closeSuccess.addEventListener('click', () => els.successModal.classList.remove('active'));
-}
-
-async function confirmOrderHandler() {
-    if (!els.checkoutForm) return;
-    const name = document.getElementById('customerName').value.trim();
-    const phone = document.getElementById('customerPhone').value.trim();
-    const address = document.getElementById('customerAddress').value.trim();
-    const note = document.getElementById('customerNote').value.trim();
-    if (!name || !phone || !address) { alert('Veuillez remplir tous les champs'); return; }
-    
-    const confirmBtn = els.confirmOrder;
-    const orig = confirmBtn.textContent;
-    confirmBtn.textContent = 'Envoi...';
-    confirmBtn.disabled = true;
-    
-    try {
-        const response = await fetch('/api/send-order', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ cartData: cart, customerDetails: { name, phone, address, note } })
-        });
-        const result = await response.json();
-        if (result.success) {
-            cart = []; saveCart(); renderCart();
-            els.checkoutModal.classList.remove('active');
-            els.successModal.classList.add('active');
-            els.checkoutForm.reset();
-        } else {
-            alert('Erreur. Appelez le restaurant directement.');
-        }
-    } catch (e) {
-        console.error(e);
-        alert('Erreur de connexion. Veuillez réessayer.');
-    } finally {
-        confirmBtn.textContent = orig;
-        confirmBtn.disabled = false;
-    }
-}
-
+// 10. INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
     renderCategories();
     renderProducts();
-    renderCart();
+    updateCartCount();
     initMobileMenu();
-    initCartToggle();
-    initModals();
-    if (els.confirmOrder) els.confirmOrder.addEventListener('click', confirmOrderHandler);
 });
 
+// Make functions global for inline onclick handlers
 window.updateQuantity = updateQuantity;
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
 window.updateCartItemQuantity = updateCartItemQuantity;
+window.openCheckoutModal = openCheckoutModal;
+window.closeCheckoutModal = closeCheckoutModal;
+window.closeSuccessModal = closeSuccessModal;
+window.submitOrder = submitOrder;
+window.switchCategory = switchCategory;
