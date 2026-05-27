@@ -6,94 +6,162 @@
     <title>Mon Panier | Minato Sushi</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY_HERE"); // Replace with your EmailJS Public Key
+        })();
+    </script>
 </head>
 <body>
+
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo"><img src="assets/logowithwordmark.png" alt="Minato"></a>
+            <a href="index.html" class="logo">
+                <img src="assets/logowithwordmark.png" alt="Minato Sushi">
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="menu.html">Menu</a></li>
                 <li><a href="aboutus.html">À Propos</a></li>
-                <li><a href="panier.html" class="active">Mon Panier <span id="nav-cart-count">0</span></a></li>
+                <li><a href="panier.html" class="active">Panier</a></li>
             </ul>
+            <div class="nav-right">
+                <a href="panier.html" class="cart-icon">
+                    🛒 <span class="cart-count" id="navCartCount">0</span>
+                </a>
+            </div>
+            <button class="mobile-toggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <div class="cart-page">
-        <div class="cart-page-header">
-            <h1> Mon Panier</h1>
-            <a href="menu.html" class="btn-primary">Continuer les achats</a>
-        </div>
-
-        <div class="cart-page-content">
-            <div class="cart-items-container" id="cart-page-items">
-                <!-- Cart items injected here -->
-                <div class="cart-empty-page">
-                    <div style="font-size: 80px; margin-bottom: 20px;">🍣</div>
-                    <h2>Votre panier est vide</h2>
-                    <p>Ajoutez des articles depuis le menu pour commencer</p>
-                    <a href="menu.html" class="btn-primary" style="margin-top: 30px;">Voir le Menu</a>
-                </div>
+    <div class="cart-page-container">
+        <div class="container" style="padding-top: 120px; padding-bottom: 100px;">
+            <h1 class="page-title">Mon Panier</h1>
+            
+            <div id="cartContent">
+                <!-- Cart items will be loaded here -->
             </div>
 
-            <div class="cart-summary" id="cart-page-summary">
-                <h3>Résumé de la commande</h3>
-                <div class="cart-summary-items" id="cart-summary-items"></div>
-                <div class="cart-summary-total">
-                    <span>Total</span>
-                    <span id="cart-page-total">0.000 DT</span>
-                </div>
-                <button class="btn-primary btn-large" id="btn-proceed-checkout" disabled onclick="openCheckoutModal()">
-                    Passer la commande
-                </button>
+            <div id="emptyCart" style="display: none; text-align: center; padding: 80px 20px;">
+                <div style="font-size: 6rem; margin-bottom: 20px;">🛒</div>
+                <h2 style="font-family: var(--font-title); margin-bottom: 15px; color: var(--text-muted);">Votre panier est vide</h2>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">Ajoutez des articles depuis le menu pour commander</p>
+                <a href="menu.html" class="btn-primary" style="padding: 16px 40px; font-size: 16px;">Voir le Menu</a>
             </div>
         </div>
     </div>
 
     <!-- Checkout Modal -->
-    <div class="modal" id="checkout-modal">
-        <div class="modal-box">
-            <h2>📦 Finaliser la commande</h2>
-            <form id="order-form">
-                <div class="form-group">
-                    <label>Nom Complet *</label>
-                    <input type="text" id="cust-name" required placeholder="Votre nom complet">
-                </div>
-                <div class="form-group">
-                    <label>Téléphone *</label>
-                    <input type="tel" id="cust-phone" required placeholder="+216 XX XXX XXX">
-                </div>
-                <div class="form-group">
-                    <label>Adresse de Livraison *</label>
-                    <textarea id="cust-address" required rows="3" placeholder="Adresse complète de livraison"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Instructions (Optionnel)</label>
-                    <textarea id="cust-note" rows="2" placeholder="Allergies, remarques..."></textarea>
-                </div>
-                <div class="payment-info-box">
-                    <strong>💳 Paiement à la livraison</strong>
-                    <p>Cash ou Carte lors de la livraison</p>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn-secondary" onclick="closeCheckoutModal()">Annuler</button>
-                    <button type="submit" class="btn-primary" id="btn-submit-order">Confirmer</button>
-                </div>
-            </form>
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>Finaliser la Commande</h2>
+                <button class="close-modal" onclick="closeCheckoutModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label for="customerName">Nom Complet *</label>
+                        <input type="text" id="customerName" required placeholder="Votre nom complet">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerPhone">Numéro de Téléphone *</label>
+                        <input type="tel" id="customerPhone" required placeholder="+216 XX XXX XXX">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerAddress">Adresse de Livraison *</label>
+                        <textarea id="customerAddress" required rows="3" placeholder="Rue, ville, code postal..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerNote">Instructions Spéciales (Optionnel)</label>
+                        <textarea id="customerNote" rows="2" placeholder="Allergies, remarques sur la livraison..."></textarea>
+                    </div>
+
+                    <div class="payment-info-box">
+                        <h4 style="margin-bottom: 10px; color: var(--primary);">💵 Mode de Paiement</h4>
+                        <p style="font-size: 14px; color: var(--text-muted);">
+                            <strong>Paiement à la livraison</strong><br>
+                            Vous pouvez payer en espèces ou par carte lors de la réception de votre commande.
+                        </p>
+                    </div>
+
+                    <div class="order-summary-box" style="margin-top: 25px; padding: 20px; background: var(--bg-elevated); border-radius: 8px; border: 1px solid var(--border);">
+                        <h4 style="margin-bottom: 15px; color: var(--primary);">Résumé de la Commande</h4>
+                        <div id="orderSummaryItems" style="margin-bottom: 15px;"></div>
+                        <div style="display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 700; color: var(--primary); border-top: 1px solid var(--border); padding-top: 15px;">
+                            <span>Total à payer:</span>
+                            <span id="orderTotalDisplay">0.000 DT</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeCheckoutModal()">Annuler</button>
+                <button class="btn-primary" id="confirmOrderBtn" onclick="submitOrder()">
+                    Confirmer la Commande
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Success Modal -->
-    <div class="modal" id="success-modal">
-        <div class="modal-box" style="text-align: center;">
-            <div style="font-size: 60px; margin-bottom: 20px;">✅</div>
-            <h2>Commande envoyée!</h2>
-            <p style="color: var(--text-muted); margin: 20px 0;">Merci! Nous vous contacterons bientôt pour confirmer la livraison.</p>
-            <button class="btn-primary" onclick="closeSuccessModal()" style="margin-top: 20px;">OK</button>
+    <div class="modal" id="successModal">
+        <div class="modal-content success" style="text-align: center; padding: 50px;">
+            <div class="success-icon" style="width: 80px; height: 80px; background: #4CAF50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 25px;">✓</div>
+            <h2 style="margin-bottom: 15px; font-family: var(--font-title);">Commande Envoyée!</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px; line-height: 1.6;">
+                Merci pour votre commande!<br>
+                Nous vous contacterons bientôt au numéro indiqué pour confirmer.
+            </p>
+            <button class="btn-primary" onclick="closeSuccessModal()" style="padding: 14px 40px;">Retour à l'Accueil</button>
         </div>
     </div>
 
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/logowithwordmark.png" alt="Minato Sushi">
+                    <p>Sushi authentique japonais préparé avec passion et tradition.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="aboutus.html">À Propos</a></li>
+                        <li><a href="panier.html">Panier</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Instagram">IG</a>
+                        <a href="#" aria-label="TikTok">TT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Minato Sushi. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
     <script src="main.js"></script>
+    <script>
+        // Initialize cart page when loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCartPage();
+            updateCartCount();
+        });
+    </script>
 </body>
 </html>
