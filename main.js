@@ -1,24 +1,24 @@
-// ==========================================
-// 🍣 MINATO SUSHI - COMPLETE JAVASCRIPT
-// ==========================================
+/* ==========================================
+   MINATO SUSHI - PREMIUM INTERACTION ENGINE
+   ========================================== */
 
-// 1. MENU DATA - Complete with 50+ items
+// === 1. DATA (50+ Items) ===
 const menuData = {
     plateaux: [
         { id: 1, name: 'Plateau 1 - P1', price: 37.500, desc: '8 Maki Saumon - 8 Californien - Saumon Avocat', pieces: '16 pièces', emoji: '🍱', popular: true },
         { id: 2, name: 'Plateau 2 - P2', price: 61.000, desc: '8 Maki Saumon - 8 Californien - Saumon Avocat - 8 Crunchy Las Vegas', pieces: '24 pièces', emoji: '🍱', popular: true },
-        { id: 3, name: 'Plateau Crunchy', price: 69.000, desc: '8 Crunchy Maki Spicy Ebi Tempura - 8 Las Vegas - 6 Godzilla', pieces: '22 pièces', emoji: '🍱', popular: true },
+        { id: 3, name: 'Plateau Crunchy', price: 69.000, desc: '8 Crunchy Maki Spicy Ebi Tempura - 8 Las Vegas - 6 Godzilla', pieces: '22 pièces', emoji: '', popular: true },
         { id: 4, name: 'Plateau Deluxe', price: 89.000, desc: 'Assortiment premium de nos meilleures spécialités', pieces: '32 pièces', emoji: '', popular: false },
         { id: 5, name: 'Plateau Veggie', price: 42.000, desc: 'Sélection de sushis végétariens frais', pieces: '20 pièces', emoji: '🥬', popular: false },
         { id: 6, name: 'Plateau Spicy', price: 58.000, desc: 'Pour les amateurs de sensations fortes', pieces: '24 pièces', emoji: '🌶️', popular: false },
-        { id: 7, name: 'Plateau Family', price: 120.000, desc: 'Idéal pour 4-6 personnes', pieces: '50 pièces', emoji: '👨‍👩‍👧‍👦', popular: true },
+        { id: 7, name: 'Plateau Family', price: 120.000, desc: 'Idéal pour 4-6 personnes', pieces: '50 pièces', emoji: '👨‍‍👧‍👦', popular: true },
         { id: 8, name: 'Plateau Couple', price: 75.000, desc: 'Parfait pour deux personnes', pieces: '28 pièces', emoji: '💑', popular: false },
         { id: 9, name: 'Plateau Solo', price: 29.000, desc: 'Menu individuel complet', pieces: '12 pièces', emoji: '🍱', popular: true },
         { id: 10, name: 'Plateau Premium', price: 150.000, desc: 'Le summum de nos créations', pieces: '60 pièces', emoji: '👑', popular: true }
     ],
     maki: [
         { id: 11, name: 'Maki Saumon', price: 18.500, desc: 'Saumon frais', pieces: '8 pièces', emoji: '🍣', popular: true },
-        { id: 12, name: 'Maki Cheesy Saumon', price: 20.000, desc: 'Saumon - Fromage fondu', pieces: '8 pièces', emoji: '🧀', popular: false },
+        { id: 12, name: 'Maki Cheesy Saumon', price: 20.000, desc: 'Saumon - Fromage fondu', pieces: '8 pièces', emoji: '', popular: false },
         { id: 13, name: 'Maki Spicy Saumon', price: 18.500, desc: 'Saumon - Sauce épicée', pieces: '8 pièces', emoji: '🌶️', popular: true },
         { id: 14, name: 'Maki Avocat', price: 15.000, desc: 'Avocat frais crémeux', pieces: '8 pièces', emoji: '🥑', popular: false },
         { id: 15, name: 'Maki Thon', price: 19.000, desc: 'Thon rouge premium', pieces: '8 pièces', emoji: '🐟', popular: false },
@@ -52,7 +52,7 @@ const menuData = {
         { id: 37, name: 'Edamame', price: 8.000, desc: 'Fèves de soja vapeur', pieces: '', emoji: '', popular: false },
         { id: 38, name: 'Gyoza', price: 12.000, desc: 'Raviolis grillés', pieces: '6 pièces', emoji: '🥟', popular: true },
         { id: 39, name: 'Tempura', price: 14.000, desc: 'Légumes et crevettes', pieces: '8 pièces', emoji: '🍤', popular: false },
-        { id: 40, name: 'Miso Soup', price: 6.000, desc: 'Soupe traditionnelle', pieces: '', emoji: '🍲', popular: false },
+        { id: 40, name: 'Miso Soup', price: 6.000, desc: 'Soupe traditionnelle', pieces: '', emoji: '', popular: false },
         { id: 41, name: 'Salade Wakame', price: 9.000, desc: 'Salade d\'algues wakame', pieces: '', emoji: '🥗', popular: false },
         { id: 42, name: 'Poulet Karaage', price: 15.000, desc: 'Poulet frit japonais', pieces: '6 pièces', emoji: '🍗', popular: true },
         { id: 43, name: 'Tofu Agedashi', price: 10.000, desc: 'Tofu frit en sauce dashi', pieces: '4 pièces', emoji: '🧈', popular: false },
@@ -79,7 +79,7 @@ const menuData = {
         { id: 58, name: 'Poke Thon', price: 24.000, desc: 'Thon - Riz - Mangue - Concombre', pieces: '', emoji: '', popular: true },
         { id: 59, name: 'Poke Veggie', price: 18.000, desc: 'Tofu - Riz - Légumes frais', pieces: '', emoji: '', popular: false },
         { id: 60, name: 'Poke Mixte', price: 26.000, desc: 'Saumon et thon - Riz - Avocat', pieces: '', emoji: '🥗', popular: true },
-        { id: 61, name: 'Poke Crevette', price: 23.000, desc: 'Crevettes - Riz - Mangue', pieces: '', emoji: '🦐', popular: false }
+        { id: 61, name: 'Poke Crevette', price: 23.000, desc: 'Crevettes - Riz - Mangue', pieces: '', emoji: '', popular: false }
     ],
     chirashi: [
         { id: 62, name: 'Chirashi Saumon', price: 25.000, desc: 'Saumon sur riz vinaigré', pieces: '', emoji: '🍚', popular: true },
@@ -87,19 +87,19 @@ const menuData = {
         { id: 64, name: 'Chirashi Deluxe', price: 38.000, desc: 'Sélection premium 8 poissons', pieces: '', emoji: '', popular: false }
     ],
     extras: [
-        { id: 65, name: 'Riz Supplémentaire', price: 3.000, desc: 'Portion de riz', pieces: '', emoji: '🍚', popular: false },
-        { id: 66, name: 'Sauce Soja', price: 1.000, desc: 'Sauce soja premium', pieces: '', emoji: '🥣', popular: false },
-        { id: 67, name: 'Gingembre', price: 2.000, desc: 'Gingembre mariné', pieces: '', emoji: '🫚', popular: false },
+        { id: 65, name: 'Riz Supplémentaire', price: 3.000, desc: 'Portion de riz', pieces: '', emoji: '', popular: false },
+        { id: 66, name: 'Sauce Soja', price: 1.000, desc: 'Sauce soja premium', pieces: '', emoji: '', popular: false },
+        { id: 67, name: 'Gingembre', price: 2.000, desc: 'Gingembre mariné', pieces: '', emoji: '', popular: false },
         { id: 68, name: 'Wasabi', price: 1.500, desc: 'Wasabi frais', pieces: '', emoji: '', popular: false },
         { id: 69, name: 'Sauce Spicy Mayo', price: 2.000, desc: 'Mayonnaise épicée', pieces: '', emoji: '🌶️', popular: false },
-        { id: 70, name: 'Sauce Teriyaki', price: 2.000, desc: 'Sauce teriyaki maison', pieces: '', emoji: '🥫', popular: false }
+        { id: 70, name: 'Sauce Teriyaki', price: 2.000, desc: 'Sauce teriyaki maison', pieces: '', emoji: '', popular: false }
     ]
 };
 
 const categories = [
-    { id: 'plateaux', name: 'Plateaux', icon: '🍱' },
+    { id: 'plateaux', name: 'Plateaux', icon: '' },
     { id: 'maki', name: 'Maki', icon: '🍙' },
-    { id: 'nigiri', name: 'Nigiri', icon: '🍣' },
+    { id: 'nigiri', name: 'Nigiri', icon: '' },
     { id: 'sashimi', name: 'Sashimi', icon: '' },
     { id: 'sidedishes', name: 'Accompagnements', icon: '🍤' },
     { id: 'noodles', name: 'Noodles', icon: '🍜' },
@@ -109,16 +109,13 @@ const categories = [
     { id: 'extras', name: 'Extras', icon: '' }
 ];
 
-// 2. STATE MANAGEMENT
+// === 2. STATE MANAGEMENT ===
 let cart = JSON.parse(localStorage.getItem('minato_cart')) || [];
 let currentCategory = 'plateaux';
 let quantities = {};
+Object.values(menuData).flat().forEach(p => quantities[p.id] = 1);
 
-Object.values(menuData).flat().forEach(p => {
-    quantities[p.id] = 1;
-});
-
-// 3. DOM ELEMENTS
+// === 3. DOM ELEMENTS ===
 const els = {
     categoryList: document.getElementById('categoryList'),
     productsGrid: document.getElementById('productsGrid'),
@@ -129,10 +126,9 @@ const els = {
     navLinks: document.querySelector('.nav-links')
 };
 
-// 4. RENDER FUNCTIONS
+// === 4. RENDER FUNCTIONS ===
 function renderCategories() {
     if (!els.categoryList) return;
-    
     els.categoryList.innerHTML = categories.map(cat => `
         <div class="cat-item ${cat.id === currentCategory ? 'active' : ''}" onclick="switchCategory('${cat.id}')">
             <span class="cat-icon">${cat.icon}</span>
@@ -145,28 +141,26 @@ function switchCategory(catId) {
     currentCategory = catId;
     renderCategories();
     renderProducts();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function renderProducts() {
     if (!els.productsGrid) return;
-    
     const products = menuData[currentCategory] || [];
     const category = categories.find(c => c.id === currentCategory);
     
-    if (els.categoryTitle) {
-        els.categoryTitle.textContent = category ? category.name : 'Menu';
-    }
+    if (els.categoryTitle) els.categoryTitle.textContent = category ? category.name : 'Menu';
     
     if (products.length === 0) {
-        els.productsGrid.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:40px;">Aucun article dans cette catégorie</p>';
+        els.productsGrid.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:40px;">Aucun article</p>';
         return;
     }
     
-    els.productsGrid.innerHTML = products.map(product => `
-        <div class="product-card">
+    els.productsGrid.innerHTML = products.map((product, index) => `
+        <div class="product-card scale-in" style="transition-delay: ${index * 0.05}s">
             <div class="prod-img">
                 ${product.popular ? '<span class="badge-popular">Populaire</span>' : ''}
-                <span style="font-size: 4rem;">${product.emoji}</span>
+                <span>${product.emoji}</span>
             </div>
             <div class="prod-details">
                 <div class="prod-name">${product.name}</div>
@@ -184,9 +178,14 @@ function renderProducts() {
             </div>
         </div>
     `).join('');
+    
+    // Trigger animations for new items
+    setTimeout(() => {
+        document.querySelectorAll('.scale-in').forEach(el => el.classList.add('active'));
+    }, 50);
 }
 
-// 5. CART FUNCTIONS
+// === 5. CART LOGIC ===
 function updateQuantity(productId, change) {
     quantities[productId] = Math.max(1, Math.min(10, quantities[productId] + change));
     const qtyEl = document.getElementById(`qty-${productId}`);
@@ -201,27 +200,26 @@ function addToCart(productId) {
     if (!product) return;
     
     const existingItem = cart.find(item => item.id === productId);
-    
-    if (existingItem) {
-        existingItem.quantity += quantity;
-    } else {
-        cart.push({ ...product, quantity });
-    }
+    if (existingItem) existingItem.quantity += quantity;
+    else cart.push({ ...product, quantity });
     
     saveCart();
     updateCartCount();
+    renderCartPage(); // Update panier page if open
     
-    // Visual feedback
+    // Button Animation
     const btn = document.getElementById(`btn-${productId}`);
     if (btn) {
-        const originalText = btn.textContent;
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<span>✓ Ajouté</span>';
         btn.style.background = 'var(--primary)';
-        btn.textContent = '✓ Ajouté';
+        btn.style.borderColor = 'var(--primary)';
         
         setTimeout(() => {
+            btn.innerHTML = originalText;
             btn.style.background = '';
-            btn.textContent = originalText;
-        }, 2000);
+            btn.style.borderColor = '';
+        }, 1500);
     }
 }
 
@@ -236,13 +234,8 @@ function updateCartItemQuantity(productId, change) {
     const item = cart.find(item => item.id === productId);
     if (item) {
         item.quantity += change;
-        if (item.quantity <= 0) {
-            removeFromCart(productId);
-        } else {
-            saveCart();
-            renderCartPage();
-            updateCartCount();
-        }
+        if (item.quantity <= 0) removeFromCart(productId);
+        else { saveCart(); renderCartPage(); updateCartCount(); }
     }
 }
 
@@ -254,9 +247,16 @@ function updateCartCount() {
     const count = cart.reduce((sum, item) => sum + item.quantity, 0);
     if (els.cartCount) els.cartCount.textContent = count;
     if (els.navCartCount) els.navCartCount.textContent = count;
+    
+    // Animate count change
+    const badge = document.querySelector('.cart-count');
+    if (badge) {
+        badge.style.transform = 'scale(1.3)';
+        setTimeout(() => badge.style.transform = 'scale(1)', 200);
+    }
 }
 
-// 6. CART PAGE RENDER
+// === 6. CART PAGE RENDER ===
 function renderCartPage() {
     const cartContent = document.getElementById('cartContent');
     const emptyCart = document.getElementById('emptyCart');
@@ -275,85 +275,74 @@ function renderCartPage() {
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     
     cartContent.innerHTML = `
-        <div style="display: grid; grid-template-columns: 1fr 350px; gap: 40px; align-items: start;">
+        <div class="cart-grid">
             <div>
-                <h2 style="font-family: var(--font-title); margin-bottom: 25px; font-size: 1.8rem;">Articles (${cart.length})</h2>
-                <div style="display: flex; flex-direction: column; gap: 15px;">
+                <h2 class="reveal">Articles (${cart.length})</h2>
+                <div class="cart-items-list">
                     ${cart.map(item => `
-                        <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border); display: flex; gap: 20px; align-items: center;">
-                            <div style="width: 80px; height: 80px; background: var(--bg-elevated); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0;">
-                                ${item.emoji}
+                        <div class="cart-item-row reveal-left">
+                            <div class="cart-item-img">${item.emoji}</div>
+                            <div class="cart-item-info">
+                                <h3 class="cart-item-name">${item.name}</h3>
+                                <p class="cart-item-desc">${item.desc}</p>
+                                <div class="cart-item-price">${(item.price * item.quantity).toFixed(3)} DT</div>
                             </div>
-                            <div style="flex: 1;">
-                                <h3 style="font-size: 1.1rem; margin-bottom: 5px;">${item.name}</h3>
-                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">${item.desc}</p>
-                                <div style="color: var(--primary); font-weight: 700;">${(item.price * item.quantity).toFixed(3)} DT</div>
+                            <div class="qty-control">
+                                <button class="qty-btn" onclick="updateCartItemQuantity(${item.id}, -1)">−</button>
+                                <span class="qty-val">${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateCartItemQuantity(${item.id}, 1)">+</button>
                             </div>
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <button onclick="updateCartItemQuantity(${item.id}, -1)" style="width: 32px; height: 32px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 6px; color: white; font-weight: bold; cursor: pointer;">−</button>
-                                <span style="font-weight: 600; min-width: 30px; text-align: center;">${item.quantity}</span>
-                                <button onclick="updateCartItemQuantity(${item.id}, 1)" style="width: 32px; height: 32px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 6px; color: white; font-weight: bold; cursor: pointer;">+</button>
-                            </div>
-                            <button onclick="removeFromCart(${item.id})" style="padding: 8px 12px; color: #ff4444; background: none; border: none; cursor: pointer; font-size: 1.2rem;">🗑️</button>
+                            <button class="cart-remove" onclick="removeFromCart(${item.id})">🗑️</button>
                         </div>
                     `).join('')}
                 </div>
             </div>
             
-            <div style="position: sticky; top: 120px;">
-                <div style="background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border);">
-                    <h3 style="font-family: var(--font-title); margin-bottom: 20px; font-size: 1.4rem;">Résumé de la Commande</h3>
-                    
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border);">
-                        <span style="color: var(--text-muted);">Sous-total</span>
-                        <span style="font-weight: 600;">${total.toFixed(3)} DT</span>
-                    </div>
-                    
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border);">
-                        <span style="color: var(--text-muted);">Livraison</span>
-                        <span style="font-weight: 600; color: #4CAF50;">Gratuite</span>
-                    </div>
-                    
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 25px; font-size: 1.5rem; font-weight: 700; color: var(--primary);">
-                        <span>Total</span>
-                        <span>${total.toFixed(3)} DT</span>
-                    </div>
-                    
-                    <button onclick="openCheckoutModal()" class="btn-primary" style="width: 100%; padding: 16px; font-size: 1.1rem; font-weight: 600;">
-                        Commander Maintenant
-                    </button>
-                    
-                    <p style="text-align: center; margin-top: 15px; font-size: 0.85rem; color: var(--text-muted);">
-                        💵 Paiement à la livraison
-                    </p>
-                </div>
+            <div class="cart-summary reveal-right">
+                <h3>Résumé de la Commande</h3>
+                <div class="summary-row"><span>Sous-total</span><span>${total.toFixed(3)} DT</span></div>
+                <div class="summary-row"><span>Livraison</span><span style="color:#4CAF50;">Gratuite</span></div>
+                <div class="summary-total"><span>Total</span><span>${total.toFixed(3)} DT</span></div>
+                <button onclick="openCheckoutModal()" class="btn-primary btn-checkout">Commander Maintenant</button>
+                <p style="text-align:center;margin-top:15px;font-size:0.85rem;color:var(--text-muted);">💵 Paiement à la livraison</p>
             </div>
         </div>
     `;
+    
+    // Trigger scroll animations for cart items
+    setTimeout(initScrollAnimations, 100);
 }
 
-// 7. CHECKOUT MODAL FUNCTIONS
+// === 7. SCROLL ANIMATIONS (Intersection Observer) ===
+function initScrollAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .scale-in').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// === 8. MODALS & CHECKOUT ===
 function openCheckoutModal() {
     const modal = document.getElementById('checkoutModal');
     if (!modal) return;
     
-    // Update order summary
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const summaryDiv = document.getElementById('orderSummaryItems');
     const totalDisplay = document.getElementById('orderTotalDisplay');
     
     if (summaryDiv) {
         summaryDiv.innerHTML = cart.map(item => `
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95rem;">
-                <span>${item.quantity}x ${item.name}</span>
-                <span style="font-weight: 600;">${(item.price * item.quantity).toFixed(3)} DT</span>
-            </div>
+            <div class="order-item"><span>${item.quantity}x ${item.name}</span><span style="font-weight:600;">${(item.price * item.quantity).toFixed(3)} DT</span></div>
         `).join('');
     }
-    
-    if (totalDisplay) {
-        totalDisplay.textContent = total.toFixed(3) + ' DT';
-    }
+    if (totalDisplay) totalDisplay.textContent = total.toFixed(3) + ' DT';
     
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -367,16 +356,63 @@ function closeCheckoutModal() {
     }
 }
 
-function closeSuccessModal() {
-    const modal = document.getElementById('successModal');
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-        window.location.href = 'index.html';
+// === 9. CONFETTI ANIMATION (For Success) ===
+function fireConfetti() {
+    const canvas = document.createElement('canvas');
+    canvas.className = 'confetti-canvas';
+    document.getElementById('successModal').appendChild(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const particles = [];
+    const colors = ['#5B9BD5', '#FF554D', '#FFD700', '#4CAF50', '#ffffff'];
+    
+    for (let i = 0; i < 150; i++) {
+        particles.push({
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            w: Math.random() * 10 + 5,
+            h: Math.random() * 10 + 5,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            vx: (Math.random() - 0.5) * 20,
+            vy: (Math.random() - 0.5) * 20 - 5,
+            gravity: 0.5,
+            rotation: Math.random() * 360,
+            rotationSpeed: (Math.random() - 0.5) * 10
+        });
     }
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = false;
+        
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += p.gravity;
+            p.rotation += p.rotationSpeed;
+            
+            if (p.y < canvas.height) {
+                active = true;
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation * Math.PI / 180);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                ctx.restore();
+            }
+        });
+        
+        if (active) requestAnimationFrame(animate);
+        else canvas.remove();
+    }
+    
+    animate();
 }
 
-// 8. ORDER SUBMISSION WITH EMAILJS
+// === 10. ORDER SUBMISSION (EmailJS) ===
 async function submitOrder() {
     const form = document.getElementById('checkoutForm');
     if (!form) return;
@@ -391,85 +427,76 @@ async function submitOrder() {
         return;
     }
     
-    if (cart.length === 0) {
-        alert('Votre panier est vide');
-        return;
-    }
-    
-    const confirmBtn = document.getElementById('confirmOrderBtn');
-    const originalText = confirmBtn.textContent;
-    confirmBtn.textContent = 'Envoi en cours...';
-    confirmBtn.disabled = true;
+    const btn = document.getElementById('confirmOrderBtn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span style="display:flex;align-items:center;gap:10px;">Envoi en cours... <span class="loader"></span></span>';
+    btn.disabled = true;
     
     try {
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         
-        // Format order items for email
-        const orderItems = cart.map(item => 
-            `${item.quantity}x ${item.name} - ${(item.price * item.quantity).toFixed(3)} DT`
-        ).join('\n');
-        
-        // Email template parameters
         const templateParams = {
-            to_email: 'minato.sushi00@gmail.com',
             from_name: name,
-            from_email: 'noreply@minato.com',
             phone: phone,
             address: address,
             note: note || 'Aucune',
-            order_items: orderItems,
+            order_items: cart.map(i => `${i.quantity}x ${i.name} - ${(i.price * i.quantity).toFixed(3)} DT`).join('\n'),
             total: total.toFixed(3),
-            date: new Date().toLocaleString('fr-FR'),
-            message: `Nouvelle commande de ${name}\n\nTéléphone: ${phone}\nAdresse: ${address}\n\nArticles:\n${orderItems}\n\nTotal: ${total.toFixed(3)} DT\n\nNote: ${note || 'Aucune'}`
+            date: new Date().toLocaleString('fr-FR')
         };
+
+        const serviceID = 'service_2vklqtm';
+        const templateID = 'template_zozfs9y';
         
-        // Send email using EmailJS
-        // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual EmailJS credentials
-        await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
+        await emailjs.send(serviceID, templateID, templateParams);
         
-        // Clear cart
+        // Success
         cart = [];
-        saveCart();
+        localStorage.setItem('minato_cart', JSON.stringify(cart));
         updateCartCount();
+        renderCartPage();
         
-        // Close modal and show success
         closeCheckoutModal();
         document.getElementById('successModal').classList.add('active');
+        fireConfetti(); // Trigger the art animation
         
     } catch (error) {
-        console.error('Error sending order:', error);
-        alert('Erreur de connexion. Veuillez réessayer ou appeler le restaurant directement.');
+        console.error('EmailJS Error:', error);
+        alert('Erreur de connexion. Veuillez réessayer.');
     } finally {
-        confirmBtn.textContent = originalText;
-        confirmBtn.disabled = false;
+        btn.innerHTML = originalText;
+        btn.disabled = false;
     }
 }
 
-// 9. MOBILE MENU
-function initMobileMenu() {
-    if (!els.mobileToggle || !els.navLinks) return;
-    
-    els.mobileToggle.addEventListener('click', () => {
-        els.navLinks.classList.toggle('active');
-        els.mobileToggle.classList.toggle('active');
-    });
-}
-
-// 10. INITIALIZATION
+// === 11. INITIALIZATION ===
 document.addEventListener('DOMContentLoaded', () => {
     renderCategories();
     renderProducts();
     updateCartCount();
-    initMobileMenu();
+    initScrollAnimations();
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
+    });
+    
+    // Mobile menu
+    if (els.mobileToggle && els.navLinks) {
+        els.mobileToggle.addEventListener('click', () => {
+            els.navLinks.classList.toggle('active');
+        });
+    }
 });
 
-// Make functions global for inline onclick handlers
+// Global exports
 window.updateQuantity = updateQuantity;
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
 window.updateCartItemQuantity = updateCartItemQuantity;
 window.openCheckoutModal = openCheckoutModal;
 window.closeCheckoutModal = closeCheckoutModal;
-window.closeSuccessModal = closeSuccessModal;
 window.submitOrder = submitOrder;
 window.switchCategory = switchCategory;
