@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "npx serve .",
-    "build": "echo 'No build step'"
+    "build": "mkdir -p public && cp -r *.html *.css *.js assets public/ 2>/dev/null || copyfiles -u 1 \"*.{html,css,js}\" public && copyfiles -u 1 \"assets/**/*\" public/"
   },
   "dependencies": {
     "sib-api-v3-sdk": "^8.5.0"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "serve": "^14.2.0"
   }
 }
