@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu | Minato Sushi</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="assets/logowithwordmark.png" alt="Minato Sushi">
-            </a>
+            <a href="index.html" class="logo"><img src="assets/logowithwordmark.png" alt="Minato Sushi"></a>
             <ul class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="menu.html" class="active">Menu</a></li>
@@ -24,31 +22,53 @@
                     🛒 <span class="cart-count" id="cartCount">0</span>
                 </a>
             </div>
-            <button class="mobile-toggle" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
+            <button class="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
     </nav>
 
     <div class="menu-page-layout">
-        <!-- Sidebar Categories -->
+        <!-- Sidebar -->
         <aside class="category-sidebar">
-            <h3>Catégories</h3>
+            <div style="padding: 0 25px 20px; border-bottom: 1px solid var(--glass-border); margin-bottom: 10px;">
+                <h3 style="font-family: var(--font-title); color: var(--primary);">Catégories</h3>
+            </div>
             <div id="categoryList">
-                <!-- Categories injected by JS -->
+                <!-- Injected by JS -->
             </div>
         </aside>
 
         <!-- Main Content -->
         <main class="menu-main">
             <div class="menu-header">
-                <h1 id="categoryTitle">Plateaux</h1>
-                <p>Sélectionnez vos articles et ajoutez-les au panier</p>
+                <h1 class="menu-title" id="categoryTitle">Plateaux</h1>
+                <p style="color: var(--text-muted);">Sélectionnez vos articles et personnalisez votre commande.</p>
             </div>
             <div class="products-grid" id="productsGrid">
-                <!-- Products injected by JS -->
+                <!-- Injected by JS -->
             </div>
         </main>
+
+        <!-- Cart Sidebar -->
+        <aside class="cart-sidebar">
+            <div class="cart-header">
+                <h2>Votre Commande</h2>
+            </div>
+            <div class="cart-items-list" id="cartItems">
+                <div class="cart-empty" style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+                    <span style="font-size: 3rem; display: block; margin-bottom: 15px;">🍱</span>
+                    Votre panier est vide
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total</span>
+                    <span id="cartTotal">0.000 DT</span>
+                </div>
+                <button class="btn-primary btn-checkout" id="checkoutBtn" disabled onclick="window.location.href='panier.html'">
+                    Voir le Panier
+                </button>
+            </div>
+        </aside>
     </div>
 
     <script src="main.js"></script>
