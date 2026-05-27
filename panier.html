@@ -11,7 +11,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            // ✅ VOTRE CLÉ PUBLIQUE EMAILJS (Déjà configurée)
+            // ✅ VOTRE CLÉ PUBLIQUE (Correcte)
             emailjs.init("Ui1F6poYGPSj7EngE");
         })();
     </script>
@@ -307,6 +307,7 @@
             try {
                 const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
                 
+                // Template parameters matching your EmailJS template variables
                 const templateParams = {
                     from_name: name,
                     phone: phone,
@@ -317,10 +318,14 @@
                     date: new Date().toLocaleString('fr-FR')
                 };
 
-                // ⚠️ IMPORTANT: Replace these with your actual EmailJS Service ID & Template ID
-                const serviceID = 'YOUR_SERVICE_ID';   // Ex: service_abc123
-                const templateID = 'YOUR_TEMPLATE_ID'; // Ex: template_xyz789
+                // ✅ CONFIGURATION CORRECTE
+                // Service ID: service_2vklqtm
+                // Template ID: template_zozfs9y
+                const serviceID = 'service_2vklqtm';
+                const templateID = 'template_zozfs9y';
                 
+                console.log('Envoi de la commande...', { serviceID, templateID, params: templateParams });
+
                 await emailjs.send(serviceID, templateID, templateParams);
                 
                 // Success
