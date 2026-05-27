@@ -5,101 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu | Minato Sushi</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo"><img src="assets/logowithwordmark.png" alt="Minato"></a>
+            <a href="index.html" class="logo">
+                <img src="assets/logowithwordmark.png" alt="Minato Sushi">
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="menu.html" class="active">Menu</a></li>
                 <li><a href="aboutus.html">À Propos</a></li>
-                <li><a href="panier.html">Mon Panier <span id="nav-cart-count">0</span></a></li>
+                <li><a href="panier.html">Panier</a></li>
             </ul>
-            <button class="mobile-toggle" onclick="document.querySelector('.category-sidebar').style.display = document.querySelector('.category-sidebar').style.display === 'block' ? 'none' : 'block'">☰</button>
+            <div class="nav-right">
+                <a href="panier.html" class="cart-icon">
+                    🛒 <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+            <button class="mobile-toggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <div class="menu-page">
-        <aside class="categories-sidebar">
+    <div class="menu-page-layout">
+        <!-- Sidebar Categories -->
+        <aside class="category-sidebar">
             <h3>Catégories</h3>
-            <ul class="category-list" id="categoryList"></ul>
+            <div id="categoryList">
+                <!-- Categories injected by JS -->
+            </div>
         </aside>
 
-        <main class="menu-content">
+        <!-- Main Content -->
+        <main class="menu-main">
             <div class="menu-header">
                 <h1 id="categoryTitle">Plateaux</h1>
                 <p>Sélectionnez vos articles et ajoutez-les au panier</p>
             </div>
-            <div class="products-grid" id="productsGrid"></div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products injected by JS -->
+            </div>
         </main>
-
-        <aside class="cart-panel" id="cartPanel">
-            <div class="cart-header">
-                <h2> Mon Panier</h2>
-                <button class="close-cart" id="closeCart">✕</button>
-            </div>
-            <div class="cart-items" id="cartItems">
-                <div class="cart-empty">
-                    <div class="cart-empty-icon"></div>
-                    <p>Votre panier est vide</p>
-                    <p class="cart-hint">Ajoutez des articles depuis le menu</p>
-                </div>
-            </div>
-            <div class="cart-footer">
-                <div class="cart-total">
-                    <span>Total:</span>
-                    <span id="cartTotal">0.000 DT</span>
-                </div>
-                <button class="btn-primary btn-checkout" id="checkoutBtn" disabled>Commander</button>
-            </div>
-        </aside>
-    </div>
-
-    <div class="modal" id="checkoutModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Commander</h2>
-                <button class="close-modal" id="closeModal">✕</button>
-            </div>
-            <div class="modal-body">
-                <form id="checkoutForm">
-                    <div class="form-group">
-                        <label for="customerName">Nom Complet *</label>
-                        <input type="text" id="customerName" required placeholder="Votre nom">
-                    </div>
-                    <div class="form-group">
-                        <label for="customerPhone">Téléphone *</label>
-                        <input type="tel" id="customerPhone" required placeholder="+216 XX XXX XXX">
-                    </div>
-                    <div class="form-group">
-                        <label for="customerAddress">Adresse de Livraison *</label>
-                        <textarea id="customerAddress" required rows="3" placeholder="Adresse complète"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="customerNote">Instructions (Optionnel)</label>
-                        <textarea id="customerNote" rows="2" placeholder="Allergies, remarques..."></textarea>
-                    </div>
-                    <div class="payment-info">
-                        <p><strong>Paiement:</strong> Cash ou Carte à la Livraison</p>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn-secondary" id="cancelOrder">Annuler</button>
-                <button class="btn-primary" id="confirmOrder">Confirmer</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="successModal">
-        <div class="modal-content success">
-            <div class="success-icon">✓</div>
-            <h2>Commande Envoyée!</h2>
-            <p>Merci! Nous vous contacterons bientôt pour confirmer.</p>
-            <button class="btn-primary" id="closeSuccess">OK</button>
-        </div>
     </div>
 
     <script src="main.js"></script>
