@@ -3,130 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minato Sushi | Sushi Premium à Tunis</title>
+    <title>Minato Sushi | L'Art du Sushi Japonais</title>
+    <meta name="description" content="Minato Sushi : Expérience culinaire authentique à Tunis. Commandez en ligne.">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo mark.png">
 </head>
 <body>
+
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo"><img src="assets/logowithwordmark.png" alt="Minato"></a>
+            <a href="index.html" class="logo">
+                <img src="assets/logowithwordmark.png" alt="Minato Sushi">
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Accueil</a></li>
                 <li><a href="menu.html">Menu</a></li>
                 <li><a href="aboutus.html">À Propos</a></li>
-                <li><a href="panier.html">Mon Panier <span id="nav-cart-count">0</span></a></li>
+                <li><a href="panier.html">Panier</a></li>
             </ul>
-            <a href="menu.html" class="btn-primary">Commander</a>
+            <div class="nav-right">
+                <a href="panier.html" class="btn-primary">Commander</a>
+            </div>
+            <button class="mobile-toggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
+    <!-- Hero Section with Art Animation -->
     <section class="hero">
         <div class="hero-bg">
-            <img src="assets/texture.png" alt="">
+            <img src="assets/texture.png" alt="Japanese Wave Texture">
         </div>
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1>Sushi <span class="accent">Premium</span> à Tunis</h1>
-                <p>Sushis frais, recettes traditionnelles et créations modernes. Livraison rapide ou à emporter.</p>
-                <div class="hero-buttons">
-                    <a href="menu.html" class="btn-primary">Commander Maintenant</a>
-                    <a href="aboutus.html" class="btn-secondary">Notre Histoire</a>
-                </div>
+        
+        <!-- Abstract Art Elements -->
+        <div class="art-float">
+            <div class="art-circle"></div>
+            <div class="art-circle"></div>
+            <div class="art-circle"></div>
+            <img src="assets/logo mark.png" alt="Logo" style="width:150px; opacity:0.8; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); filter: drop-shadow(0 0 30px rgba(91,155,213,0.5));">
+        </div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">L'Art du<br><span class="text-primary">Sushi Premium</span></h1>
+            <p class="hero-subtitle">Une expérience culinaire authentique. Fraîcheur, tradition et créativité livrées à votre porte.</p>
+            <div class="hero-buttons" style="display:flex; gap:20px; justify-content:center;">
+                <a href="menu.html" class="btn-primary" style="padding:18px 45px; font-size:1rem;">Découvrir le Menu</a>
+                <a href="aboutus.html" class="btn-secondary" style="padding:18px 45px; font-size:1rem; border:1px solid var(--text-muted); color:var(--text-muted);">Notre Histoire</a>
             </div>
-            <div class="logo-showcase">
-                <img src="assets/logo mark.png" alt="Minato Logo">
-            </div>
+        </div>
+
+        <div class="scroll-indicator" style="position:absolute; bottom:40px; left:50%; transform:translateX(-50%); animation: bounce 2s infinite;">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2">
+                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+            </svg>
         </div>
     </section>
 
-    <section class="features">
+    <!-- Features Section -->
+    <section>
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>Pourquoi Minato?</h2>
-                <p>L'excellence japonaise à votre table</p>
+                <p>Nous redéfinissons l'expérience du sushi avec une passion sans compromis.</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🐟</div>
-                    <h3>Frais Quotidien</h3>
-                    <p>Poisson livré chaque matin pour une fraîcheur optimale</p>
+                <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                    <span class="feature-icon">🐟</span>
+                    <h3>Fraîcheur Absolue</h3>
+                    <p>Nos poissons sont livrés quotidiennement pour garantir une qualité irréprochable.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👨‍🍳</div>
-                    <h3>Chefs Experts</h3>
-                    <p>Maîtres sushimen formés au Japon</p>
+                <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                    <span class="feature-icon">‍🍳</span>
+                    <h3>Maîtres Sushimen</h3>
+                    <p>Des chefs experts formés aux traditions culinaires les plus exigeantes du Japon.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🚚</div>
-                    <h3>Livraison Rapide</h3>
-                    <p>Livraison express à Tunis en moins de 45 min</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⭐</div>
-                    <h3>Qualité Premium</h3>
-                    <p>Ingrédients sélectionnés avec soin</p>
+                <div class="feature-card reveal" style="transition-delay: 0.3s;">
+                    <span class="feature-icon"></span>
+                    <h3>Livraison Express</h3>
+                    <p>Recevez votre commande chaude et fraîche en moins de 45 minutes.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="menu-preview texture-section">
+    <!-- Menu Preview -->
+    <section style="background: var(--bg-card); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
         <div class="container">
-            <div class="section-header">
-                <h2>Nos Spécialités</h2>
-                <p>Les favoris de nos clients</p>
+            <div class="section-header reveal">
+                <h2>Nos Favoris</h2>
+                <p>Les choix préférés de nos clients.</p>
             </div>
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <div class="menu-item-image">🍣</div>
-                    <h3>Salmon Nigiri</h3>
-                    <p>Saumon frais sur riz vinaigré</p>
-                    <span class="price">$6.500 DT</span>
+            <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+                <div class="product-card reveal-left" style="background: var(--bg-elevated);">
+                    <div class="prod-img" style="height: 250px;"><span style="font-size: 6rem;">🍣</span></div>
+                    <div class="prod-details" style="text-align: center;">
+                        <div class="prod-name" style="font-size: 1.5rem;">Salmon Nigiri</div>
+                        <div class="prod-desc">La finesse du saumon sur un lit de riz parfait.</div>
+                        <span class="prod-price" style="font-size: 1.8rem;">16.000 DT</span>
+                    </div>
                 </div>
-                <div class="menu-item">
-                    <div class="menu-item-image">🍱</div>
-                    <h3>Dragon Roll</h3>
-                    <p>Anguille, avocat, sauce anguille</p>
-                    <span class="price">$14.500 DT</span>
-                </div>
-                <div class="menu-item">
-                    <div class="menu-item-image">🥢</div>
-                    <h3>Rainbow Roll</h3>
-                    <p>Crabe, avocat, poisson assorti</p>
-                    <span class="price">$15.000 DT</span>
-                </div>
-                <div class="menu-item">
-                    <div class="menu-item-image">🍙</div>
-                    <h3>California Roll</h3>
-                    <p>Crabe, avocat, concombre</p>
-                    <span class="price">$12.000 DT</span>
-                </div>
-                <div class="menu-item">
-                    <div class="menu-item-image">🍤</div>
-                    <h3>Tempura Roll</h3>
-                    <p>Crevette tempura, avocat</p>
-                    <span class="price">$16.000 DT</span>
-                </div>
-                <div class="menu-item">
-                    <div class="menu-item-image"></div>
-                    <h3>Sashimi Mixte</h3>
-                    <p>Assortiment thon et saumon</p>
-                    <span class="price">$35.000 DT</span>
+                <div class="product-card reveal-right" style="background: var(--bg-elevated);">
+                    <div class="prod-img" style="height: 250px;"><span style="font-size: 6rem;">🍱</span></div>
+                    <div class="prod-details" style="text-align: center;">
+                        <div class="prod-name" style="font-size: 1.5rem;">Plateau Deluxe</div>
+                        <div class="prod-desc">L'assortiment ultime pour les connaisseurs.</div>
+                        <span class="prod-price" style="font-size: 1.8rem;">89.000 DT</span>
+                    </div>
                 </div>
             </div>
-            <div class="text-center">
-                <a href="menu.html" class="btn-primary">Voir le Menu Complet</a>
+            <div class="text-center" style="margin-top: 50px;">
+                <a href="menu.html" class="btn-primary reveal">Voir Tout le Menu</a>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
+    <!-- Footer -->
+    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="assets/logowithwordmark.png" alt="Minato Sushi">
-                    <p>Sushi authentique japonais préparé avec passion et tradition.</p>
+                    <img src="assets/logowithwordmark.png" alt="Minato Sushi" style="height: 40px;">
+                    <p>Minato Sushi - L'excellence japonaise à Tunis.</p>
+                    <div class="social-links" style="margin-top: 20px;">
+                        <a href="#">FB</a>
+                        <a href="#">IG</a>
+                        <a href="#">TK</a>
+                    </div>
                 </div>
                 <div class="footer-links">
                     <h4>Navigation</h4>
@@ -136,13 +143,13 @@
                         <li><a href="aboutus.html">À Propos</a></li>
                     </ul>
                 </div>
-                <div class="footer-social">
-                    <h4>Suivez-nous</h4>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook">FB</a>
-                        <a href="#" aria-label="Instagram">IG</a>
-                        <a href="#" aria-label="TikTok">TT</a>
-                    </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="#">Tunis, Tunisie</a></li>
+                        <li><a href="#">+216 20 000 000</a></li>
+                        <li><a href="#">contact@minato.tn</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
