@@ -5,121 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>À Propos | Minato Sushi</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo"><img src="assets/logowithwordmark.png" alt="Minato"></a>
+            <a href="index.html" class="logo"><img src="assets/logowithwordmark.png" alt="Minato Sushi"></a>
             <ul class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="menu.html">Menu</a></li>
                 <li><a href="aboutus.html" class="active">À Propos</a></li>
-                <li><a href="panier.html">Mon Panier <span id="nav-cart-count">0</span></a></li>
+                <li><a href="panier.html">Panier</a></li>
             </ul>
+            <div class="nav-right">
+                <a href="menu.html" class="btn-primary">Commander</a>
+            </div>
+            <button class="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
     </nav>
 
-    <section class="page-hero">
-        <div class="container">
-            <h1>À Propos de Minato</h1>
-            <p>Notre histoire, philosophie et engagement</p>
+    <!-- Cinematic Header -->
+    <div style="height: 60vh; position: relative; display: flex; align-items: center; justify-content: center; background: linear-gradient(to bottom, rgba(5,5,5,0.3), var(--bg-dark));">
+        <img src="assets/texture.png" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.15; z-index: -1;">
+        <div class="text-center reveal">
+            <h1 style="font-family: var(--font-title); font-size: 5rem; color: var(--primary);">Notre Histoire</h1>
+            <p style="font-size: 1.5rem; color: var(--text-muted); max-width: 600px; margin: 0 auto;">La passion du sushi authentique au cœur de Tunis.</p>
         </div>
-    </section>
+    </div>
 
-    <section class="about-section">
+    <!-- Content -->
+    <section>
         <div class="container">
-            <div class="about-grid">
-                <div class="about-content">
-                    <h2>Notre Histoire</h2>
-                    <p>Minato est né d'une passion pour la cuisine japonaise authentique. Notre nom signifie "port" en japonais - un lieu où les traditions se rencontrent et les saveurs convergent.</p>
-                    <p>Fondé par le Chef Kenji Tanaka, formé pendant 15 ans à Tokyo, Minato combine techniques traditionnelles et créativité moderne.</p>
-                    <p>Nous sélectionnons uniquement les ingrédients les plus frais, préparons notre riz avec précision et préparons chaque pièce avec soin.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 100px;">
+                <div class="reveal-left">
+                    <h2 style="font-family: var(--font-title); font-size: 2.5rem; margin-bottom: 20px;">L'Excellence <span class="text-primary">Japonaise</span></h2>
+                    <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">
+                        Minato signifie "Port" en japonais. Fondé en 2020, notre restaurant est né d'une vision simple : offrir une expérience culinaire qui transporte nos clients directement à Tokyo. 
+                    </p>
+                    <br>
+                    <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">
+                        Chaque grain de riz est vinaigré avec précision, chaque tranche de poisson est coupée par des maîtres sushimen avec des années d'expérience. Nous ne faisons pas de compromis sur la qualité.
+                    </p>
                 </div>
-                <div class="about-image">
-                    <img src="assets/logo mark.png" alt="Minato">
+                <div class="reveal-right" style="background: var(--bg-card); padding: 50px; border-radius: 20px; border: 1px solid var(--glass-border); text-align: center;">
+                    <img src="assets/logo mark.png" alt="Minato Logo" style="max-width: 200px; filter: brightness(0) invert(1); opacity: 0.9;">
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section class="philosophy">
-        <div class="container">
-            <div class="section-header">
-                <h2>Notre Philosophie</h2>
-            </div>
-            <div class="philosophy-grid">
-                <div class="philosophy-item">
-                    <h3>🎯 Qualité First</h3>
-                    <p>Nous ne faisons jamais de compromis sur la qualité des ingrédients</p>
-                </div>
-                <div class="philosophy-item">
-                    <h3>🌊 Tradition & Innovation</h3>
-                    <p>Respect des méthodes traditionnelles avec une touche moderne</p>
-                </div>
-                <div class="philosophy-item">
-                    <h3>❤️ Préparé avec Amour</h3>
-                    <p>Chaque plat est préparé avec dévouement et passion</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="team">
-        <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>Notre Équipe</h2>
-                <p>Des artisans dédiés à la perfection</p>
+                <p>Les artisans derrière chaque création.</p>
             </div>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-avatar">👨🍳</div>
+
+            <div class="features-grid">
+                <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                    <div style="font-size: 4rem; margin-bottom: 20px;">‍🍳</div>
                     <h3>Kenji Tanaka</h3>
-                    <p>Chef Principal & Fondateur</p>
+                    <p style="color: var(--primary); font-weight: 600; margin-bottom: 10px;">Chef Fondateur</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">15 ans d'expérience dans les restaurants étoilés de Tokyo.</p>
                 </div>
-                <div class="team-member">
-                    <div class="member-avatar">👩‍🍳</div>
+                <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                    <div style="font-size: 4rem; margin-bottom: 20px;">👩‍🍳</div>
                     <h3>Sakura Yamamoto</h3>
-                    <p>Maître Sushimen</p>
+                    <p style="color: var(--primary); font-weight: 600; margin-bottom: 10px;">Maître Sushimen</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Spécialiste des sashimis et des présentations artistiques.</p>
                 </div>
-                <div class="team-member">
-                    <div class="member-avatar">👨‍🍳</div>
+                <div class="feature-card reveal" style="transition-delay: 0.3s;">
+                    <div style="font-size: 4rem; margin-bottom: 20px;"></div>
                     <h3>Hiroshi Sato</h3>
-                    <p>Chef Exécutif</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-avatar">‍🍳</div>
-                    <h3>Yuki Nakamura</h3>
-                    <p>Chef Pâtissière</p>
+                    <p style="color: var(--primary); font-weight: 600; margin-bottom: 10px;">Chef Exécutif</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Expert en fusion culinaire et saveurs modernes.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
+    <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <img src="assets/logowithwordmark.png" alt="Minato Sushi">
-                    <p>Sushi authentique japonais préparé avec passion et tradition.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="menu.html">Menu</a></li>
-                        <li><a href="aboutus.html">À Propos</a></li>
-                    </ul>
-                </div>
-                <div class="footer-social">
-                    <h4>Suivez-nous</h4>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook">FB</a>
-                        <a href="#" aria-label="Instagram">IG</a>
-                        <a href="#" aria-label="TikTok">TT</a>
-                    </div>
-                </div>
-            </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 Minato Sushi. Tous droits réservés.</p>
             </div>
