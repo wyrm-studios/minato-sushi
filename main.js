@@ -11,7 +11,7 @@ const menuData = {
         { id: 4, name: 'Plateau Deluxe', price: 89.000, desc: 'Assortiment premium de nos meilleures spécialités', pieces: '32 pièces', emoji: '', popular: false },
         { id: 5, name: 'Plateau Veggie', price: 42.000, desc: 'Sélection de sushis végétariens frais', pieces: '20 pièces', emoji: '🥬', popular: false },
         { id: 6, name: 'Plateau Spicy', price: 58.000, desc: 'Pour les amateurs de sensations fortes', pieces: '24 pièces', emoji: '🌶️', popular: false },
-        { id: 7, name: 'Plateau Family', price: 120.000, desc: 'Idéal pour 4-6 personnes', pieces: '50 pièces', emoji: '‍👩‍👧👦', popular: true },
+        { id: 7, name: 'Plateau Family', price: 120.000, desc: 'Idéal pour 4-6 personnes', pieces: '50 pièces', emoji: '👨‍‍👧‍👦', popular: true },
         { id: 8, name: 'Plateau Couple', price: 75.000, desc: 'Parfait pour deux personnes', pieces: '28 pièces', emoji: '💑', popular: false },
         { id: 9, name: 'Plateau Solo', price: 29.000, desc: 'Menu individuel complet', pieces: '12 pièces', emoji: '🍱', popular: true },
         { id: 10, name: 'Plateau Premium', price: 150.000, desc: 'Le summum de nos créations', pieces: '60 pièces', emoji: '👑', popular: true }
@@ -19,10 +19,10 @@ const menuData = {
     maki: [
         { id: 11, name: 'Maki Saumon', price: 18.500, desc: 'Saumon frais', pieces: '8 pièces', emoji: '🍣', popular: true },
         { id: 12, name: 'Maki Cheesy Saumon', price: 20.000, desc: 'Saumon - Fromage fondu', pieces: '8 pièces', emoji: '', popular: false },
-        { id: 13, name: 'Maki Spicy Saumon', price: 18.500, desc: 'Saumon - Sauce épicée', pieces: '8 pièces', emoji: '🌶️', popular: true },
-        { id: 14, name: 'Maki Avocat', price: 15.000, desc: 'Avocat frais crémeux', pieces: '8 pièces', emoji: '', popular: false },
-        { id: 15, name: 'Maki Thon', price: 19.000, desc: 'Thon rouge premium', pieces: '8 pièces', emoji: '🐟', popular: false },
-        { id: 16, name: 'Maki California', price: 21.000, desc: 'Crabe - Avocat - Concombre', pieces: '8 pièces', emoji: '', popular: true },
+        { id: 13, name: 'Maki Spicy Saumon', price: 18.500, desc: 'Saumon - Sauce épicée', pieces: '8 pièces', emoji: '️', popular: true },
+        { id: 14, name: 'Maki Avocat', price: 15.000, desc: 'Avocat frais crémeux', pieces: '8 pièces', emoji: '🥑', popular: false },
+        { id: 15, name: 'Maki Thon', price: 19.000, desc: 'Thon rouge premium', pieces: '8 pièces', emoji: '', popular: false },
+        { id: 16, name: 'Maki California', price: 21.000, desc: 'Crabe - Avocat - Concombre', pieces: '8 pièces', emoji: '🍙', popular: true },
         { id: 17, name: 'Maki Crevette', price: 17.000, desc: 'Crevette tempura croustillante', pieces: '8 pièces', emoji: '🦐', popular: false },
         { id: 18, name: 'Maki Concombre', price: 12.000, desc: 'Concombre frais et croquant', pieces: '8 pièces', emoji: '🥒', popular: false },
         { id: 19, name: 'Maki Anguille', price: 24.000, desc: 'Anguille grillée sauce teriyaki', pieces: '8 pièces', emoji: '🐍', popular: true },
@@ -36,14 +36,14 @@ const menuData = {
         { id: 25, name: 'Nigiri Crevette', price: 15.000, desc: '2 pièces de crevette cuite', pieces: '2 pièces', emoji: '🦐', popular: false },
         { id: 26, name: 'Nigiri Anguille', price: 17.000, desc: '2 pièces d\'anguille grillée', pieces: '2 pièces', emoji: '🐍', popular: false },
         { id: 27, name: 'Nigiri Oeuf', price: 12.000, desc: '2 pièces d\'omelette japonaise', pieces: '2 pièces', emoji: '🥚', popular: false },
-        { id: 28, name: 'Nigiri Poulpe', price: 16.000, desc: '2 pièces de poulpe tendre', pieces: '2 pièces', emoji: '🐙', popular: false },
-        { id: 29, name: 'Nigiri Crevette Crue', price: 19.000, desc: '2 pièces de crevette crue', pieces: '2 pièces', emoji: '🦐', popular: true },
+        { id: 28, name: 'Nigiri Poulpe', price: 16.000, desc: '2 pièces de poulpe tendre', pieces: '2 pièces', emoji: '', popular: false },
+        { id: 29, name: 'Nigiri Crevette Crue', price: 19.000, desc: '2 pièces de crevette crue', pieces: '2 pièces', emoji: '', popular: true },
         { id: 30, name: 'Nigiri Dauphin', price: 20.000, desc: '2 pièces de thon blanc', pieces: '2 pièces', emoji: '', popular: false }
     ],
     sashimi: [
-        { id: 31, name: 'Sashimi Saumon', price: 28.000, desc: '5 tranches de saumon frais', pieces: '5 pièces', emoji: '', popular: true },
+        { id: 31, name: 'Sashimi Saumon', price: 28.000, desc: '5 tranches de saumon frais', pieces: '5 pièces', emoji: '🐟', popular: true },
         { id: 32, name: 'Sashimi Thon', price: 32.000, desc: '5 tranches de thon rouge', pieces: '5 pièces', emoji: '🐟', popular: true },
-        { id: 33, name: 'Sashimi Mixte', price: 35.000, desc: 'Assortiment saumon et thon', pieces: '8 pièces', emoji: '🍽️', popular: true },
+        { id: 33, name: 'Sashimi Mixte', price: 35.000, desc: 'Assortiment saumon et thon', pieces: '8 pièces', emoji: '️', popular: true },
         { id: 34, name: 'Sashimi Bar', price: 30.000, desc: '5 tranches de bar frais', pieces: '5 pièces', emoji: '🐟', popular: false },
         { id: 35, name: 'Sashimi Poulpe', price: 26.000, desc: '5 tranches de poulpe', pieces: '5 pièces', emoji: '🐙', popular: false },
         { id: 36, name: 'Sashimi Premium', price: 45.000, desc: 'Assortiment premium 12 pièces', pieces: '12 pièces', emoji: '', popular: true }
@@ -52,8 +52,8 @@ const menuData = {
         { id: 37, name: 'Edamame', price: 8.000, desc: 'Fèves de soja vapeur', pieces: '', emoji: '', popular: false },
         { id: 38, name: 'Gyoza', price: 12.000, desc: 'Raviolis grillés', pieces: '6 pièces', emoji: '🥟', popular: true },
         { id: 39, name: 'Tempura', price: 14.000, desc: 'Légumes et crevettes', pieces: '8 pièces', emoji: '🍤', popular: false },
-        { id: 40, name: 'Miso Soup', price: 6.000, desc: 'Soupe traditionnelle', pieces: '', emoji: '', popular: false },
-        { id: 41, name: 'Salade Wakame', price: 9.000, desc: 'Salade d\'algues wakame', pieces: '', emoji: '', popular: false },
+        { id: 40, name: 'Miso Soup', price: 6.000, desc: 'Soupe traditionnelle', pieces: '', emoji: '🍲', popular: false },
+        { id: 41, name: 'Salade Wakame', price: 9.000, desc: 'Salade d\'algues wakame', pieces: '', emoji: '🥗', popular: false },
         { id: 42, name: 'Poulet Karaage', price: 15.000, desc: 'Poulet frit japonais', pieces: '6 pièces', emoji: '🍗', popular: true },
         { id: 43, name: 'Tofu Agedashi', price: 10.000, desc: 'Tofu frit en sauce dashi', pieces: '4 pièces', emoji: '🧈', popular: false },
         { id: 44, name: 'Crabe Rangoon', price: 13.000, desc: 'Raviolis au crabe croustillants', pieces: '6 pièces', emoji: '🦀', popular: false }
@@ -220,8 +220,8 @@ function renderCart() {
     if (cart.length === 0) {
         els.cartItems.innerHTML = `
             <div class="cart-empty" style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
-                <span style="font-size: 3rem; display: block; margin-bottom: 15px;"></span>
-                Votre panier est vide
+                <span style="font-size: 3rem; display: block; margin-bottom: 15px;">🍱</span>
+                Votre plate est vide
             </div>
         `;
     } else {
@@ -285,7 +285,7 @@ function renderCartPage() {
                                 <span class="qty-val">${item.quantity}</span>
                                 <button class="qty-btn" onclick="updateCartItemQuantity(${item.id}, 1)">+</button>
                             </div>
-                            <button class="cart-remove" onclick="removeFromCart(${item.id})" style="padding: 8px; color: #ff4444; background: none; border: none; cursor: pointer; font-size: 1.2rem;">️</button>
+                            <button class="cart-remove" onclick="removeFromCart(${item.id})" style="padding: 8px; color: #ff4444; background: none; border: none; cursor: pointer; font-size: 1.2rem;">🗑️</button>
                         </div>
                     `).join('')}
                 </div>
@@ -560,6 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCategories();
     renderProducts();
     renderCart(); // Initialize sidebar cart
+    renderCartPage(); // Initialize panier page cart
     updateCartCount();
     initScrollAnimations();
     
